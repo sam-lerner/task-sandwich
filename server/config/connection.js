@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(
-    // !!! CHANGE MONGOOSE LINK
-  process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/tech-friends-ins-demo',
-  {
+
+mongoose.connect
+  (process.env.MONGODB_URI || 'mongodb://localhost/task-sandwich', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  }
-);
+  });
 
 module.exports = mongoose.connection;
