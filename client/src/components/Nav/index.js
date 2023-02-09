@@ -1,10 +1,10 @@
-import React, { useSate } from 'react';
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+// import { Link } from "react-router-dom";
 import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
-import SignUpForm from "./SignupForm";
-import LoginForm from "./LoginForm";
+// import SignUpForm from "./SignupForm";
+// import LoginForm from "./LoginForm";
 
-import Auth from "../utils/auth";
+// import Auth from "../utils/auth";
 
 import "./style.css";
 
@@ -26,7 +26,7 @@ const AppNavbar = () => {
                 Search For Books
               </Nav.Link> */}
               {/* if user is logged in show saved books and logout */}
-              {Auth.loggedIn() ? (
+              {/* {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/saved'>
                     Your Profile
@@ -38,7 +38,7 @@ const AppNavbar = () => {
                 </>
               ) : (
                 <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
-              )}
+              )} */}
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -66,10 +66,10 @@ const AppNavbar = () => {
           <Modal.Body>
             <Tab.Content>
               <Tab.Pane eventKey='login'>
-                <LoginForm handleModalClose={() => setShowModal(false)} />
+                {/* <LoginForm handleModalClose={() => setShowModal(false)} /> */}
               </Tab.Pane>
               <Tab.Pane eventKey='signup'>
-                <SignUpForm handleModalClose={() => setShowModal(false)} />
+                {/* <SignUpForm handleModalClose={() => setShowModal(false)} /> */}
               </Tab.Pane>
             </Tab.Content>
           </Modal.Body>

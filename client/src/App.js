@@ -1,5 +1,5 @@
 import React from 'react';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+// import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
@@ -9,19 +9,25 @@ import { Header, Nav, Footer, LoginForm, SignupForm } from './components';
 
 function App() {
   return (
-    <ApolloProvider>
+    <>
+      {/* <ApolloProvider> */}
       <Header />
+      <Router>
       <Nav />
-      <Route
-        path="/"
-        element={<Home />}
-      />
-      <Route
-        path="/profile"
-        element={<Profile />}
-      />
+        <Routes>
+          <Route
+            path="/"
+            element={<Home />}
+          />
+          <Route
+            path="/profile"
+            element={<Profile />}
+          />
+        </Routes>
+      </Router>
       <Footer />
-    </ApolloProvider>
+      {/* </ApolloProvider> */}
+    </>
   );
 }
 
