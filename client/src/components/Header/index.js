@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
+
+import "./style.css";
 
 const Header = () => {
   return (
-    <div>Header</div>
+    <header className="header">
+      <a href="/">Task Sandwich</a>
+    </header>
   )
 }
 
