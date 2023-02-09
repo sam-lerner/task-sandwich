@@ -1,0 +1,32 @@
+.footer {
+background: black;
+height: 10vh;
+display: flex;
+align-items: center;
+justify-content: space-around;
+}
+
+.footer a img {
+height: 8vh;
+width: 8vh;
+border-radius: 10%;
+margin-right: .75em;
+}
+
+.footer a {
+margin: 0;
+text-align: center;
+color: #bdbdbd;
+}
+
+.footer a:hover {
+color: #FFFDD0;
+}
+
+.footerZoom {
+transition: transform 0.2s;
+}
+
+.footerZoom:hover {
+transform: scale(1.1);
+}
