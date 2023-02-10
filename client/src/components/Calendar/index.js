@@ -1,6 +1,7 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import './style.css';
+import { Container, Row, Col } from 'react-bootstrap';
 
 // calendar variables
 let today = dayjs();
@@ -34,23 +35,23 @@ function generateCalendar(date) {
     // starting from the 1st day of the month
     let dateCounter = 1;
     let rows = "";
-    
+
     while (dateCounter <= daysInMonth) {
         let cells = "";
         for (let i = 0; i < 7; i++) {
             // creates empty spots of first week. startDay starts from the beginning of the week and counts down to the first day of the month.
             if (startDay > 0) {
                 cells += "<td></td>";
-                console.log(`startDay: ${startDay}, cells: ${cells}`)
+                // console.log(`startDay: ${startDay}, cells: ${cells}`)
                 startDay--;
                 // creates the rest of the month
                 // adds to dateCounter at the end. if dateCounter is less than total days of the month, continue
             } else if (dateCounter <= daysInMonth) {
-                console.log(`dateCounter: ${dateCounter}, daysInMonth: ${daysInMonth}`)
+                // console.log(`dateCounter: ${dateCounter}, daysInMonth: ${daysInMonth}`)
                 // !!! currently no events
                 const event = events.find(e => e.date.date() === dateCounter && e.date.month() === date.month());
                 cells += `<td data-date="${dateCounter}">${event ? event.event : dateCounter}</td>`;
-                console.log(`cells: ${cells}`);
+                // console.log(`cells: ${cells}`);
                 dateCounter++;
             }
         }
@@ -58,6 +59,7 @@ function generateCalendar(date) {
     }
 
     calendarBody = rows;
+    console.log(calendarBody)
 }
 
 
@@ -75,7 +77,7 @@ function previous() {
 
 function next() {
     today = today.add(1, "month");
-    currentMonth.textContent = today.format('MMMM');
+    currentMonth = today.format('MMMM');
     generateCalendar(today);
 }
 
@@ -99,8 +101,8 @@ const Profile = () => {
 
     return (
         <>
+            <h3 id="dateDisplay"> {dateDisplay} </h3>
             <div id="calendar">
-                <h3 id="dateDisplay"> {dateDisplay} </h3>
                 <div id="calendarHeader">
                     {/* &lt; = less than symbol */}
                     <button onClick={() => previous()} id="previous">&lt;</button>
@@ -124,7 +126,7 @@ const Profile = () => {
                         </tr>
                     </thead>
                     {/* tbody: thread body */}
-                    <tbody id="calendarBody">{calendarBody}</tbody>
+                    <tbody id="calendarBody" dangerouslySetInnerHTML={{ __html: calendarBody }}></tbody>
                 </table>
             </div>
             {/* <form id="eventForm">
