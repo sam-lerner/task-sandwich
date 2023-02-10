@@ -20,10 +20,6 @@ const projectSchema = new Schema({
         type: Date
     },
     team: [ /* team id */],
-    status: {
-        type: String,
-        required: true,
-    },
     tasks: [taskSchema]
 
 });
