@@ -9,7 +9,6 @@ let currentMonth
 let dateDisplay
 let calendarBody
 
-
 // calendar event form
 // const eventForm = document.querySelector("#event");
 // const eventDate = document.querySelector("#eventDate");
@@ -53,7 +52,7 @@ function generateCalendar(date) {
 }
 
 
-function previous () {
+function previous() {
     today = today.subtract(1, "month");
     currentMonth = today.format('MMMM');
     generateCalendar(today);
@@ -65,7 +64,7 @@ function previous () {
 //     generateCalendar(today);
 // });
 
-function next () {
+function next() {
     today = today.add(1, "month");
     currentMonth.textContent = today.format('MMMM');
     generateCalendar(today);
@@ -89,49 +88,47 @@ init();
 
 const Profile = () => {
 
-return (
-    <>
-<div id="calendar">
-        <h3 id="dateDisplay"> {dateDisplay} </h3>
-        <div id="calendarHeader">
-            {/* &lt; = less than symbol */}
-            <button onClick={() => previous()} id="previous">&lt;</button>
-            <h3 id="currentMonth">{currentMonth}</h3>
-            {/* &gt; = greater than symbol */}
-            <button onClick={() => next()} id="next">&gt;</button>
-        </div>
-        <table>
-            {/* thead: table head */}
-            <thead>
-                {/* tr: table row */}
-                <tr>
-                    {/* th: table header (used instead of td because th is automatically centered and bold) */}
-                    <th>Sun</th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thu</th>
-                    <th>Fri</th>
-                    <th>Sat</th>
-                </tr>
-            </thead>
-            {/* tbody: thread body */}
-            <tbody id="calendarBody">
-                {/* td: table data */}
-                {/* <td> tags are imported through javascript */}
-                {calendarBody}
-            </tbody>
-        </table>
-    </div>
-    {/* <form id="eventForm">
+    return (
+        <>
+            <div id="calendar">
+                <h3 id="dateDisplay"> {dateDisplay} </h3>
+                <div id="calendarHeader">
+                    {/* &lt; = less than symbol */}
+                    <button onClick={() => previous()} id="previous">&lt;</button>
+                    <h3 id="currentMonth">{currentMonth}</h3>
+                    {/* &gt; = greater than symbol */}
+                    <button onClick={() => next()} id="next">&gt;</button>
+                </div>
+                <table>
+                    {/* thead: table head */}
+                    <thead>
+                        {/* tr: table row */}
+                        <tr>
+                            {/* th: table header (used instead of td because th is automatically centered and bold) */}
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    {/* tbody: thread body */}
+                    <tbody id="calendarBody">
+                        {/* td: table data */}
+                        {/* <td> tags are imported through javascript */}
+                        {calendarBody}
+                    </tbody>
+                </table>
+            </div>
+            {/* <form id="eventForm">
         <input type="text" id="event" placeholder="Event">
         <input type="date" id="eventDate">
         <button id="addEvent">Add Event</button>
     </form> */}
-    <script src="index.js"></script>
-    
-    </>
-)
+        </>
+    )
 
 };
 
