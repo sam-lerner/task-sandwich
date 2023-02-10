@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const taskSchema = require('./Task');
 
 const projectSchema = new Schema({
 
@@ -23,7 +22,10 @@ const projectSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'team'
     }],
-    tasks: [taskSchema]
+    tasks: [{
+        type: Schema.Types.ObjectId,
+        ref: 'task'
+    }]
 
 });
 

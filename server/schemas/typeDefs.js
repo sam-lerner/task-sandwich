@@ -45,10 +45,10 @@ type Query {
     project(_id:ID!): Project
     projectsByUser(_id:ID!): [Project]
     projectsByTeam(_id:ID!): [Project]
-    task(_id:taskId): Task
-    tasksByProject(_id:taskId): [Task]
-    tasksByUser(_id:taskId): [Task]
-    tasksByTeam(_id:taskId): [Task]
+    task(_id:ID): Task
+    tasksByProject(_id:ID): [Task]
+    tasksByUser(_id:ID): [Task]
+    tasksByTeam(_id:ID): [Task]
     team(_id:ID!): Team
     teamsByUser(_id:ID!): [Team]
 }
@@ -64,16 +64,16 @@ type Mutation {
 }
 input teamInput {
     teamName: String
-    members: [User]
-    project: [Project]
+    members: [userInput]
+    project: [projectInput]
 }
 input projectInput {
     projectName: String!
     projectDescription: String
     startDate: String
     endDate: String
-    team: [Team]
-    tasks: [Task]
+    team: [teamInput]
+    tasks: [taskInput]
 }
 input taskInput {
     taskId: String!
@@ -82,8 +82,17 @@ input taskInput {
     createdOn: String
     dueDate: String
     taskStatus: String!
-    assignedTo: [User]
-    belongsToProject: [Project]
+    assignedTo: userInput
+    belongsToProject: projectInput
+}
+input userInput {
+    userId: String!
+    name: String!
+    email: String!
+    teams: [teamInput]
+    projects: [projectInput]
+    sandwichCount: Int
+    sandwichReceived: Int
 }
 `;
 
