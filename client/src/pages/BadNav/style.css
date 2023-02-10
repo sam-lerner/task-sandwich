@@ -1,0 +1,13 @@
+.badnav-top-card {
+  display: flex;
+  justify-content: center;
+}
+
+/* .badnav-card {
+  display: flex;
+  justify-content: center;
+} */
+
+.badnav-text {
+  color: #bdbdbd;
+}

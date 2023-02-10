@@ -11,7 +11,7 @@ import { setContext } from "@apollo/client/link/context";
 
 import './App.css';
 
-import { Home, Profile, Projects } from './pages';
+import { Home, Profile, Projects, BadNav } from './pages';
 import { Header, Nav, Footer, LoginForm, SignupForm } from './components';
 
 // Construct our main GraphQL API endpoint
@@ -60,7 +60,7 @@ function App() {
           />
           <Route 
             path='*'
-            element={<h1 className='display-2'>That's not a real page!</h1>}
+            element={<BadNav />}
           />
         </Routes>
       </Router>
