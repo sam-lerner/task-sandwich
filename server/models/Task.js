@@ -3,6 +3,10 @@ const dateFormat = require('../utils/dateHelper');
 
 const taskSchema = new Schema({
 
+    taskId:{ 
+        type: String,
+        required: true,
+    },
     taskName: {
       type: String,
       required: true,

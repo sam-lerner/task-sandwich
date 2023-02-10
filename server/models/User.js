@@ -12,22 +12,31 @@ const userSchema = new Schema({
 
   email: {
     type: String,
-    required:true,
+    required: true,
     unique: true,
     trim: true
   },
 
   password: {
-    type:String,
+    type: String,
     required: true,
     trim: true,
     min_length: 8
   },
-  teams: [/*teams*/],
+  teams: [{
+    type: Schema.Types.ObjectId,
+    ref: 'team'
+  }],
 
-  projects: [/*projects*/],
+  projects: [{
+    type: Schema.Types.ObjectId,
+    ref: 'project'
+  }],
 
   sandwichCount: {
+    type: Int16Array
+  },
+  sandwichReceived: {
     type: Int16Array
   }
 
@@ -46,6 +55,6 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-const User = model('User', userSchema);
+const User = model('user', userSchema);
 
 module.exports = User;

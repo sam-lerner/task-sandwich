@@ -19,7 +19,10 @@ const projectSchema = new Schema({
     endDate: {
         type: Date
     },
-    team: [ /* team id */],
+    team: [{
+        type: Schema.Types.ObjectId,
+        ref: 'team'
+    }],
     tasks: [taskSchema]
 
 });
