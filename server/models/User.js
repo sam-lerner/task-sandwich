@@ -34,10 +34,10 @@ const userSchema = new Schema({
   }],
 
   sandwichCount: {
-    type: Int16Array
+    type: Number
   },
   sandwichReceived: {
-    type: Int16Array
+    type: Number
   }
 
 });
