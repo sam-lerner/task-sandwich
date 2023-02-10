@@ -1,0 +1,21 @@
+/* |||| GLOBAL STYLE |||| */
+
+/* ROOT COLOR KEY */
+:root {
+  --primary: #424242;
+  --secondary: #7cb342;
+  --tertiary: #bdbdbd;
+  --quatrinary: #eeeeee;
+  --light: #e3e4e3;
+  --dark: #7cb342;
+  --black: #000000;
+  --error: rgb(228, 46, 1);
+  --border-radius: 0.3rem;
+}
+
+/* GLOBAL EFFECTS */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}

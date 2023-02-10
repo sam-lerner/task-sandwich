@@ -8,52 +8,22 @@ function Navbar({ currentPage, handlePageChange }) {
       <ul className="nav nav-tabs">
         <li className="nav-item navHeader">
           <a
-            href="#about"
-            onClick={() => handlePageChange('About')}
+            href="#profile"
+            onClick={() => handlePageChange('Profile')}
 
-            className={currentPage === 'About' ? 'nav-link active' : 'nav-link'}
+            className={currentPage === 'Profile' ? 'nav-link active' : 'nav-link'}
           >
             Profile
           </a>
         </li>
         <li className="nav-item navHeader">
           <a
-            href="#portfolio"
-            onClick={() => handlePageChange('Portfolio')}
+            href="#projects"
+            onClick={() => handlePageChange('Projects')}
 
-            className={currentPage === 'Portfolio' ? 'nav-link active' : 'nav-link'}
+            className={currentPage === 'Projects' ? 'nav-link active' : 'nav-link'}
           >
             Projects
-          </a>
-        </li>
-        <li className="nav-item navHeader">
-          <a
-            href="#resume"
-            onClick={() => handlePageChange('Resume')}
-
-            className={currentPage === 'Resume' ? 'nav-link active' : 'nav-link'}
-          >
-            Resume
-          </a>
-        </li>
-        <li className="nav-item navHeader">
-          <a
-            href="#LoFi"
-
-            onClick={() => handlePageChange('LoFi')}
-            className={currentPage === 'LoFi' ? 'nav-link active' : 'nav-link'}
-          >
-            LoFi
-          </a>
-        </li>
-        <li className="nav-item navHeader">
-          <a
-            href="#Contact"
-
-            onClick={() => handlePageChange('Contact')}
-            className={currentPage === 'Contact' ? 'nav-link active' : 'nav-link'}
-          >
-            Contact
           </a>
         </li>
       </ul>
