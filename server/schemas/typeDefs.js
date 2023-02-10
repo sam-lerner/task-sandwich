@@ -47,10 +47,10 @@ type Query {
     project(_id:ID!): Project
     projectsByUser(_id:ID!): [Project]
     projectsByTeam(_id:ID!): [Project]
-    task(_id:ID!): Task
-    tasksByProject(_id:ID!): [Task]
-    tasksByUser(_id:ID!): [Task]
-    tasksByTeam(_id:ID!): [Task]
+    task(_id:taskId): Task
+    tasksByProject(_id:taskId): [Task]
+    tasksByUser(_id:taskId): [Task]
+    tasksByTeam(_id:taskId): [Task]
     team(_id:ID!): Team
     teamsByUser(_id:ID!): [Team]
 }
@@ -82,6 +82,7 @@ input: projectInput {
 }
 
 input: taskInput {
+    taskId: String!
     taskName: String
     taskDescription: String
     createdOn: Date
