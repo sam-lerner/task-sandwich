@@ -54,12 +54,12 @@ type Query {
 }
 type Mutation {
     login(email: String!, password: String!):Auth
-    addUser(username: String!, email: String!, password: String!):Auth
-    addTeam(team: teamInput, _id:ID!):Team
+    addUser(name: String!, email: String!, password: String!):Auth
+    addTeam(team: teamInput):Team
     removeTeam(_id: ID!):Team
-    addProject(project: projectInput, _id:ID!):Project
+    addProject(project: projectInput):Project
     removeProject(_id: ID!):Project
-    addTask(task: taskInput, _id:ID!):Project
+    addTask(task: taskInput):Project
     removeTask(_id: ID!):Project
 }
 input teamInput {
