@@ -5,8 +5,8 @@ type User {
     _id: ID!
     name: String
     email: String
-    teams: [teams]
-    projects: [projects]
+    teams: [Team]
+    projects: [Project]
     sandwichCount: Int
     sandwichReceived: Int
 }
@@ -26,7 +26,6 @@ type Project {
     team: [Team]
     tasks: [Task]
 }
-
 type Task {
     _id: ID!
     taskName: String!
@@ -45,7 +44,17 @@ type Auth {
 
 type Query {
     me: User
+    project(_id:ID!): Project
+    projectsByUser(_id:ID!): [Project]
+    projectsByTeam(_id:ID!): [Project]
+    task(_id:ID!): Task
+    tasksByProject(_id:ID!): [Task]
+    tasksByUser(_id:ID!): [Task]
+    tasksByTeam(_id:ID!): [Task]
+    team(_id:ID!): Team
+    teamsByUser(_id:ID!): [Team]
 }
+
 type Mutation {
     login(email: String!, password: String!):Auth
     addUser(username: String!, email:String!, password: String!):Auth
@@ -53,10 +62,10 @@ type Mutation {
     removeTeam(_id:ID!):Team
     addProject(project:projectInput, _id:ID!):Project
     removeProject(_id:ID!):Project
-    addTask:(task:taskInput, _id:ID!):Task
-    removeTask:(_id:ID!):Task
-
+    addTask:(task:taskInput, _id:ID!):Project
+    removeTask:(_id:ID!):Project
 }
+
 input: teamInput {
     teamName: String
     members: [User]
