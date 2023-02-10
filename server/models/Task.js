@@ -33,7 +33,7 @@ const taskSchema = new Schema({
     }],
     belongsToProject: [
         {
-            type: Schema.Type.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'project'
         }
     ],
