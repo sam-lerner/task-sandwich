@@ -9,6 +9,10 @@ table {
     padding: 8px;
     text-align: center;
   }
+
+  #calendar {
+    width: 30%;
+  }
   
   #calendarHeader {
     display: flex;
