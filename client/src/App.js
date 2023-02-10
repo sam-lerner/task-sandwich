@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './App.css';
 
-import { Home, Profile, Projects } from './pages';
+import { Home, Profile, Projects, BadNav } from './pages';
 import { Header, Nav, Footer, LoginForm, SignupForm } from './components';
 
 // const client = new ApolloClient({
@@ -40,7 +40,7 @@ function App() {
           />
           <Route 
             path='*'
-            element={<h1 className='display-2'>That's not a real page!</h1>}
+            element={<BadNav />}
           />
         </Routes>
       </Router>

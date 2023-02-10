@@ -42,10 +42,8 @@ async function startApolloServer(resolvers, typeDefs) {
 
   db.once("open", () => {
     httpServer.listen(PORT, () => {
-      console.log(`API server running on port ${PORT}!`);
-      console.log(
-        `Use GraphQL at http://localhost:${PORT}/graphql`
-      );
+      console.log(`🍔 API server running on port ${PORT}!`);
+      console.log(`Use GraphQL at http://localhost:${PORT}/graphql 🧙`);
     });
   });
 }
