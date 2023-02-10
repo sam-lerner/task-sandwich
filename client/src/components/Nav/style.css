@@ -1,0 +1,38 @@
+.navCard {
+  background: black;
+  border: 1px solid #FFFDD0;
+}
+
+.navHeading {
+  min-height: 4em;
+  line-height: 1em;
+  font-size: 1.2rem;
+  color: #FFFDD0;
+  padding: 0 2em;
+}
+
+.navHeader a:hover {
+  opacity: 100%;
+}
+
+.navHeader {
+  transition: transform 0.2s;
+  transition: background-color 1s ease-out 100ms;
+}
+
+.navHeader a:hover {
+  transform: scale(1.025);
+}
+
+.navHeader active {
+  color: black;
+  background: #FFFDD0;
+}
+
+.navHeader a {
+  color: #808080;
+}
+
+.navHeader a:hover {
+  color: #FFFDD0;
+}
