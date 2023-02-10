@@ -20,10 +20,10 @@ const AppNavbar = () => {
             <Nav className='ml-auto'>
               {/* {Auth.loggedIn() ? ( */}
                 <>
-                  <Nav.Link as={Link} to='/saved'>
+                  <Nav.Link as={Link} to='/profile'>
                     Your Profile
                   </Nav.Link>
-                  <Nav.Link as={Link} to='/saved'>
+                  <Nav.Link as={Link} to='/projects'>
                     Your Projects
                   </Nav.Link>
                   <Nav.Link>Logout</Nav.Link>

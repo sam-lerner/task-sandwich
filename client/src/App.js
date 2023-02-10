@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './App.css';
 
-import { Home, Profile, Project } from './pages';
+import { Home, Profile, Projects } from './pages';
 import { Header, Nav, Footer, LoginForm, SignupForm } from './components';
 
 // const client = new ApolloClient({
@@ -35,8 +35,8 @@ function App() {
             element={<Profile />}
           />
           <Route
-            path="/project"
-            element={<Project />}
+            path="/projects"
+            element={<Projects />}
           />
           <Route 
             path='*'
