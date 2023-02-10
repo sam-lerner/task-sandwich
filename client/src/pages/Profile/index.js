@@ -1,15 +1,14 @@
 import React from 'react';
+import dayjs from 'dayjs';
+import './style.css';
 
 // calendar variables
 let today = dayjs();
-const currentMonth = document.querySelector("#currentMonth");
-const calendar = document.querySelector("#calendar");
-const dateDisplay = document.querySelector("#dateDisplay");
-const calendarBody = document.querySelector("#calendarBody");
+let currentMonth
+// const calendar = document.querySelector("#calendar");
+let dateDisplay
+let calendarBody
 
-//calendar buttons
-const previous = document.querySelector("#previous");
-const next = document.querySelector("#next");
 
 // calendar event form
 // const eventForm = document.querySelector("#event");
@@ -19,13 +18,13 @@ const next = document.querySelector("#next");
 let events = [];
 
 function init() {
-    dateDisplay.textContent = today.format('MMMM D, YYYY')
-    currentMonth.textContent = today.format('MMMM')
+    dateDisplay = today.format('MMMM D, YYYY')
+    currentMonth = today.format('MMMM')
     generateCalendar(today);
 }
 
 function generateCalendar(date) {
-    calendarBody.innerHTML = "";
+    calendarBody = "";
     const firstDate = dayjs(date).startOf('month');
     const lastDate = dayjs(date).endOf('month');
     // .day: days of the week
@@ -50,20 +49,33 @@ function generateCalendar(date) {
         rows += `<tr>${cells}</tr>`;
     }
 
-    calendarBody.innerHTML = rows;
+    calendarBody = rows;
 }
 
-previous.addEventListener("click", () => {
-    today = today.subtract(1, "month");
-    currentMonth.textContent = today.format('MMMM');
-    generateCalendar(today);
-});
 
-next.addEventListener("click", () => {
+function previous () {
+    today = today.subtract(1, "month");
+    currentMonth = today.format('MMMM');
+    generateCalendar(today);
+}
+
+// previous.addEventListener("click", () => {
+//     today = today.subtract(1, "month");
+//     currentMonth.textContent = today.format('MMMM');
+//     generateCalendar(today);
+// });
+
+function next () {
     today = today.add(1, "month");
     currentMonth.textContent = today.format('MMMM');
     generateCalendar(today);
-});
+}
+
+// next.addEventListener("click", () => {
+//     today = today.add(1, "month");
+//     currentMonth.textContent = today.format('MMMM');
+//     generateCalendar(today);
+// });
 
 // addEventButton.addEventListener("click", () => {
 //     const event = eventForm.value;
@@ -79,7 +91,45 @@ const Profile = () => {
 
 return (
     <>
-
+<div id="calendar">
+        <h3 id="dateDisplay"> {dateDisplay} </h3>
+        <div id="calendarHeader">
+            {/* &lt; = less than symbol */}
+            <button onClick={() => previous()} id="previous">&lt;</button>
+            <h3 id="currentMonth">{currentMonth}</h3>
+            {/* &gt; = greater than symbol */}
+            <button onClick={() => next()} id="next">&gt;</button>
+        </div>
+        <table>
+            {/* thead: table head */}
+            <thead>
+                {/* tr: table row */}
+                <tr>
+                    {/* th: table header (used instead of td because th is automatically centered and bold) */}
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </thead>
+            {/* tbody: thread body */}
+            <tbody id="calendarBody">
+                {/* td: table data */}
+                {/* <td> tags are imported through javascript */}
+                {calendarBody}
+            </tbody>
+        </table>
+    </div>
+    {/* <form id="eventForm">
+        <input type="text" id="event" placeholder="Event">
+        <input type="date" id="eventDate">
+        <button id="addEvent">Add Event</button>
+    </form> */}
+    <script src="index.js"></script>
+    
     </>
 )
 
