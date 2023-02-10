@@ -23,7 +23,6 @@ const projectSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'team'
     }],
-    tasks: [taskSchema]
 
 });
 

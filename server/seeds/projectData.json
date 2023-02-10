@@ -1,0 +1,10 @@
+[    
+    {
+        "projectName": "Test Project",
+        "projectDescription": "This is a test project for seeding only. Does not have any memebers, tasks, or admin"
+    },
+    {
+        "projectName": "The second Test Project",
+        "projectDescription": "This project is also empty but I put the word sandwich in the description"
+    }
+]

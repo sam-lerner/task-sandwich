@@ -1,16 +1,27 @@
 import React from 'react';
-// import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import {
+//   ApolloClient,
+//   InMemoryCache,
+//   ApolloProvider
+// } from "@apollo/client";
+
+// import { setContext } from "@apollo/client/link/context";
+
 import './App.css';
 
-import { Home, Profile } from './pages';
+import { Home, Profile, Projects } from './pages';
 import { Header, Nav, Footer, LoginForm, SignupForm } from './components';
 
+// const client = new ApolloClient({
+//   uri: '/graphql',
+//   cache: new InMemoryCache(),
+// });
 
 function App() {
   return (
     <>
-      {/* <ApolloProvider> */}
+    {/* <ApolloProvider client={client}> */}
       <Header />
       <Router>
       <Nav />
@@ -22,6 +33,14 @@ function App() {
           <Route
             path="/profile"
             element={<Profile />}
+          />
+          <Route
+            path="/projects"
+            element={<Projects />}
+          />
+          <Route 
+            path='*'
+            element={<h1 className='display-2'>That's not a real page!</h1>}
           />
         </Routes>
       </Router>
