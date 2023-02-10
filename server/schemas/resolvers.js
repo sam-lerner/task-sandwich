@@ -1,4 +1,4 @@
-const { User, Project, Team, taskSchema } = require('../models');
+const { User, Project, Team, Task } = require('../models');
 
 const resolvers = {
     Query: {
@@ -43,13 +43,10 @@ const resolvers = {
             )
         },
 
-        taskByProject: async (parent, {projectId}) => {
-            return Project.findOne(
+        tasksByProject: async (parent, {projectId}) => {
+            return Task.findOne(
                 {
                     _id: projectId
-                },
-                {
-                    tasks: 1
                 }
             )
         },
@@ -83,33 +80,6 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
           },
-
-        // !!! example
-        // addProfile: async (parent, { name }) => {
-        //   return Profile.create({ name });
-        // },
-        // addSkill: async (parent, { profileId, skill }) => {
-        //   return Profile.findOneAndUpdate(
-        //     { _id: profileId },
-        //     {
-        //       $addToSet: { skills: skill },
-        //     },
-        //     {
-        //       new: true,
-        //       runValidators: true,
-        //     }
-        //   );
-        // },
-        // removeProfile: async (parent, { profileId }) => {
-        //   return Profile.findOneAndDelete({ _id: profileId });
-        // },
-        // removeSkill: async (parent, { profileId, skill }) => {
-        //   return Profile.findOneAndUpdate(
-        //     { _id: profileId },
-        //     { $pull: { skills: skill } },
-        //     { new: true }
-        //   );
-        // },
     },
 };
 

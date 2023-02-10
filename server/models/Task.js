@@ -39,4 +39,6 @@ const taskSchema = new Schema({
     ],
 });
 
-module.exports = taskSchema;
+const Task = model('task', taskSchema);
+
+module.exports = Task;
