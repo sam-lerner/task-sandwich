@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar } from '../../components';
+import { Calendar, Planner } from '../../components';
 
 
 const Projects = () => {
@@ -8,6 +8,7 @@ const Projects = () => {
 return (
     <>
       <Calendar />
+      <Planner />
     </>
 )
 
