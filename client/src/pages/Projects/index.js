@@ -2,7 +2,7 @@ import React from 'react';
 import { Calendar } from '../../components';
 
 
-const Profile = () => {
+const Projects = () => {
 
 
 return (
@@ -13,4 +13,4 @@ return (
 
 };
 
-export default Profile;
+export default Projects;
