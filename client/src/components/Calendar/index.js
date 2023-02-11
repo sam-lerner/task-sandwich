@@ -14,7 +14,7 @@ const Calendar = () => {
     let events = [];
 
     // rerun {generateCalendar} when {today} changes
-    // useEffect(callback,[dependencies]);
+    // useEffect(callback,[dependencies]) - without the dependency it keeps rendering the page
     useEffect(() => {
         generateCalendar(today);
     }, [today]);
@@ -56,18 +56,16 @@ const Calendar = () => {
             rows.push(<tr key={rows.length}>{cells}</tr>);
         }
         setCalendarBody(rows);
-        // console.log(`today after setCalendarBody: ${today}`);
-        // console.log(`setCalendarBody(rows): ${calendarBody}`);
-        // console.log('setCalendarBody(rows): (stringified): ', JSON.stringify(calendarBody));
-        // console.log(`First object in calendarBody: ${calendarBody[0]}`);
     }
+
+    // function changeMonth() {
+    //     let currentMonth = 
+    // }
 
     function handlePreviousClick() {
         setToday(today.subtract(1, "month"));
-        // console.log(`today: ${today}`)
         // use a parent to keep track of the number
         setCurrentMonth(today.format('MMMM'));
-        console.log(`currentMonth: ${currentMonth}`)
         generateCalendar(today);
     }
 
@@ -105,16 +103,9 @@ const Calendar = () => {
                         </tr>
                     </thead>
                     {/* tbody: thread body */}
-                    {/* <tbody id="calendarBody" dangerouslySetInnerHTML={{ __html: calendarBody }}></tbody> */}
                     <tbody id="calendarBody">
                         {calendarBody}
                     </tbody>
-                    {/* <tbody id="calendarBody">
-                        {calendarBody.map((row, index) => (
-                            <tr key={index}>{row}</tr>
-                        ))}
-                    </tbody> */}
-
                 </table>
             </div>
         </>
