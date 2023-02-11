@@ -9,20 +9,15 @@ const Calendar = () => {
     const dateDisplay = currentDate.format('MMMM D, YYYY')
     const [today, setToday] = useState(dayjs());
     const [currentMonth, setCurrentMonth] = useState(today.format('MMMM'));
-    const [calendarBody, setCalendarBody] = useState('');
-
-    // calendar event form
-    // const eventForm = document.querySelector("#event");
-    // const [event, setEvent ] = useState("";)
-    // const eventDate = document.querySelector("#eventDate");
-    // const addEventButton = document.querySelector("#addEvent");
+    const [calendarBody, setCalendarBody] = useState([]);
 
     let events = [];
 
     // rerun {generateCalendar} when {today} changes
+    // useEffect(callback,[dependencies]) - without the dependency it keeps rendering the page
     useEffect(() => {
         generateCalendar(today);
-    });
+    }, [today]);
 
     function generateCalendar(date) {
         const firstDate = dayjs(date).startOf('month');
@@ -34,47 +29,51 @@ const Calendar = () => {
 
         // starting from the 1st day of the month
         let dateCounter = 1;
-        let rows = "";
+        let rows = [];
 
         while (dateCounter <= daysInMonth) {
-            let cells = "";
+            let cells = [];
             for (let i = 0; i < 7; i++) {
                 // creates empty spots of first week. startDay starts from the beginning of the week and counts down to the first day of the month.
                 if (startDay > 0) {
-                    cells += "<td></td>";
+                    cells.push(<td key={`${i}-${startDay}`}></td>);
                     startDay--;
                     // creates the rest of the month
                     // adds to dateCounter at the end. if dateCounter is less than total days of the month, continue
                 } else if (dateCounter <= daysInMonth) {
                     // !!! currently no events
-                    const event = events.find(e => e.date.date() === dateCounter && e.date.month() === date.month());
-                    cells += `<td data-date="${dateCounter}">${event ? event.event : dateCounter}</td>`;
+                    const event = events.find(
+                        (e) => e.date.date() === dateCounter && e.date.month() === date.month()
+                    );
+                    cells.push(
+                        <td key={`${i}-${dateCounter}`} data-date={dateCounter}>
+                            {event ? event.event : dateCounter}
+                        </td>
+                    );
                     dateCounter++;
                 }
             }
-            rows += `<tr>${cells}</tr>`;
+            rows.push(<tr key={rows.length}>{cells}</tr>);
         }
         setCalendarBody(rows);
     }
 
-    function previous() {
+    // function changeMonth() {
+    //     let currentMonth = 
+    // }
+
+    function handlePreviousClick() {
         setToday(today.subtract(1, "month"));
+        // use a parent to keep track of the number
         setCurrentMonth(today.format('MMMM'));
         generateCalendar(today);
     }
 
-    function next() {
+    function handleNextClick() {
         setToday(today.add(1, "month"));
         setCurrentMonth(today.format('MMMM'));
         generateCalendar(today);
     }
-
-    // addEventButton.addEventListener("click", () => {
-    //     const event = eventForm.value;
-    //     const date = new Date(eventDate.value);
-    //     events.push({ event, date });
-    //     generateCalendar(today);
-    // });
 
     return (
         <>
@@ -83,10 +82,10 @@ const Calendar = () => {
                 <div id="calendarHeader">
                     {/* &lt; = less than symbol */}
                     {/* <button onClick={() => previous()} id="previous">&lt;</button> */}
-                    <button onClick={previous}>&lt;</button>
+                    <button onClick={handlePreviousClick}>&lt;</button>
                     <h3 id="currentMonth">{currentMonth}</h3>
                     {/* &gt; = greater than symbol */}
-                    <button onClick={next}>&gt;</button>
+                    <button onClick={handleNextClick}>&gt;</button>
                 </div>
                 <table>
                     {/* thead: table head */}
@@ -104,17 +103,11 @@ const Calendar = () => {
                         </tr>
                     </thead>
                     {/* tbody: thread body */}
-                    <tbody id="calendarBody" dangerouslySetInnerHTML={{ __html: calendarBody }}></tbody>
-                    {/* <tbody id="calendarBody">
+                    <tbody id="calendarBody">
                         {calendarBody}
-                    </tbody> */}
+                    </tbody>
                 </table>
             </div>
-            {/* <form id="eventForm">
-        <input type="text" id="event" placeholder="Event">
-        <input type="date" id="eventDate">
-        <button id="addEvent">Add Event</button>
-    </form> */}
         </>
     )
 
