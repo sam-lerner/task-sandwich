@@ -54,12 +54,40 @@ const resolvers = {
         },
         team: async (parent, { teamId }) => {
             return Team.findOne({ _id: teamId });
+        },
+
+        //check to see if a daily reset has happened and resets both sandwich count and next daily reset time in databse if necessary
+        checkForSandwichReset: async (parent, { userId }) => {
+            const checkForReset = await User.findOne(
+                { _id: userId },
+                { nextSandwichReset }
+            );
+
+            let currentTime = new Date()
+            if (currentTime > checkForReset) {
+                let setToNextDay = new Date(currentTime.setHours(currentTime.getHours() + 24)).toISOString().split('T')[0];
+                return User.findOneAndUpdate(
+                    { _id: userId },
+                    {
+                        $set: {
+                            sandwichCount: 5,
+                            nextSandwichReset: {
+                                $toDate: setToNextDay
+                            }
+                        }
+                    }
+                );
+            } else {
+                return User.findOne({ _id: userId })
+            }
+
+
         }
 
     },
 
     Mutation: {
- // Tested successfully
+        // Tested successfully
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
@@ -77,13 +105,13 @@ const resolvers = {
 
             return { token, user };
         },
-         // Tested successfully
+        // Tested successfully
         addUser: async (parent, args) => {
             const user = await User.create(args);
             const token = signToken(user);
             return { token, user };
         },
-         // Tested successfully
+        // Tested successfully
         addTeam: async (parent, args, context) => {
             const team = await Team.create(args.team);
             console.log(args.team)

@@ -51,6 +51,7 @@ type Query {
     tasksByTeam(_id:ID): [Task]
     team(_id:ID!): Team
     teamsByUser(_id:ID!): [Team]
+    checkForSandwichReset(_id:ID!):User
 }
 type Mutation {
     login(email: String!, password: String!):Auth
