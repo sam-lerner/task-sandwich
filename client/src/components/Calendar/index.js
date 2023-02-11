@@ -20,6 +20,7 @@ const Calendar = () => {
     let events = [];
 
     // rerun {generateCalendar} when {today} changes
+    // useEffect(callback,[dependencies]);
     useEffect(() => {
         generateCalendar(today);
     });
@@ -55,15 +56,19 @@ const Calendar = () => {
             rows += `<tr>${cells}</tr>`;
         }
         setCalendarBody(rows);
+        console.log(`today after setCalendarBody: ${today}`)
     }
 
-    function previous() {
+    function handlePreviousClick() {
         setToday(today.subtract(1, "month"));
+        // console.log(`today: ${today}`)
+        // use a parent to keep track of the number
         setCurrentMonth(today.format('MMMM'));
+        console.log(`currentMonth: ${currentMonth}`)
         generateCalendar(today);
     }
 
-    function next() {
+    function handleNextClick() {
         setToday(today.add(1, "month"));
         setCurrentMonth(today.format('MMMM'));
         generateCalendar(today);
@@ -83,10 +88,10 @@ const Calendar = () => {
                 <div id="calendarHeader">
                     {/* &lt; = less than symbol */}
                     {/* <button onClick={() => previous()} id="previous">&lt;</button> */}
-                    <button onClick={previous}>&lt;</button>
+                    <button onClick={handlePreviousClick}>&lt;</button>
                     <h3 id="currentMonth">{currentMonth}</h3>
                     {/* &gt; = greater than symbol */}
-                    <button onClick={next}>&gt;</button>
+                    <button onClick={handleNextClick}>&gt;</button>
                 </div>
                 <table>
                     {/* thead: table head */}
