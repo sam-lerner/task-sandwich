@@ -83,25 +83,15 @@ const resolvers = {
             return Team.findOne({ _id: teamId });
         },
 
-        teamsByUser: async (parent, { userId }) => {
-            return Team.aggregate(
-                {
-                    $group: {
-                        members: [userId]
-                    }
-                }
-            )
-        },
-
         //check to see if a daily reset has happened and resets both sandwich count and next daily reset time in databse if necessary
-        checkForSandwichReset: async (parent, { userId }, context) => {
-            console.log(context.user._id)
+        checkForSandwichReset: async (parent, { userId }) => {
             const checkForReset = await User.findOne(
-                { _id: userId }
+                { _id: userId },
+                { nextSandwichReset }
             );
 
             let currentTime = new Date()
-            if (currentTime > checkForReset.nextSandwichReset) {
+            if (currentTime > checkForReset) {
                 let setToNextDay = new Date(currentTime.setHours(currentTime.getHours() + 24)).toISOString().split('T')[0];
                 return User.findOneAndUpdate(
                     { _id: userId },
@@ -109,7 +99,7 @@ const resolvers = {
                         $set: {
                             sandwichCount: 5,
                             nextSandwichReset: {
-                                $toDate: setToNextDay + 'T09:00:00'
+                                $toDate: setToNextDay
                             }
                         }
                     }
