@@ -1,13 +1,25 @@
 import { gql } from '@apollo/client';
 
+export const QUERY_ME = gql`
+  query me {
+    me {
+      _id
+      name
+      teams
+      projects
+    }
+  }
+`;
 
-// !!! example
-// export const QUERY_PROFILES = gql`
-//   query allProfiles {
-//     profiles {
-//       _id
-//       name
-//       skills
-//     }
-//   }
-// `;
+export const QUERY_SINGLE_PROJECT = gql `
+  query project($projectId: ID!) {
+    project(projectId: $projectId) {
+        _id
+        projectName
+        projectDescription
+        startDate
+        endDate
+        team
+    }
+  }
+`;
