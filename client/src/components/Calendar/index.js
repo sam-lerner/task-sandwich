@@ -9,13 +9,7 @@ const Calendar = () => {
     const dateDisplay = currentDate.format('MMMM D, YYYY')
     const [today, setToday] = useState(dayjs());
     const [currentMonth, setCurrentMonth] = useState(today.format('MMMM'));
-    const [calendarBody, setCalendarBody] = useState('');
-
-    // calendar event form
-    // const eventForm = document.querySelector("#event");
-    // const [event, setEvent ] = useState("";)
-    // const eventDate = document.querySelector("#eventDate");
-    // const addEventButton = document.querySelector("#addEvent");
+    const [calendarBody, setCalendarBody] = useState([]);
 
     let events = [];
 
@@ -23,7 +17,7 @@ const Calendar = () => {
     // useEffect(callback,[dependencies]);
     useEffect(() => {
         generateCalendar(today);
-    });
+    }, [today]);
 
     function generateCalendar(date) {
         const firstDate = dayjs(date).startOf('month');
@@ -35,28 +29,37 @@ const Calendar = () => {
 
         // starting from the 1st day of the month
         let dateCounter = 1;
-        let rows = "";
+        let rows = [];
 
         while (dateCounter <= daysInMonth) {
-            let cells = "";
+            let cells = [];
             for (let i = 0; i < 7; i++) {
                 // creates empty spots of first week. startDay starts from the beginning of the week and counts down to the first day of the month.
                 if (startDay > 0) {
-                    cells += "<td></td>";
+                    cells.push(<td key={`${i}-${startDay}`}></td>);
                     startDay--;
                     // creates the rest of the month
                     // adds to dateCounter at the end. if dateCounter is less than total days of the month, continue
                 } else if (dateCounter <= daysInMonth) {
                     // !!! currently no events
-                    const event = events.find(e => e.date.date() === dateCounter && e.date.month() === date.month());
-                    cells += `<td data-date="${dateCounter}">${event ? event.event : dateCounter}</td>`;
+                    const event = events.find(
+                        (e) => e.date.date() === dateCounter && e.date.month() === date.month()
+                    );
+                    cells.push(
+                        <td key={`${i}-${dateCounter}`} data-date={dateCounter}>
+                            {event ? event.event : dateCounter}
+                        </td>
+                    );
                     dateCounter++;
                 }
             }
-            rows += `<tr>${cells}</tr>`;
+            rows.push(<tr key={rows.length}>{cells}</tr>);
         }
         setCalendarBody(rows);
-        console.log(`today after setCalendarBody: ${today}`)
+        // console.log(`today after setCalendarBody: ${today}`);
+        // console.log(`setCalendarBody(rows): ${calendarBody}`);
+        // console.log('setCalendarBody(rows): (stringified): ', JSON.stringify(calendarBody));
+        // console.log(`First object in calendarBody: ${calendarBody[0]}`);
     }
 
     function handlePreviousClick() {
@@ -73,13 +76,6 @@ const Calendar = () => {
         setCurrentMonth(today.format('MMMM'));
         generateCalendar(today);
     }
-
-    // addEventButton.addEventListener("click", () => {
-    //     const event = eventForm.value;
-    //     const date = new Date(eventDate.value);
-    //     events.push({ event, date });
-    //     generateCalendar(today);
-    // });
 
     return (
         <>
@@ -109,17 +105,18 @@ const Calendar = () => {
                         </tr>
                     </thead>
                     {/* tbody: thread body */}
-                    <tbody id="calendarBody" dangerouslySetInnerHTML={{ __html: calendarBody }}></tbody>
-                    {/* <tbody id="calendarBody">
+                    {/* <tbody id="calendarBody" dangerouslySetInnerHTML={{ __html: calendarBody }}></tbody> */}
+                    <tbody id="calendarBody">
                         {calendarBody}
+                    </tbody>
+                    {/* <tbody id="calendarBody">
+                        {calendarBody.map((row, index) => (
+                            <tr key={index}>{row}</tr>
+                        ))}
                     </tbody> */}
+
                 </table>
             </div>
-            {/* <form id="eventForm">
-        <input type="text" id="event" placeholder="Event">
-        <input type="date" id="eventDate">
-        <button id="addEvent">Add Event</button>
-    </form> */}
         </>
     )
 
