@@ -4,7 +4,7 @@ import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
 import SignUpForm from "../SignupForm";
 import LoginForm from "../LoginForm";
 
-// import Auth from "../utils/auth";
+import Auth from "../../utils/auth";
 
 import "./style.css";
 
@@ -18,7 +18,8 @@ const AppNavbar = () => {
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto'>
-              {/* {Auth.loggedIn() ? ( */}
+              {/* if user is logged in show all of these, including logout */}
+              {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/profile'>
                     Your Profile
@@ -26,12 +27,12 @@ const AppNavbar = () => {
                   <Nav.Link as={Link} to='/projects'>
                     Your Projects
                   </Nav.Link>
-                  <Nav.Link>Logout</Nav.Link>
-                  {/* <Nav.Link onClick={Auth.logout}>Logout</Nav.Link> */}
+                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
-              {/* ) : ( */}
+              ) : (
+                // if user is not logged in, only show this
                 <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
-              {/* )} */}
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
