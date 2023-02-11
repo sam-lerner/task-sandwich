@@ -33,9 +33,14 @@ const userSchema = new Schema({
     ref: 'project'
   }],
 
+  nextSandwichReset: {
+    type: Date
+  },
+  
   sandwichCount: {
     type: Number
   },
+  
   sandwichReceived: {
     type: Number
   }
