@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const taskSchema = require('./Task');
 
 const projectSchema = new Schema({
 
@@ -19,8 +18,14 @@ const projectSchema = new Schema({
     endDate: {
         type: Date
     },
-    team: [ /* team id */],
-    tasks: [taskSchema]
+    team: [{
+        type: Schema.Types.ObjectId,
+        ref: 'team'
+    }],
+    tasks: [{
+        type: Schema.Types.ObjectId,
+        ref: 'task'
+    }]
 
 });
 

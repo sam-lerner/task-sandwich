@@ -3,6 +3,10 @@ const dateFormat = require('../utils/dateHelper');
 
 const taskSchema = new Schema({
 
+    taskId:{ 
+        type: String,
+        required: true,
+    },
     taskName: {
       type: String,
       required: true,
@@ -29,10 +33,12 @@ const taskSchema = new Schema({
     }],
     belongsToProject: [
         {
-            type: Schema.Type.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'project'
         }
     ],
 });
 
-module.exports = taskSchema;
+const Task = model('task', taskSchema);
+
+module.exports = Task;

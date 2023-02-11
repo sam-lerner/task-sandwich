@@ -1,0 +1,64 @@
+.planner {
+  font-size: 16px;
+}
+
+.time-block {
+  border-radius: 15px;
+  border-top: 1px solid white;
+}
+
+.description {
+  white-space: pre-wrap;
+  background: transparent;
+  border: none;
+  resize: none;
+  border-left: 1px solid black;
+  padding: 10px;
+}
+
+.hour {
+  background-color: #ffffff;
+  color: #000000;
+  border-top: 1px dashed #000000;
+}
+
+.past {
+  background-color: #ff6961;
+  color: darkred;
+}
+
+.present {
+  background-color: lightskyblue;
+  color: darkblue;
+}
+
+.future {
+  background-color: #77dd77;
+  color: darkgreen;
+}
+
+/* SAVE BUTTON STYLE */
+.saveBtn {
+  border-left: 1px solid black;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  color: white;
+}
+
+.saveBtn i:hover {
+  font-size: 20px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.future-btn {
+  background-color: darkgreen;
+}
+
+.past-btn {
+  background-color: darkred;
+}
+
+.present-btn {
+  background-color: darkblue;
+}
