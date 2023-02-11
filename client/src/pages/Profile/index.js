@@ -11,7 +11,7 @@ const Profile = () => {
 
   // If there is no `userId` in the URL as a parameter, execute the `QUERY_ME` query instead for the logged in user's information
   const { loading, data } = useQuery(
-    // userId ? QUERY_SINGLE_USER : QUERY_ME,
+    QUERY_ME,
     {
       variables: { userId: userId },
     }
