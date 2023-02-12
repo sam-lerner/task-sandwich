@@ -17,12 +17,12 @@ todoForm.addEventListener("submit", (event) => {
 });
 
 function createTodoItem(text) {
-  const li = document.createElement("li");
-  li.innerText = text;
-  li.addEventListener("click", () => {
-    moveItem(li, inProgressList);
+  const liItem = document.createElement("li");
+  liItem.innerText = text;
+  liItem.addEventListener("click", () => {
+    moveItem(liItem, inProgressList);
   });
-  return li;
+  return liItem;
 }
 
 function moveItem(item, list) {
