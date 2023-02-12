@@ -56,7 +56,7 @@ padding: 1vh 4vh;
 
 .footerDocs1 a {
   float: right;
-  padding: 1vh 2vw;
+  padding: 2vh 2vw;
 }
 
 .footerDocs2 {
@@ -71,5 +71,5 @@ padding: 1vh 4vh;
 
 .footerDocs2 a {
   /* float: right; */
-  padding: 1vh 6vw;
+  padding: 2vh 6vw;
 }
