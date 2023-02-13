@@ -33,7 +33,7 @@ type Task {
     taskDescription: String
     createdOn: String
     dueDate: String
-    taskStatus: String!
+    taskStatus: String
     assignedTo: [User]
     belongsToProject: [Project]
 }
@@ -62,7 +62,7 @@ type Mutation {
     removeTeam(_id: ID!):Team
     addProject(project: projectInput, teamId:ID!):Project
     removeProject(_id: ID!):Project
-    addTask(task: taskInput):Project
+    addTask(task: taskInput, projectId:ID!):Project
     removeTask(_id: ID!):Project
 }
 input teamInput {
@@ -83,7 +83,7 @@ input taskInput {
     taskDescription: String
     createdOn: String
     dueDate: String
-    taskStatus: String!
+    taskStatus: String
     assignedTo: userInput
     belongsToProject: projectInput
 }
