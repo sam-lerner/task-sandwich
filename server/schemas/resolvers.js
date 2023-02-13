@@ -1,6 +1,7 @@
 const { User, Project, Team, Task } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
+const { getArgumentValues } = require('graphql');
 
 const resolvers = {
     Query: {
@@ -30,9 +31,15 @@ const resolvers = {
             return Project.find(params) //array of only values, no property names
         },
 
-        // profile: async (parent, { profileId }) => {
-        //   return Profile.findOne({ _id: profileId });
-        // },
+        projectsByTeam: async (parent, { teamId }) => {
+            const projectsForTeam = await Team.find(
+                { _id: teamId },
+                { projects: 1 }
+            )
+            const params = projectsForTeam ? { _id } : {}
+
+            return Project.find(params)
+        },
 
         task: async (parent, { taskId }) => {
             return Project.findOne(
@@ -46,25 +53,61 @@ const resolvers = {
         },
 
         tasksByProject: async (parent, { projectId }) => {
-            return Task.findOne(
-                {
-                    _id: projectId
-                }
+            const tasksForProject = await Project.find(
+                { _id: projectId },
+                { tasks: 1 }
             )
+            const params = tasksForProject ? { _id } : {}
+
+            return Task.find(params)
         },
+
+        tasksByUser: async (parent, { userId }) => {
+            return Task.aggregate(
+                {
+                    $group: {
+                        assignedTo: [userId]
+                    }
+                })
+        },
+
+        tasksByTeam: async (parent, { teamId }) => {
+            const projectsForTeam = await Team.find(
+                { _id: teamId },
+                { projects: 1 }
+            )
+            const params = projectsForTeam ? { _id } : {}
+            const teamProjects = await Project.find(
+                { params },
+                { tasks: 1 }
+            )
+            const newParams = teamProjects ? { _id } : {}
+            return Task.find(newParams)
+        },
+
         team: async (parent, { teamId }) => {
             return Team.findOne({ _id: teamId });
         },
 
+        teamsByUser: async (parent, { userId }) => {
+            return Team.aggregate(
+                {
+                    $group: {
+                        members: [userId]
+                    }
+                }
+            )
+        },
+
         //check to see if a daily reset has happened and resets both sandwich count and next daily reset time in databse if necessary
-        checkForSandwichReset: async (parent, { userId }) => {
+        checkForSandwichReset: async (parent, { userId }, context) => {
+            console.log(context.user._id)
             const checkForReset = await User.findOne(
-                { _id: userId },
-                { nextSandwichReset }
+                { _id: userId }
             );
 
             let currentTime = new Date()
-            if (currentTime > checkForReset) {
+            if (currentTime > checkForReset.nextSandwichReset) {
                 let setToNextDay = new Date(currentTime.setHours(currentTime.getHours() + 24)).toISOString().split('T')[0];
                 return User.findOneAndUpdate(
                     { _id: userId },
@@ -72,20 +115,16 @@ const resolvers = {
                         $set: {
                             sandwichCount: 5,
                             nextSandwichReset: {
-                                $toDate: setToNextDay
+                                $toDate: setToNextDay + 'T09:00:00'
                             }
                         }
                     }
-                );
+                )
             } else {
                 return User.findOne({ _id: userId })
             }
-
-
         }
-
     },
-
     Mutation: {
         // Tested successfully
         login: async (parent, { email, password }) => {
@@ -123,14 +162,67 @@ const resolvers = {
             return team;
         },
         // THIS NEEDS TO CHANGE TO REFLECT TEAM, NOT USER.
+
+        removeTeam: async (parent, args, context) => {
+            const projectsToBeDeleted = await Team.find(
+                {_id: args.team._id},
+                {projects: 1}
+                )
+            const noMoreProjects = await Project.deleteMany(
+                {_id: projectsToBeDeleted}
+            )
+            const pullTeamFromUserModel = await User.findOneAndUpdate(
+                {teams: [args.team._id]},
+                {$pull: {
+                    teams: args.team._id
+                }}
+            )
+            return Team.deleteOne({_id: args.team._id})
+        },
+
         addProject: async (parent, args, context) => {
             const project = await Project.create(args.project);
             const team = context.team._id;
-            await User.findOneAndUpdate(
+            await Team.findOneAndUpdate(
                 { _id: team },
                 { $addToSet: { projects: project._id } }
             )
             return project;
+        },
+        removeProject: async (parent, args, context) => {
+            const tasksToBeDeleted = await Project.find(
+                {_id: args.project._id},
+                {tasks: 1}
+            )
+            const noMoreTasks = await Task.deleteMany(
+                {_id: tasksToBeDeleted}
+            )
+            const pullFromTeamModel = await Team.findOneAndUpdate(
+                {projects: [args.project._id]},
+                {$pull: {
+                    projects: args.project._id
+                }}
+            )
+            return Project.deleteOne({_id: args.project._id})
+        },
+
+        addTask: async (parents, args, context) => {
+            const task = await Task.create(args.task)
+            await Project.findOneAndUpdate(
+                {_id: context.project._id},
+                {$addToSet: {tasks: task._id}}
+            )
+            return task
+        },
+
+        removeTask: async (parent, args, context) => {
+            const pullFromProjectModel = await Project.findOneAndUpdate(
+                {tasks: [args.task._id]},
+                {$pull: {
+                    tasks: args.task._id
+                }}
+            )
+            return Task.deleteOne({_id: args.task._id})
         }
     },
 };

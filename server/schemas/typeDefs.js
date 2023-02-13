@@ -7,6 +7,7 @@ type User {
     email: String
     teams: [Team]
     projects: [Project]
+    nextSandwichReset: String
     sandwichCount: Int
     sandwichReceived: Int
 }
@@ -51,7 +52,7 @@ type Query {
     tasksByTeam(_id:ID): [Task]
     team(_id:ID!): Team
     teamsByUser(_id:ID!): [Team]
-    checkForSandwichReset(_id:ID!):User
+    checkForSandwichReset(_id:ID!): User
 }
 type Mutation {
     login(email: String!, password: String!):Auth
