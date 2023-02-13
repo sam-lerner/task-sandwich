@@ -53,7 +53,7 @@ const CreateTeam = () => {
                     disabled={!(teamFormData.teamName)}
                     type='submit'
                     variant='success'>
-                    Create team
+                    Create Team
                 </Button>
             </Form>
         </>
