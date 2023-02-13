@@ -1,116 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import dayjs from 'dayjs';
-import './style.css';
+import React, { useState } from 'react';
+// react calendar npm
+import Calendar from 'react-calendar';
+// styling from the react calendar npm
+import 'react-calendar/dist/Calendar.css';
 
-const Calendar = () => {
+function OurCalendar() {
+  // Date is a built-in object
+  const [date, setDate] = useState(new Date());
 
-    // calendar variables
-    const currentDate = dayjs();
-    const dateDisplay = currentDate.format('MMMM D, YYYY')
-    const [today, setToday] = useState(dayjs());
-    const [currentMonth, setCurrentMonth] = useState(today.format('MMMM'));
-    const [calendarBody, setCalendarBody] = useState([]);
+  return (
+    <div className='app'>
+      <h1 className='text-center'>React Calendar</h1>
+      <div className='calendar-container'>
+      {/* setDate stores a date, which is what the user clicks */}
+      {/* the current date is the initial value */}
+        <Calendar onChange={setDate} value={date} />
+      </div>
+      <p className='text-center'>
+        <span className='bold'>Selected Date:</span>{' '}
+        {date.toDateString()}
+      </p>
+    </div>
+  );
+}
 
-    let events = [];
+export default OurCalendar;
 
-    // rerun {generateCalendar} when {today} changes
-    // useEffect(callback,[dependencies]) - without the dependency it keeps rendering the page
-    useEffect(() => {
-        generateCalendar(today);
-    }, [today]);
 
-    function generateCalendar(date) {
-        const firstDate = dayjs(date).startOf('month');
-        const lastDate = dayjs(date).endOf('month');
-        // .day: days of the week - what day is first day of the month in number
-        let startDay = firstDate.day();
-        // .date: days of the month - what day is last day of the month in number
-        let daysInMonth = lastDate.date();
+// onChange
+// When a user clicks on an item of the most detailed view, this function is called. We can receive user selection with the help of this in the following way with alert('Clicked date is: ', value)}/>
 
-        // starting from the 1st day of the month
-        let dateCounter = 1;
-        let rows = [];
+// onClickDay
+// When a user clicks on a particular day, this function is called: alert('Clicked day is: ', value)}/>. Similar to onClickDay, React-Calendar also support events like onClickDecade, onClickMonth, onClickYear, onClickWeekNumber, etc.
 
-        while (dateCounter <= daysInMonth) {
-            let cells = [];
-            for (let i = 0; i < 7; i++) {
-                // creates empty spots of first week. startDay starts from the beginning of the week and counts down to the first day of the month.
-                if (startDay > 0) {
-                    cells.push(<td key={`${i}-${startDay}`}></td>);
-                    startDay--;
-                    // creates the rest of the month
-                    // adds to dateCounter at the end. if dateCounter is less than total days of the month, continue
-                } else if (dateCounter <= daysInMonth) {
-                    // !!! currently no events
-                    const event = events.find(
-                        (e) => e.date.date() === dateCounter && e.date.month() === date.month()
-                    );
-                    cells.push(
-                        <td key={`${i}-${dateCounter}`} data-date={dateCounter}>
-                            {event ? event.event : dateCounter}
-                        </td>
-                    );
-                    dateCounter++;
-                }
-            }
-            rows.push(<tr key={rows.length}>{cells}</tr>);
-        }
-        setCalendarBody(rows);
-    }
-
-    // function changeMonth() {
-    //     let currentMonth = 
-    // }
-
-    function handlePreviousClick() {
-        setToday(today.subtract(1, "month"));
-        // use a parent to keep track of the number
-        setCurrentMonth(today.format('MMMM'));
-        generateCalendar(today);
-    }
-
-    function handleNextClick() {
-        setToday(today.add(1, "month"));
-        setCurrentMonth(today.format('MMMM'));
-        generateCalendar(today);
-    }
-
-    return (
-        <>
-            <h3 id="dateDisplay"> {dateDisplay} </h3>
-            <div id="calendar">
-                <div id="calendarHeader">
-                    {/* &lt; = less than symbol */}
-                    {/* <button onClick={() => previous()} id="previous">&lt;</button> */}
-                    <button onClick={handlePreviousClick}>&lt;</button>
-                    <h3 id="currentMonth">{currentMonth}</h3>
-                    {/* &gt; = greater than symbol */}
-                    <button onClick={handleNextClick}>&gt;</button>
-                </div>
-                <table>
-                    {/* thead: table head */}
-                    <thead>
-                        {/* tr: table row */}
-                        <tr>
-                            {/* th: table header (used instead of td because th is automatically centered and bold) */}
-                            <th>Sun</th>
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thu</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
-                        </tr>
-                    </thead>
-                    {/* tbody: thread body */}
-                    <tbody id="calendarBody">
-                        {calendarBody}
-                    </tbody>
-                </table>
-            </div>
-        </>
-    )
-
-};
-
-export default Calendar;
+// onViewChange
+// When the user navigates from one view to another using the drill up button or by clicking a tile, this function is called. This gives us the reason for view change and can be one of the following values: prev, prev2, next, next2, drillUp, drillDown, and onChange. Here’s an example: alert('New view is: ', view)}/>.
