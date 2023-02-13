@@ -9,15 +9,21 @@ import Auth from '../../utils/auth';
 
 const Profile = () => {
 
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({});
   const [showModal, setShowModal] = useState(false);
 
-  const { data, loading, error } = useQuery(QUERY_ME, {
-    onCompleted: (data) => {
-      setUserData(data);
-    }
-  });
-  
+  const { data, loading, error } = useQuery(QUERY_ME);
+
+  // const { data, loading, error } = useQuery(QUERY_ME, {
+  //   onCompleted: (data) => {
+  //     setUserData(data);
+  //   }
+  // });
+    // console.log(data, loading)
+
+  // const userData = data?.me||{} 
+  // prevents the error during population (like in mapping)
+
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
   if (!token) {
@@ -37,7 +43,6 @@ const Profile = () => {
     return <div>Error retrieving data</div>;
   }
 
-  console.log(userData)
   // console.log(userData.me.name);
 
   return (
@@ -77,7 +82,7 @@ const Profile = () => {
           </Modal.Body>
         </Tab.Container>
       </Modal>
-      <UserInfo userData={userData}/>
+      <UserInfo userData={data}/>
     </>
   )
 

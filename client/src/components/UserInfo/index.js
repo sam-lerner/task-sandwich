@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 
 import "./style.css";
 
@@ -6,11 +6,11 @@ const UserInfo = ({ userData }) => {
   // console.log(userData);
   // console.log(userData.me);
   // console.log(userData.me.teams);
-  let user;
-
-  if (userData) {
-    user = userData.me;
-  }
+  // let user;
+  console.log(userData);
+  // if (userData) {
+  //   user = userData.me;
+  // }
 
   // console.log(user);
   // console.log(user.name);
@@ -28,13 +28,13 @@ const UserInfo = ({ userData }) => {
   return (
     <>
     <div className="userInfo">
-      {/* <div key={user._id}>
-        <h2>{user.name}</h2>
-        <p>{user.teams}</p>
-        <p>{user.projects}</p> */}
-        {/* <p>{info.sandwichCount}</p>
-           <p>{info.sandwichReceived}</p> */}
-      {/* </div> */}
+      <div key={userData.me._id}>
+        <h2>{userData.me.name}</h2>
+        <p>{userData.me.teams}</p>
+        <p>{userData.me.projects}</p>
+        {/* <p>{userData.sandwichCount}</p>
+           <p>{userData.sandwichReceived}</p> */}
+      </div>
     </div>
     </>
   )
