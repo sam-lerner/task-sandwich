@@ -4,7 +4,7 @@ import Calendar from 'react-calendar';
 // styling from the react calendar npm
 import 'react-calendar/dist/Calendar.css';
 
-function OurCalendar() {
+function OurCalendar({ userData }) {
   // Date is a built-in object
   const [date, setDate] = useState(new Date());
 

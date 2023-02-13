@@ -5,8 +5,12 @@ export const QUERY_ME = gql`
     me {
       _id
       name
-      teams
-      projects
+      teams {
+        _id
+      }
+      projects {
+        _id
+      }
     }
   }
 `;
