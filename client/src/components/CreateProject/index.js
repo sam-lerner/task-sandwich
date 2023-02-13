@@ -44,7 +44,7 @@ const CreateTeam = () => {
                     <Form.Label>Project Name</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='project name'
+                        placeholder='What should we call the project?'
                         name='projectName'
                         onChange={handleInputChange}
                         value={projectFormData.projectName}
@@ -55,7 +55,7 @@ const CreateTeam = () => {
                     <Form.Label>Project Description</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='project description'
+                        placeholder='Describe your project.'
                         name='projectDescription'
                         onChange={handleInputChange}
                         value={projectFormData.projectDescription}
@@ -65,7 +65,7 @@ const CreateTeam = () => {
                     <Form.Label>Project End Date</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='project end date'
+                        placeholder='What is the final date for the project?'
                         name='endDate'
                         onChange={handleInputChange}
                         value={projectFormData.endDate}
