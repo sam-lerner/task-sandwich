@@ -17,6 +17,7 @@ const Profile = () => {
       setUserData(data);
     }
   });
+  // console.log(userData);
 
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -33,9 +34,14 @@ const Profile = () => {
     return <div>Loading...</div>;
   }
 
+  if (error) {
+    return <div>Error retrieving data</div>;
+  }
+
+
   return (
     <>
-      <Calendar />
+      <Calendar/>
       {/* isLoggedInUser={!userId && true} */}
       <TaskList />
       <Button onClick={() => setShowModal(true)}> Create a Team or Project </Button>
