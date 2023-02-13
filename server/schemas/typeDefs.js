@@ -59,7 +59,7 @@ type Mutation {
     addUser(name: String!, email: String!, password: String!):Auth
     addTeam(team: teamInput):Team
     removeTeam(_id: ID!):Team
-    addProject(project: projectInput):Project
+    addProject(project: projectInput, teamId:ID!):Project
     removeProject(_id: ID!):Project
     addTask(task: taskInput):Project
     removeTask(_id: ID!):Project
@@ -78,7 +78,6 @@ input projectInput {
     tasks: [taskInput]
 }
 input taskInput {
-    taskId: String!
     taskName: String
     taskDescription: String
     createdOn: String

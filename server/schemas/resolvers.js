@@ -5,7 +5,7 @@ const { getArgumentValues } = require('graphql');
 
 const resolvers = {
     Query: {
-
+        // Tested successfully
         me: async (parent, args, context) => {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
@@ -152,77 +152,102 @@ const resolvers = {
         },
         // Tested successfully
         addTeam: async (parent, args, context) => {
-            const team = await Team.create(args.team);
-            console.log(args.team)
+            const newTeam = { teamName: args.team.teamName, admin: [context.user._id], members: [context.user._id], projects: [] }
+            const team = await Team.create(newTeam);
+            console.log(args)
+            console.log(context.user)
             const me = context.user._id;
             await User.findOneAndUpdate(
                 { _id: me },
                 { $addToSet: { teams: team._id } }
             )
-            return team;
-        },
-        // THIS NEEDS TO CHANGE TO REFLECT TEAM, NOT USER.
-
-        removeTeam: async (parent, args, context) => {
-            const projectsToBeDeleted = await Team.find(
-                {_id: args.team._id},
-                {projects: 1}
-                )
-            const noMoreProjects = await Project.deleteMany(
-                {_id: projectsToBeDeleted}
-            )
-            const pullTeamFromUserModel = await User.findOneAndUpdate(
-                {teams: [args.team._id]},
-                {$pull: {
-                    teams: args.team._id
-                }}
-            )
-            return Team.deleteOne({_id: args.team._id})
+            // console.log(team)
+            const verifyTeam = await Team.findById(team._id).populate('admin').populate('members');
+            console.log(verifyTeam)
+            return verifyTeam;
         },
 
+        // Currently only deleting team, not updating anything.
+        removeTeam: async (parent, args) => {
+            // const projectsToBeDeleted = await Team.find(
+            //     { _id: args._id },
+            //     { projects: 1, _id: 0 }
+            // )
+            // console.log(projectsToBeDeleted)
+            // await Project.deleteMany(
+            //     { _id: { $in: projectsToBeDeleted } }
+            // )
+            // await User.findOneAndUpdate(
+            //     { teams: [args.team._id] },
+            //     {
+            //         $pull: {
+            //             teams: args.team._id
+            //         }
+            //     }
+            // )
+            return Team.findOneAndDelete({ _id: args._id })
+        },
+
+        // Need to create addUserToTeam
+
+        // All working
         addProject: async (parent, args, context) => {
-            const project = await Project.create(args.project);
-            const team = context.team._id;
+            const me = context.user._id;
+            const projectData = { ...args.project };
+            projectData.team = [];
+            projectData.team.push(args.teamId);
+            console.log(projectData);
+            const project = await Project.create(projectData);
             await Team.findOneAndUpdate(
-                { _id: team },
+                { _id: args.teamId },
+                { $addToSet: { projects: project._id } }
+            )
+            await User.findOneAndUpdate(
+                { _id: me },
                 { $addToSet: { projects: project._id } }
             )
             return project;
         },
-        removeProject: async (parent, args, context) => {
-            const tasksToBeDeleted = await Project.find(
-                {_id: args.project._id},
-                {tasks: 1}
-            )
-            const noMoreTasks = await Task.deleteMany(
-                {_id: tasksToBeDeleted}
-            )
-            const pullFromTeamModel = await Team.findOneAndUpdate(
-                {projects: [args.project._id]},
-                {$pull: {
-                    projects: args.project._id
-                }}
-            )
-            return Project.deleteOne({_id: args.project._id})
+
+        // Successful only at deleting the project, not updating
+        removeProject: async (parent, args) => {
+            // const tasksToBeDeleted = await Project.find(
+            //     { _id: args.project._id },
+            //     { tasks: 1 }
+            // )
+            // const noMoreTasks = await Task.deleteMany(
+            //     { _id: tasksToBeDeleted }
+            // )
+            // const pullFromTeamModel = await Team.findOneAndUpdate(
+            //     { projects: [args.project._id] },
+            //     {
+            //         $pull: {
+            //             projects: args.project._id
+            //         }
+            //     }
+            // )
+            return Project.findOneAndDelete({ _id: args._id })
         },
 
         addTask: async (parents, args, context) => {
             const task = await Task.create(args.task)
             await Project.findOneAndUpdate(
-                {_id: context.project._id},
-                {$addToSet: {tasks: task._id}}
+                { _id: context.project._id },
+                { $addToSet: { tasks: task._id } }
             )
             return task
         },
 
         removeTask: async (parent, args, context) => {
             const pullFromProjectModel = await Project.findOneAndUpdate(
-                {tasks: [args.task._id]},
-                {$pull: {
-                    tasks: args.task._id
-                }}
+                { tasks: [args.task._id] },
+                {
+                    $pull: {
+                        tasks: args.task._id
+                    }
+                }
             )
-            return Task.deleteOne({_id: args.task._id})
+            return Task.deleteOne({ _id: args.task._id })
         }
     },
 };
