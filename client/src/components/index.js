@@ -8,4 +8,5 @@ export { default as Figure } from './Figure';
 export { default as TaskList } from './TaskList';
 export { default as CreateTeam } from './CreateTeam';
 export { default as CreateProject } from './CreateProject';
+export { default as UserInfo } from './UserInfo';
 // export { default as Planner } from './Planner';
