@@ -42,7 +42,7 @@ const CreateTeam = () => {
                     <Form.Label>Team Name</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='team name'
+                        placeholder='What is your team called?'
                         name='teamName'
                         onChange={handleInputChange}
                         value={teamFormData.teamName}
