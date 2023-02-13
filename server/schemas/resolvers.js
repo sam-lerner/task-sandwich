@@ -20,15 +20,17 @@ const resolvers = {
             return Project.findOne({ _id: _id });
         },
 
-        projectsByUser: async (parent, { userId }) => {
-            const projectsForUser = await User.find(
-                { _id: userId },
-                { projectId: 1 }
+        projectsByUser: async (parent, args) => {
+            const params = await User.find(
+                { _id: args._id }
             )
-            //expect array of IDs
-            const params = projectsForUser ? { _id } : {};
-
-            return Project.find(params) //array of only values, no property names
+            let [...param] = params.projects
+            Project.findMany({
+                _id: {
+                    $in: [...param]
+                }
+            })
+            // return Project.find({ _id: { $in: params.projects } }) //array of only values, no property names
         },
 
         projectsByTeam: async (parent, { teamId }) => {
@@ -188,7 +190,13 @@ const resolvers = {
             return Team.findOneAndDelete({ _id: args._id })
         },
 
-        // Need to create addUserToTeam
+        // Returning null but working
+        addUserToTeam: async (parent, args, context) => {
+            console.log(args)
+            await Team.findByIdAndUpdate(args._id,
+                { $addToSet: { members: args.memberId } }
+            );
+        },
 
         // All working
         addProject: async (parent, args, context) => {
