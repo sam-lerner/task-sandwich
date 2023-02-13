@@ -34,8 +34,7 @@ const userSchema = new Schema({
   }],
 
   nextSandwichReset: {
-    type: Date,
-    default: Date.now
+    type: Date
   },
   
   sandwichCount: {
