@@ -1,46 +1,21 @@
 import { useState } from 'react';
-// import { QUERY_ME } from '../../utils/queries';
-
-// const { User } = require("../../../../server/models");
-// import Auth from '../../utils/auth';
-// const [userData, setUserData] = useState({});
 
 import "./style.css";
 
-// const { data, loading, error } = useQuery(QUERY_ME, {
-//   onCompleted: (data) => {
-//     setUserData(data);
-//     console.log(userData);
-//   }
-// });
-
-// const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-// if (!token) {
-//   return (
-//     <h4>
-//       You need to be logged in to see your profile page. Use the navigation
-//       links above to sign up or log in!
-//     </h4>
-//   );
-// }
-
-// if (loading) {
-//   return <div>Loading...</div>;
-// }
-
-// const getInfo = async (parent, args, context) => {
-//   if (context.user) {
-//     const userData = await User.findOne({ _id: context.user._id })
-//         .select('-_v -password')
-//     return userData;
-// }
-// throw new AuthenticationError('Please log in')
-// };
-
 const UserInfo = ({ userData }) => {
-  console.log(userData);
-  const [info, setInfo] = useState([]);
+  // console.log(userData);
+  // console.log(userData.me);
+  // console.log(userData.me.teams);
+  let user;
+
+  if (userData) {
+    user = userData.me;
+  }
+
+  // console.log(user);
+  // console.log(user.name);
+
+  // const [info, setInfo] = useState(userData);
 
   // useEffect(() => {
   //   const fetchInfo = async () => {
@@ -49,19 +24,19 @@ const UserInfo = ({ userData }) => {
   //   }
   //   fetchInfo();
   // }, []);
-
+  // console.log(`info: ${info}`)
   return (
+    <>
     <div className="userInfo">
-      {userData.map((item) => (
-        <div key={item._id}>
-          <h2>{item.name}</h2>
-          <p>{item.teams}</p>
-          <p>{item.projects}</p>
-          <p>{item.sandwichCount}</p>
-          <p>{item.sandwichReceived}</p>
-        </div>
-      ))}
+      {/* <div key={user._id}>
+        <h2>{user.name}</h2>
+        <p>{user.teams}</p>
+        <p>{user.projects}</p> */}
+        {/* <p>{info.sandwichCount}</p>
+           <p>{info.sandwichReceived}</p> */}
+      {/* </div> */}
     </div>
+    </>
   )
 }
 

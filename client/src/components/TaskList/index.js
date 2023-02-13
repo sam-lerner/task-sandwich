@@ -30,15 +30,30 @@ const TaskList = () => {
     return (
         <>
             <ListGroup>
-                {todo.map(item => (
-                    <ListGroup.Item>
-                        <h3>{item.taskName}</h3>
-                        <p>Due: {item.dueDateText}</p>
-                        <p>{item.taskDescription}</p>
-                    </ListGroup.Item>
-                ))}
+                <div class="accordion" id="accordionExample">
+                    {todo.map((item, index) => (
+                        <ListGroup.Item key={index}>
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            {item.taskName}
+                                        </button>
 
+                                    </h2>
+                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <p>Due: {item.dueDateText}</p>
+                                        <p>{item.taskDescription}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </ListGroup.Item>
+                    ))}
+                </div>
             </ListGroup>
+
         </>
     );
 }
