@@ -18,7 +18,6 @@ const Profile = () => {
     }
   });
   
-
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
   if (!token) {

@@ -26,15 +26,17 @@ const UserInfo = ({ userData }) => {
   // }, []);
   // console.log(`info: ${info}`)
   return (
+    <>
     <div className="userInfo">
-      {/* <div key={user._id}> */}
-        {/* <h2>{user.name}</h2>
+      {/* <div key={user._id}>
+        <h2>{user.name}</h2>
         <p>{user.teams}</p>
         <p>{user.projects}</p> */}
         {/* <p>{info.sandwichCount}</p>
            <p>{info.sandwichReceived}</p> */}
       {/* </div> */}
     </div>
+    </>
   )
 }
 
