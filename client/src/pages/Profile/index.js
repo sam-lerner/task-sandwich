@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, TaskList } from '../../components';
+import { Calendar, TaskList, CreateTeam } from '../../components';
 
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../../utils/queries';
@@ -36,6 +36,7 @@ const Profile = () => {
       <Calendar />
       {/* isLoggedInUser={!userId && true} */}
       <TaskList />
+      <CreateTeam />
     </>
   )
 

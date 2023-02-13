@@ -28,16 +28,18 @@ const TaskList = () => {
     // form for finaldate - all numerical - new Date(year,month,day,hours,minutes,seconds,ms)
 
     return (
-        <ListGroup>
-            {todo.map(item => (
-                <ListGroup.Item>
-                    <h3>{item.taskName}</h3>
-                    <p>Due: {item.dueDateText}</p>
-                    <p>{item.taskDescription}</p>
-                </ListGroup.Item>
-            ))}
+        <>
+            <ListGroup>
+                {todo.map(item => (
+                    <ListGroup.Item>
+                        <h3>{item.taskName}</h3>
+                        <p>Due: {item.dueDateText}</p>
+                        <p>{item.taskDescription}</p>
+                    </ListGroup.Item>
+                ))}
 
-        </ListGroup>
+            </ListGroup>
+        </>
     );
 }
 
