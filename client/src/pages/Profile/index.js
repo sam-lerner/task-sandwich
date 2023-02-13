@@ -9,20 +9,9 @@ import Auth from '../../utils/auth';
 
 const Profile = () => {
 
-  // const [userData, setUserData] = useState({});
   const [showModal, setShowModal] = useState(false);
 
   const { data, loading, error } = useQuery(QUERY_ME);
-
-  // const { data, loading, error } = useQuery(QUERY_ME, {
-  //   onCompleted: (data) => {
-  //     setUserData(data);
-  //   }
-  // });
-    // console.log(data, loading)
-
-  // const userData = data?.me||{} 
-  // prevents the error during population (like in mapping)
 
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -42,8 +31,6 @@ const Profile = () => {
   if (error) {
     return <div>Error retrieving data</div>;
   }
-
-  // console.log(userData.me.name);
 
   return (
     <>
