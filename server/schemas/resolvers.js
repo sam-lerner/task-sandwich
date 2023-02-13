@@ -152,33 +152,42 @@ const resolvers = {
         },
         // Tested successfully
         addTeam: async (parent, args, context) => {
-            const team = await Team.create(args.team);
-            console.log(args.team)
-            const me = context.user._id;
+            const newTeam = { teamName: args.team.teamName, admin: [context.user._id], members: [context.user._id], projects: [] }
+            const team = await Team.create(newTeam);
+            console.log(args)
+            console.log(context.user)
+            const me = context._id;
             await User.findOneAndUpdate(
                 { _id: me },
                 { $addToSet: { teams: team._id } }
             )
-            return team;
+            console.log(team)
+            const verifyTeam = await Team.findById(team._id).populate('admin.name').populate('members.name');
+            console.log(verifyTeam)
+            return verifyTeam;
         },
         // THIS NEEDS TO CHANGE TO REFLECT TEAM, NOT USER.
 
         removeTeam: async (parent, args, context) => {
             const projectsToBeDeleted = await Team.find(
-                {_id: args.team._id},
-                {projects: 1}
-                )
+                { _id: args.team._id },
+                { projects: 1 }
+            )
             const noMoreProjects = await Project.deleteMany(
-                {_id: projectsToBeDeleted}
+                { _id: projectsToBeDeleted }
             )
             const pullTeamFromUserModel = await User.findOneAndUpdate(
-                {teams: [args.team._id]},
-                {$pull: {
-                    teams: args.team._id
-                }}
+                { teams: [args.team._id] },
+                {
+                    $pull: {
+                        teams: args.team._id
+                    }
+                }
             )
-            return Team.deleteOne({_id: args.team._id})
+            return Team.deleteOne({ _id: args.team._id })
         },
+
+        // Need to create addUserToTeam
 
         addProject: async (parent, args, context) => {
             const project = await Project.create(args.project);
@@ -191,38 +200,42 @@ const resolvers = {
         },
         removeProject: async (parent, args, context) => {
             const tasksToBeDeleted = await Project.find(
-                {_id: args.project._id},
-                {tasks: 1}
+                { _id: args.project._id },
+                { tasks: 1 }
             )
             const noMoreTasks = await Task.deleteMany(
-                {_id: tasksToBeDeleted}
+                { _id: tasksToBeDeleted }
             )
             const pullFromTeamModel = await Team.findOneAndUpdate(
-                {projects: [args.project._id]},
-                {$pull: {
-                    projects: args.project._id
-                }}
+                { projects: [args.project._id] },
+                {
+                    $pull: {
+                        projects: args.project._id
+                    }
+                }
             )
-            return Project.deleteOne({_id: args.project._id})
+            return Project.deleteOne({ _id: args.project._id })
         },
 
         addTask: async (parents, args, context) => {
             const task = await Task.create(args.task)
             await Project.findOneAndUpdate(
-                {_id: context.project._id},
-                {$addToSet: {tasks: task._id}}
+                { _id: context.project._id },
+                { $addToSet: { tasks: task._id } }
             )
             return task
         },
 
         removeTask: async (parent, args, context) => {
             const pullFromProjectModel = await Project.findOneAndUpdate(
-                {tasks: [args.task._id]},
-                {$pull: {
-                    tasks: args.task._id
-                }}
+                { tasks: [args.task._id] },
+                {
+                    $pull: {
+                        tasks: args.task._id
+                    }
+                }
             )
-            return Task.deleteOne({_id: args.task._id})
+            return Task.deleteOne({ _id: args.task._id })
         }
     },
 };
