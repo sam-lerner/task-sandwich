@@ -19,26 +19,21 @@ const resolvers = {
             console.log(_id)
             return Project.findOne({ _id: _id });
         },
-
-        projectsByUser: async (parent, { userId }) => {
-            const projectsForUser = await User.find(
-                { _id: userId },
-                { projectId: 1 }
-            )
-            //expect array of IDs
-            const params = projectsForUser ? { _id } : {};
-
-            return Project.find(params) //array of only values, no property names
+        // Tested successfully
+        projectsByUser: async (parent, args) => {
+            const params = await User.find(
+                { _id: args._id }
+            ).populate('projects')
+            console.log(params[0].projects)
+            return params[0].projects
         },
-
-        projectsByTeam: async (parent, { teamId }) => {
-            const projectsForTeam = await Team.find(
-                { _id: teamId },
-                { projects: 1 }
-            )
-            const params = projectsForTeam ? { _id } : {}
-
-            return Project.find(params)
+        // Tested successfully
+        projectsByTeam: async (parent, args) => {
+            const params = await Team.find(
+                { _id: args._id },
+            ).populate('projects')
+            console.log(params[0].projects)
+            return params[0].projects
         },
 
         task: async (parent, { taskId }) => {
@@ -52,14 +47,11 @@ const resolvers = {
             )
         },
 
-        tasksByProject: async (parent, { projectId }) => {
-            const tasksForProject = await Project.find(
-                { _id: projectId },
-                { tasks: 1 }
-            )
-            const params = tasksForProject ? { _id } : {}
-
-            return Task.find(params)
+        tasksByProject: async (parent, args) => {
+            const params = await Project.find(
+                { _id: args._id },
+            ).populate('tasks')
+            return params[0].tasks
         },
 
         tasksByUser: async (parent, { userId }) => {
@@ -188,7 +180,13 @@ const resolvers = {
             return Team.findOneAndDelete({ _id: args._id })
         },
 
-        // Need to create addUserToTeam
+        // Returning null but working
+        addUserToTeam: async (parent, args, context) => {
+            console.log(args)
+            await Team.findByIdAndUpdate(args._id,
+                { $addToSet: { members: args.memberId } }
+            );
+        },
 
         // All working
         addProject: async (parent, args, context) => {
@@ -228,12 +226,18 @@ const resolvers = {
             // )
             return Project.findOneAndDelete({ _id: args._id })
         },
-
+        // Successful create, update project, task
         addTask: async (parents, args, context) => {
-            const task = await Task.create(args.task)
+            // console.log(args.task)
+            const task = await Task.create({ ...args.task })
+            // console.log(task)
             await Project.findOneAndUpdate(
-                { _id: context.project._id },
+                { _id: args.projectId },
                 { $addToSet: { tasks: task._id } }
+            )
+            await Task.findOneAndUpdate(
+                { _id: task._id },
+                { $addToSet: { belongsToProject: args.projectId } }
             )
             return task
         },
@@ -249,6 +253,7 @@ const resolvers = {
             )
             return Task.deleteOne({ _id: args.task._id })
         }
+        // Need to create an assignTask mutation
     },
 };
 
