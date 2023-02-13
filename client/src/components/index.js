@@ -5,4 +5,4 @@ export { default as LoginForm } from './LoginForm';
 export { default as SignupForm } from './SignupForm';
 export { default as Calendar } from './Calendar';
 export { default as Figure } from './Figure';
-export { default as Planner } from './Planner';
+// export { default as Planner } from './Planner';

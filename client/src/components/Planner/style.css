@@ -1,3 +1,41 @@
+.todo-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .column {
+  width: 30%;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  margin-top: 10px;
+}
+
+input[type="text"], button {
+  font-size: 16px;
+  padding: 5px 10px;
+  border: none;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  margin-left: 10px;
+  cursor: pointer;
+} */
+
+
+/* DAILY SCHEDULE PLANNER STYLE */
 .planner {
   font-size: 16px;
 }
