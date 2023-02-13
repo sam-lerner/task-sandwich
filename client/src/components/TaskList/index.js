@@ -30,8 +30,8 @@ const TaskList = () => {
     return (
         <>
             <ListGroup>
-                {todo.map(item => (
-                    <ListGroup.Item>
+                {todo.map((item, index) => (
+                    <ListGroup.Item key={index}>
                         <h3>{item.taskName}</h3>
                         <p>Due: {item.dueDateText}</p>
                         <p>{item.taskDescription}</p>

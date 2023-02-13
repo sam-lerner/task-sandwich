@@ -12,7 +12,7 @@ const UserInfo = ({ userData }) => {
     user = userData.me;
   }
 
-  console.log(user);
+  // console.log(user);
   // console.log(user.name);
 
   // const [info, setInfo] = useState(userData);

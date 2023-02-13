@@ -17,7 +17,7 @@ const Profile = () => {
       setUserData(data);
     }
   });
-  // console.log(userData);
+  
 
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -38,6 +38,8 @@ const Profile = () => {
     return <div>Error retrieving data</div>;
   }
 
+  console.log(userData)
+  // console.log(userData.me.name);
 
   return (
     <>
