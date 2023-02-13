@@ -191,8 +191,8 @@ const resolvers = {
         // Need to create addUserToTeam
 
         // Can create a project, updating team, but not currently populating in user array correctly.
-        addProject: async (parent, args) => {
-            console.log(args)
+        addProject: async (parent, args, context) => {
+            const me = context.user._id;
             const projectData = { ...args.project };
             projectData.team = [];
             projectData.team.push(args.teamId);
@@ -200,6 +200,10 @@ const resolvers = {
             const project = await Project.create(projectData);
             await Team.findOneAndUpdate(
                 { _id: args.teamId },
+                { $addToSet: { projects: project._id } }
+            )
+            await User.findOneAndUpdate(
+                { _id: me },
                 { $addToSet: { projects: project._id } }
             )
             return project;
