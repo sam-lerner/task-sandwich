@@ -226,3 +226,21 @@ const resolvers = {
 };
 
 module.exports = resolvers;
+
+
+// Sam notes
+
+// sandiwchCount: async (parent, oldDate, context) => {
+//     let currentSandwiches = GET FROM USER context
+//     let setDate = GET OLD DATE FROM LAST CHECK
+//     const currentDate = Date.now
+
+//     if currentDate > setDate {
+//         THIS WILL ACTUALLY NEED TO BE FINDANDUPDATE
+//         currentSanwiches++5
+//         setDate FIND AND UPDATE TO currentDate
+//         return
+//     } else {
+//         return
+//     }
+// }
