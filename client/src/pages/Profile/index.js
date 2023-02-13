@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Calendar, TaskList, CreateTeam, CreateProject } from '../../components';
+import React, { useState } from 'react';
+import { Calendar, TaskList, CreateTeam, CreateProject, UserInfo } from '../../components';
 import { Button, Nav, Modal, Tab } from "react-bootstrap";
 
 import { useQuery } from '@apollo/client';
@@ -76,6 +76,7 @@ const Profile = () => {
           </Modal.Body>
         </Tab.Container>
       </Modal>
+      <UserInfo userData={userData}/>
     </>
   )
 
