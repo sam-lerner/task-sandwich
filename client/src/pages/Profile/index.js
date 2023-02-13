@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Calendar } from '../../components';
+import { Calendar, TaskList, CreateTeam, CreateProject } from '../../components';
+import { Button, Nav, Modal, Tab } from "react-bootstrap";
 
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../../utils/queries';
@@ -9,6 +10,7 @@ import Auth from '../../utils/auth';
 const Profile = () => {
 
   const [userData, setUserData] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   const { data, loading, error } = useQuery(QUERY_ME, {
     onCompleted: (data) => {
@@ -35,6 +37,39 @@ const Profile = () => {
     <>
       <Calendar />
       {/* isLoggedInUser={!userId && true} */}
+      <TaskList />
+      <Button onClick={() => setShowModal(true)}> Create a Team or Project </Button>
+      <Modal
+        size='lg'
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        aria-labelledby='create-modal'>
+        {/* tab container to do either signup or login component */}
+        <Tab.Container defaultActiveKey='team'>
+          <Modal.Header closeButton>
+            <Modal.Title id='team-modal'>
+              <Nav variant='pills'>
+                <Nav.Item>
+                  <Nav.Link eventKey='team'>Create a Team</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey='project'>Create a Project</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Tab.Content>
+              <Tab.Pane eventKey='team'>
+                <CreateTeam handleModalClose={() => setShowModal(false)} />
+              </Tab.Pane>
+              <Tab.Pane eventKey='project'>
+                <CreateProject handleModalClose={() => setShowModal(false)} />
+              </Tab.Pane>
+            </Tab.Content>
+          </Modal.Body>
+        </Tab.Container>
+      </Modal>
     </>
   )
 
