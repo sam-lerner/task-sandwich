@@ -190,7 +190,7 @@ const resolvers = {
 
         // Need to create addUserToTeam
 
-        // Can create a project, updating team, but not currently populating in user array correctly.
+        // All working
         addProject: async (parent, args, context) => {
             const me = context.user._id;
             const projectData = { ...args.project };
