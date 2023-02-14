@@ -1,102 +1,105 @@
-.todo-list {
-  display: flex;
-  justify-content: space-between;
-}
-
-/* .column {
-  width: 30%;
-}
-
-ul {
-  list-style: none;
+* {
+  margin: 0;
   padding: 0;
-}
-
-li {
-  margin-bottom: 10px;
-}
-
-form {
+  box-sizing: border-box;
+  }
+  /* body {
+  background: #e27442;
+  } */
+  .todo-container {
+  color: white;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  padding: 20px;
+  width: 600px;
+  transform: translate(-50%,-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
   display: flex;
-  margin-top: 10px;
-}
-
-input[type="text"], button {
-  font-size: 16px;
-  padding: 5px 10px;
-  border: none;
-}
-
-button {
-  background-color: #4CAF50;
-  color: white;
-  margin-left: 10px;
-  cursor: pointer;
-} */
-
-
-/* DAILY SCHEDULE PLANNER STYLE */
-.planner {
-  font-size: 16px;
-}
-
-.time-block {
-  border-radius: 15px;
-  border-top: 1px solid white;
-}
-
-.description {
-  white-space: pre-wrap;
-  background: transparent;
-  border: none;
-  resize: none;
-  border-left: 1px solid black;
+  flex-direction: column;
+  align-items: center;
+  }
+  .todo {
+  width: 400px;
+  }
+  .todo-container h2 {
   padding: 10px;
-}
-
-.hour {
-  background-color: #ffffff;
-  color: #000000;
-  border-top: 1px dashed #000000;
-}
-
-.past {
-  background-color: #ff6961;
-  color: darkred;
-}
-
-.present {
-  background-color: lightskyblue;
-  color: darkblue;
-}
-
-.future {
-  background-color: #77dd77;
-  color: darkgreen;
-}
-
-/* SAVE BUTTON STYLE */
-.saveBtn {
-  border-left: 1px solid black;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+  font-family: 'Candal', sans-serif;
+  font-size: 2em;
+  }
+  .todo-header input {
+  width: 92%;
+  border: none;
+  border-radius: 5px;
+  height: 20px;
+  font-family: 'Candal', sans-serif;
+  }
+  .todo-header button {
   color: white;
-}
-
-.saveBtn i:hover {
-  font-size: 20px;
-  transition: all 0.3s ease-in-out;
+  border: none;
+  border-radius: 50%;
   cursor: pointer;
-}
-
-.future-btn {
-  background-color: darkgreen;
-}
-
-.past-btn {
-  background-color: darkred;
-}
-
-.present-btn {
-  background-color: darkblue;
-}
+  padding: 5px;
+  font-family: 'Candal', sans-serif;
+  background-color: rgb(51, 212, 100);
+  }
+  .todo-container ul {
+  list-style: none;
+  }
+  .todo-list-item {
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Candal', sans-serif;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: row;
+  }
+  .todo-list-item form {
+  width: 100%;
+  display: flex;
+  }
+  .todo-list-item input {
+  flex-grow: 2;
+  margin-right: 20px;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Candal', sans-serif;
+  }
+  .todo-list-item button {
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px;
+  font-family: 'Candal', sans-serif;
+  background-color: rgb(51, 212, 100);
+  }
+  .todo-list-item .cancel {
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px;
+  font-family: 'Candal', sans-serif;
+  background-color: rgb(223, 43, 43);
+  margin-left: 5px;
+  }
+  .todo-list-item div {
+  flex-grow: 2;
+  }
+  .todo-list-item .edit {
+  color : rgb(143, 233, 58);
+  margin-right: 10px;
+  cursor:pointer;
+  text-decoration: none;
+  }
+  .todo-list-item .remove {
+  color : rgb(243, 96, 96);
+  margin-right: 5px;
+  cursor:pointer;
+  text-decoration: none;
+  }
