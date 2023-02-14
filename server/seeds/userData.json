@@ -2,21 +2,25 @@
     {
         "name": "XVergara",
         "email": "xavier@gmail.com",
-        "password": "pass12345"
+        "password": "pass12345",
+        "assignedTo": ["63eb8e41b19b4865481b36d4"]
     },
     {
         "name": "SLerner",
         "email": "sam@gmail.com",
-        "password": "pass12345"
+        "password": "pass12345",
+        "assignedTo": ["63eb8e41b19b4865481b36d4"]
     },
     {
         "name": "ANail",
         "email": "azime@gmail.com",
-        "password": "pass12345"
+        "password": "pass12345",
+        "assignedTo": ["63eb8e41b19b4865481b36d4"]
     },
     {
         "name": "EKirberger",
         "email": "eric@gmail.com",
-        "password": "pass12345"
+        "password": "pass12345",
+        "assignedTo": ["63eb8e41b19b4865481b36d4"]
     }
 ]
