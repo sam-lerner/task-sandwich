@@ -35,15 +35,13 @@ const resolvers = {
             console.log(params[0].projects)
             return params[0].projects
         },
-
-        task: async (parent, { taskId }) => {
-            return Project.findOne(
+        // Tested successfully
+        task: async (parent, args) => {
+            console.log(args)
+            return Task.findOne(
                 {
-                    _id: projectId
+                    _id: args._id
                 },
-                {
-                    $inc: { tasks: [taskId] }
-                }
             )
         },
 
