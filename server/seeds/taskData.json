@@ -1,5 +1,23 @@
-{
-    "taskId": 1,
-    "taskName": "I hope this works",
-    "taskStatus": "In Progress"
-}
+[
+    {
+        "taskId": 1,
+        "taskName": "reach mvp",
+        "taskDescription": "have at least these....",
+        "taskStatus": "In Progress",
+        "dueDate": "February 13, 2023 23:59"
+    },
+    {
+        "taskId": 2,
+        "taskName": "add more stuff",
+        "taskDescription": "fun stuff",
+        "taskStatus": "In Progress",
+        "dueDate": "February 14, 2023 23:59"
+    },
+    {
+        "taskId": 2,
+        "taskName": "presentation",
+        "taskDescription": "you got this!",
+        "taskStatus": "In Progress",
+        "dueDate": "February 17, 2023 15:00"
+    }
+]

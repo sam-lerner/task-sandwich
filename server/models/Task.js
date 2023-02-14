@@ -3,10 +3,7 @@ const dateFormat = require('../utils/dateHelper');
 
 const taskSchema = new Schema({
 
-    taskId:{ 
-        type: String,
-        required: true,
-    },
+    
     taskName: {
       type: String,
       required: true,
@@ -25,7 +22,7 @@ const taskSchema = new Schema({
     },
     taskStatus: {
         type: String,
-        required: true
+        default: "Open"
     },
     assignedTo: [{
         type: Schema.Types.ObjectId,

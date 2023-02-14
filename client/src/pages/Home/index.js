@@ -57,6 +57,8 @@ const Home = () => {
       <br></br>
       <h3>"Task Sandwich literally saved my life!"</h3>
       <h6>-Jimmy Hoffa, labor organizer</h6>
+      <br></br>
+      <br></br>
     </>
   );
 };
