@@ -7,6 +7,8 @@ import { QUERY_ME } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
+import "./style.css";
+
 const Profile = () => {
 
   console.log("im in profile")
@@ -34,7 +36,7 @@ const Profile = () => {
   }
 
   return (
-    <>
+    <div className="profileMain">
       <Calendar/>
       {/* isLoggedInUser={!userId && true} */}
       <TaskList />
@@ -71,7 +73,7 @@ const Profile = () => {
         </Tab.Container>
       </Modal>
       <UserInfo userData={userData}/>
-    </>
+    </div>
   )
 
 };
