@@ -7,9 +7,15 @@ export const QUERY_ME = gql`
       name
       teams {
         _id
+        teamName
       }
       projects {
         _id
+        projectName
+      }
+      tasks {
+        _id
+        taskName
       }
     }
   }
