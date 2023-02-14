@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, TaskList, CreateTeam, CreateProject, UserInfo } from '../../components';
+import { Calendar, CreateTeam, CreateProject, UserInfo } from '../../components';
 import { Button, Nav, Modal, Tab } from "react-bootstrap";
 
 import { useQuery } from '@apollo/client';
@@ -37,7 +37,7 @@ const Profile = () => {
     <>
       <Calendar/>
       {/* isLoggedInUser={!userId && true} */}
-      <TaskList />
+      {/* <TaskList /> */}
       <Button onClick={() => setShowModal(true)}> Create a Team or Project </Button>
       <Modal
         size='lg'

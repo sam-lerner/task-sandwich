@@ -7,7 +7,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 
-const TaskList = () => {
+const TaskList = ({ taskData }) => {
 
     const [open, setOpen] = useState({});
     // const { data, loading, error } = useQuery(QUERY_TASKS_BY_USER);
@@ -53,7 +53,7 @@ const TaskList = () => {
     return (
         <>
             <ListGroup>
-                {todo.map((item, index) => (
+                {taskData.map((item, index) => (
                     <ListGroup.Item key={index}>
                         <Button
                             onClick={() => handleOpen(index)}
