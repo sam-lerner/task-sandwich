@@ -2,11 +2,6 @@ import "./style.css";
 
 const UserInfo = ({ userData }) => {
 
-  console.log(userData);
-  console.log(userData.me.teams);
-  console.log(userData.me.projects);
-  console.log(userData.me.tasks);
-
   return (
     <>
       <div className="userInfo">
@@ -27,8 +22,6 @@ const UserInfo = ({ userData }) => {
               {userData.me.tasks.length && userData.me.tasks.map(task => <li>{task.taskName}</li>)}
             </ul>
           </div>
-          {/* <p>{userData.sandwichCount}</p>
-           <p>{userData.sandwichReceived}</p> */}
         </div>
       </div>
     </>

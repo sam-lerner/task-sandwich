@@ -3,7 +3,7 @@ import { Calendar, CreateTeam, CreateProject, CreateTask, TaskList, UserInfo } f
 import { Button, Nav, Modal, Tab, Container, Row, Col } from "react-bootstrap";
 
 import { useQuery } from '@apollo/client';
-import { QUERY_ME } from '../../utils/queries';
+import { QUERY_ME, QUERY_TASKS_BY_USER } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
@@ -11,9 +11,8 @@ import "./style.css";
 
 const Profile = () => {
 
-  const [showModal, setShowModal] = useState(false);
-
-  const { data: userData, loading, error } = useQuery(QUERY_ME);
+  const { data: userData, loading: meLoading, error: meError } = useQuery(QUERY_ME);
+  // const { data: taskData, loading: taskLoading, error: taskError } = useQuery(QUERY_TASKS_BY_USER);
 
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -26,14 +25,21 @@ const Profile = () => {
     );
   }
   console.log("checked token")
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  if (meLoading) {
+    return <div>Loading User...</div>;
+  } 
+  // else if (taskLoading) {
+  //   return <div>Loading Tasks...</div>;
+  // }
 
-  if (error) {
-    console.error(JSON.parse(JSON.stringify(error)))
-    return <div>Error retrieving data</div>;
-  }
+  if (meError) {
+    console.error(JSON.parse(JSON.stringify(meError)))
+    return <div>Error retrieving user data</div>;
+  } 
+  // else if (taskError) {
+  //   console.error(JSON.parse(JSON.stringify(taskError)))
+  //   return <div>Error retrieving task data</div>;
+  // }
 
   return (
     <div className="profileMain">
@@ -44,7 +50,7 @@ const Profile = () => {
           </Col>
           {/* isLoggedInUser={!userId && true} */}
           <Col>
-          <TaskList />
+            <TaskList userData={userData} />
           </Col>
         </Row>
         <UserInfo userData={userData} />
