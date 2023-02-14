@@ -2,20 +2,21 @@ import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap';
 
 import { useMutation } from '@apollo/client';
-import { ADD_PROJECT } from '../../utils/mutations';
+import { ADD_TASK } from '../../utils/mutations';
 
 const CreateTeam = () => {
 
-    const [projectFormData, setProjectFormData] = useState({ projectName: '', projectDescription: '', endDate: '' });
-    const [createProject, { error }] = useMutation(ADD_PROJECT);
+    const [taskFormData, setTaskFormData] = useState({ taskName: '', taskDescription: '', dueDate: '' });
+    const [createTask, { error }] = useMutation(ADD_TASK);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setProjectFormData({ ...projectFormData, [name]: value });
+        setTaskFormData({ ...taskFormData, [name]: value });
     };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        console.log("taskFormData: ", taskFormData)
 
         // check if form has everything (as per react-bootstrap docs)
         const form = event.currentTarget;
@@ -25,15 +26,16 @@ const CreateTeam = () => {
         }
 
         try {
-            const { data } = await createProject({ variables: { project: { ...projectFormData } } });
+            const { data } = await createTask({ variables: { task: { ...taskFormData } } });
+            console.log("taskFormData: ", taskFormData)
         } catch (err) {
             console.error(JSON.parse(JSON.stringify(err)));
         }
 
-        setProjectFormData({
-            projectName: '',
-            projectDescription: '',
-            endDate: '',
+        setTaskFormData({
+            taskName: '',
+            taskDescription: '',
+            dueDate: '',
         });
     };
 
@@ -41,41 +43,41 @@ const CreateTeam = () => {
         <>
             <Form onSubmit={handleFormSubmit}>
                 <Form.Group>
-                    <Form.Label>Project Name</Form.Label>
+                    <Form.Label>Task Name</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='What should we call the project?'
-                        name='projectName'
+                        placeholder='What should we call the task?'
+                        name='taskName'
                         onChange={handleInputChange}
-                        value={projectFormData.projectName}
+                        value={taskFormData.taskName}
                         required
                     />
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Project Description</Form.Label>
+                    <Form.Label>Task Description</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='Describe your project.'
-                        name='projectDescription'
+                        placeholder='Describe your task.'
+                        name='taskDescription'
                         onChange={handleInputChange}
-                        value={projectFormData.projectDescription}
+                        value={taskFormData.taskDescription}
                     />
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Project End Date</Form.Label>
+                    <Form.Label>Task Due Date</Form.Label>
                     <Form.Control
                         type='text'
-                        placeholder='What is the final date for the project?'
-                        name='endDate'
+                        placeholder='What is the final date for the task?'
+                        name='dueDate'
                         onChange={handleInputChange}
-                        value={projectFormData.endDate}
+                        value={taskFormData.dueDate}
                     />
                 </Form.Group>
                 <Button
-                    disabled={!(projectFormData.projectName)}
+                    disabled={!(taskFormData.taskName)}
                     type='submit'
                     variant='success'>
-                    Create Project
+                    Create Task
                 </Button>
             </Form>
         </>
