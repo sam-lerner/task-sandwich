@@ -1,31 +1,40 @@
 import React from 'react';
-import { Calendar, TaskList } from '../../components';
+import { Calendar, TaskList, ProjectInfo } from '../../components';
 
 import { useQuery } from '@apollo/client';
-import { QUERY_PROJECTS_BY_USER } from '../../utils/queries';
+import { QUERY_ME } from '../../utils/queries';
+
+import Auth from '../../utils/auth';
 
 const Projects = () => {
 
-  const { projects: projectData, loading, error } = useQuery(QUERY_PROJECTS_BY_USER);
+  const { data: userData, loading, error } = useQuery(QUERY_ME);
 
-  console.log(projectData);
+  const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-
-  // const { data: taskData } = useQuery(QUERY_TASKS_BY_PROJECT);
-
-    if (loading) {
-
+  if (!token) {
+    return (
+      <h4>
+        You need to be logged in to see your project page. Use the navigation
+        links above to sign up or log in!
+      </h4>
+    );
+  }
+  console.log("checked token")
+  if (loading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
+    console.error(JSON.parse(JSON.stringify(error)))
     return <div>Error retrieving data</div>;
   }
 
 return (
     <>
       <Calendar />
-      {/* <TaskList taskData= {taskData}/> */}
+      <TaskList />
+      <ProjectInfo userData={userData} />
     </>
 )
 };
