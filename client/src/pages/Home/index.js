@@ -1,10 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import { Figure } from "../../components";
-// import { LoginForm, SignupForm } from '../../components';
+import { Container, Row, Col, Toast, Button } from "react-bootstrap";
 
 const Home = () => {
+  const [showA, setShowA] = useState(true);
+  const [showB, setShowB] = useState(true);
+
+  const toggleShowA = () => setShowA(!showA);
+  const toggleShowB = () => setShowB(!showB);
   return (
     <>
+    <Container>
+    <Toast>
+      <Toast.Header>
+        <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+        <strong className="me-auto">Bootstrap</strong>
+        <small>11 mins ago</small>
+      </Toast.Header>
+      <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
+    </Toast>
+    <Row>
+      <Col md={6} className="mb-2">
+        <Button onClick={toggleShowA} className="mb-2">
+          Toggle Toast <strong>with</strong> Animation
+        </Button>
+        <Toast show={showA} onClose={toggleShowA}>
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+          </Toast.Header>
+          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
+        </Toast>
+      </Col>
+      <Col md={6} className="mb-2">
+        <Button onClick={toggleShowB} className="mb-2">
+          Toggle Toast <strong>without</strong> Animation
+        </Button>
+        <Toast onClose={toggleShowB} show={showB} animation={false}>
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+          </Toast.Header>
+          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
+        </Toast>
+      </Col>
+    </Row>
       <h1>Stay on task and become your team's hero!</h1>
       <p className="plagueis">
         Do you have a project you are hoping to accomplish?
@@ -59,6 +109,7 @@ const Home = () => {
       <h6>-Jimmy Hoffa, labor organizer</h6>
       <br></br>
       <br></br>
+      </Container>
     </>
   );
 };
