@@ -14,6 +14,7 @@ const Projects = () => {
   // const { data: taskData } = useQuery(QUERY_TASKS_BY_PROJECT);
 
     if (loading) {
+
     return <div>Loading...</div>;
   }
 
@@ -27,7 +28,6 @@ return (
       {/* <TaskList taskData= {taskData}/> */}
     </>
 )
-
 };
 
 export default Projects;

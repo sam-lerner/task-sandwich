@@ -35,32 +35,36 @@ const resolvers = {
             console.log(params[0].projects)
             return params[0].projects
         },
-
-        task: async (parent, { taskId }) => {
-            return Project.findOne(
+        // Tested successfully
+        task: async (parent, args) => {
+            console.log(args)
+            return Task.findOne(
                 {
-                    _id: projectId
+                    _id: args._id
                 },
-                {
-                    $inc: { tasks: [taskId] }
-                }
             )
         },
-
+        // Tested successfully
         tasksByProject: async (parent, args) => {
+            console.log(args)
             const params = await Project.find(
                 { _id: args._id },
             ).populate('tasks')
             return params[0].tasks
         },
 
-        tasksByUser: async (parent, { userId }) => {
-            return Task.aggregate(
-                {
-                    $group: {
-                        assignedTo: [userId]
-                    }
-                })
+        tasksByUser: async (parent, args) => {
+            console.log(args._id)
+            const params = await User.find(
+                { _id: args._id },
+            ).populate('tasks')
+            // return Task.aggregate(
+            //     [{
+            //         $group: {
+            //             assignedTo: args
+            //         }
+            //     }])
+            return params[0].tasks
         },
 
         tasksByTeam: async (parent, { teamId }) => {
@@ -184,7 +188,8 @@ const resolvers = {
         addUserToTeam: async (parent, args, context) => {
             console.log(args)
             await Team.findByIdAndUpdate(args._id,
-                { $addToSet: { members: args.memberId } }
+                { $addToSet: { members: args.memberId } },
+                { new: true }
             );
         },
 
@@ -241,19 +246,27 @@ const resolvers = {
             )
             return task
         },
-
+        // Successful only at deleting the project, not updating
         removeTask: async (parent, args, context) => {
-            const pullFromProjectModel = await Project.findOneAndUpdate(
-                { tasks: [args.task._id] },
-                {
-                    $pull: {
-                        tasks: args.task._id
-                    }
-                }
+            // const pullFromProjectModel = await Project.findOneAndUpdate(
+            //     { tasks: [args.task._id] },
+            //     {
+            //         $pull: {
+            //             tasks: args.task._id
+            //         }
+            //     }
+            // )
+            return Task.findOneAndDelete({ _id: args._id })
+        },
+        // Tested successfully, but showing empty array 
+        assignTask: async (parent, { _id, userId }, context) => {
+            console.log(_id)
+            console.log(userId)
+            return Task.findByIdAndUpdate(
+                { _id },
+                { $addToSet: { assignedTo: userId } }
             )
-            return Task.deleteOne({ _id: args.task._id })
         }
-        // Need to create an assignTask mutation
     },
 };
 

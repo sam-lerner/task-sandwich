@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, TaskList, CreateTeam, CreateProject, UserInfo } from '../../components';
+import { Calendar, CreateTeam, CreateProject, TaskList, UserInfo } from '../../components';
 import { Button, Nav, Modal, Tab } from "react-bootstrap";
 
 import { useQuery } from '@apollo/client';
@@ -11,7 +11,6 @@ import "./style.css";
 
 const Profile = () => {
 
-  console.log("im in profile")
   const [showModal, setShowModal] = useState(false);
 
   const { data: userData, loading, error } = useQuery(QUERY_ME);
