@@ -3,7 +3,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
 
-const TaskList = () => {
+const TaskList = ({ taskData }) => {
 
     const [open, setOpen] = useState(false);
     const dateOne = new Date(2023, 1, 13, 23, 59);
@@ -33,7 +33,7 @@ const TaskList = () => {
     return (
         <>
             <ListGroup>
-                {todo.map((item, index) => (
+                {taskData.map((item, index) => (
                     <ListGroup.Item key={index}>
                         <Button
                             onClick={() => setOpen(!open)}
