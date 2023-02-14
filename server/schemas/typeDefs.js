@@ -44,6 +44,7 @@ type Auth {
 }
 type Query {
     me: User
+    mePlus:User
     project(_id:ID!): Project
     projectsByUser(_id:ID!): [Project]
     projectsByTeam(_id:ID!): [Project]

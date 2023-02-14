@@ -14,6 +14,18 @@ const resolvers = {
             }
             throw new AuthenticationError('Please log in')
         },
+
+        mePlus: async (parent, args, context) => {
+            if (context.user) {
+                const userData = await User.findOne({ _id: context.user._id })
+                    .populate('projects', 'teams')
+                console.log(userData.teams)
+
+                return userData.teams;
+            }
+            throw new AuthenticationError('Please log in')
+        },
+
         // Tested successfully
         project: async (parent, { _id }) => {
             console.log(_id)
@@ -191,6 +203,10 @@ const resolvers = {
                 { $addToSet: { members: args.memberId } },
                 { new: true }
             );
+            await User.findOneAndUpdate(
+                { _id: args.memberId },
+                { $addToSet: { teams: args._id } }
+            )
         },
 
         // All working
