@@ -4,7 +4,17 @@ import { Button, ListGroup, Collapse, OverlayTrigger, Popover } from 'react-boot
 
 const TaskList = ({ userData }) => {
     const taskData = userData.me.tasks;
-    console.log(taskData)
+    console.log(taskData[0].dueDate)
+    console.log(new Date(taskData[0].dueDate).toLocaleDateString());
+    console.log(new Date(1738213200000).toLocaleDateString());
+    console.log(new Date());
+    console.log(new Date(Date.parse(taskData[0].dueDate)).toLocaleDateString());
+    // const date = new Date(2025, 0, 30);
+    // console.log(date.toLocaleDateString());
+
+
+
+
 
     const [open, setOpen] = useState({});
 
@@ -19,7 +29,7 @@ const TaskList = ({ userData }) => {
                     <ListGroup.Item>
                         <OverlayTrigger trigger="click" placement="right" overlay={
                             <Popover id="popover-basic">
-                                <Popover.Header as="h3">{task.dueDate}</Popover.Header>
+                                <Popover.Header as="h3">{new Date(task.dueDate).toLocaleDateString()}</Popover.Header>
                                 <Popover.Body>
                                     {task.taskDescription}
                                 </Popover.Body>

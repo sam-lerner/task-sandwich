@@ -8,7 +8,6 @@ const CreateTeam = () => {
 
     const [projectFormData, setProjectFormData] = useState({ projectName: '', projectDescription: '', endDate: '' });
     const [createProject, { error }] = useMutation(ADD_PROJECT);
-    const [startDate, setStartDate] = useState(new Date());
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -18,6 +17,10 @@ const CreateTeam = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
+        // date input is a timstamp in milliseconds, we convert it here and pass it with the variables when creating the project
+        const date = new Date(projectFormData.endDate);
+        const formattedDate = date.toLocaleDateString();
+
         // check if form has everything (as per react-bootstrap docs)
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -26,7 +29,7 @@ const CreateTeam = () => {
         }
 
         try {
-            const { data } = await createProject({ variables: { project: { ...projectFormData } } });
+            const { data } = await createProject({ variables: { project: { ...projectFormData, endDate: formattedDate } } });
         } catch (err) {
             console.error(JSON.parse(JSON.stringify(err)));
         }
@@ -37,8 +40,6 @@ const CreateTeam = () => {
             endDate: '',
         });
     };
-
-    
 
     return (
         <>
