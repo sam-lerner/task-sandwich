@@ -5,7 +5,7 @@ const { getArgumentValues } = require('graphql');
 
 const resolvers = {
     Query: {
-
+        // Tested successfully
         me: async (parent, args, context) => {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
@@ -19,26 +19,21 @@ const resolvers = {
             console.log(_id)
             return Project.findOne({ _id: _id });
         },
-
-        projectsByUser: async (parent, { userId }) => {
-            const projectsForUser = await User.find(
-                { _id: userId },
-                { projectId: 1 }
-            )
-            //expect array of IDs
-            const params = projectsForUser ? { _id } : {};
-
-            return Project.find(params) //array of only values, no property names
+        // Tested successfully
+        projectsByUser: async (parent, args) => {
+            const params = await User.find(
+                { _id: args._id }
+            ).populate('projects')
+            console.log(params[0].projects)
+            return params[0].projects
         },
-
-        projectsByTeam: async (parent, { teamId }) => {
-            const projectsForTeam = await Team.find(
-                { _id: teamId },
-                { projects: 1 }
-            )
-            const params = projectsForTeam ? { _id } : {}
-
-            return Project.find(params)
+        // Tested successfully
+        projectsByTeam: async (parent, args) => {
+            const params = await Team.find(
+                { _id: args._id },
+            ).populate('projects')
+            console.log(params[0].projects)
+            return params[0].projects
         },
 
         task: async (parent, { taskId }) => {
@@ -52,14 +47,11 @@ const resolvers = {
             )
         },
 
-        tasksByProject: async (parent, { projectId }) => {
-            const tasksForProject = await Project.find(
-                { _id: projectId },
-                { tasks: 1 }
-            )
-            const params = tasksForProject ? { _id } : {}
-
-            return Task.find(params)
+        tasksByProject: async (parent, args) => {
+            const params = await Project.find(
+                { _id: args._id },
+            ).populate('tasks')
+            return params[0].tasks
         },
 
         tasksByUser: async (parent, { userId }) => {
@@ -152,78 +144,116 @@ const resolvers = {
         },
         // Tested successfully
         addTeam: async (parent, args, context) => {
-            const team = await Team.create(args.team);
-            console.log(args.team)
+            const newTeam = { teamName: args.team.teamName, admin: [context.user._id], members: [context.user._id], projects: [] }
+            const team = await Team.create(newTeam);
+            console.log(args)
+            console.log(context.user)
             const me = context.user._id;
             await User.findOneAndUpdate(
                 { _id: me },
                 { $addToSet: { teams: team._id } }
             )
-            return team;
-        },
-        // THIS NEEDS TO CHANGE TO REFLECT TEAM, NOT USER.
-
-        removeTeam: async (parent, args, context) => {
-            const projectsToBeDeleted = await Team.find(
-                {_id: args.team._id},
-                {projects: 1}
-                )
-            const noMoreProjects = await Project.deleteMany(
-                {_id: projectsToBeDeleted}
-            )
-            const pullTeamFromUserModel = await User.findOneAndUpdate(
-                {teams: [args.team._id]},
-                {$pull: {
-                    teams: args.team._id
-                }}
-            )
-            return Team.deleteOne({_id: args.team._id})
+            // console.log(team)
+            const verifyTeam = await Team.findById(team._id).populate('admin').populate('members');
+            console.log(verifyTeam)
+            return verifyTeam;
         },
 
+        // Currently only deleting team, not updating anything.
+        removeTeam: async (parent, args) => {
+            // const projectsToBeDeleted = await Team.find(
+            //     { _id: args._id },
+            //     { projects: 1, _id: 0 }
+            // )
+            // console.log(projectsToBeDeleted)
+            // await Project.deleteMany(
+            //     { _id: { $in: projectsToBeDeleted } }
+            // )
+            // await User.findOneAndUpdate(
+            //     { teams: [args.team._id] },
+            //     {
+            //         $pull: {
+            //             teams: args.team._id
+            //         }
+            //     }
+            // )
+            return Team.findOneAndDelete({ _id: args._id })
+        },
+
+        // Returning null but working
+        addUserToTeam: async (parent, args, context) => {
+            console.log(args)
+            await Team.findByIdAndUpdate(args._id,
+                { $addToSet: { members: args.memberId } }
+            );
+        },
+
+        // All working
         addProject: async (parent, args, context) => {
-            const project = await Project.create(args.project);
-            const team = context.team._id;
+            const me = context.user._id;
+            const projectData = { ...args.project };
+            projectData.team = [];
+            projectData.team.push(args.teamId);
+            console.log(projectData);
+            const project = await Project.create(projectData);
             await Team.findOneAndUpdate(
-                { _id: team },
+                { _id: args.teamId },
+                { $addToSet: { projects: project._id } }
+            )
+            await User.findOneAndUpdate(
+                { _id: me },
                 { $addToSet: { projects: project._id } }
             )
             return project;
         },
-        removeProject: async (parent, args, context) => {
-            const tasksToBeDeleted = await Project.find(
-                {_id: args.project._id},
-                {tasks: 1}
-            )
-            const noMoreTasks = await Task.deleteMany(
-                {_id: tasksToBeDeleted}
-            )
-            const pullFromTeamModel = await Team.findOneAndUpdate(
-                {projects: [args.project._id]},
-                {$pull: {
-                    projects: args.project._id
-                }}
-            )
-            return Project.deleteOne({_id: args.project._id})
-        },
 
+        // Successful only at deleting the project, not updating
+        removeProject: async (parent, args) => {
+            // const tasksToBeDeleted = await Project.find(
+            //     { _id: args.project._id },
+            //     { tasks: 1 }
+            // )
+            // const noMoreTasks = await Task.deleteMany(
+            //     { _id: tasksToBeDeleted }
+            // )
+            // const pullFromTeamModel = await Team.findOneAndUpdate(
+            //     { projects: [args.project._id] },
+            //     {
+            //         $pull: {
+            //             projects: args.project._id
+            //         }
+            //     }
+            // )
+            return Project.findOneAndDelete({ _id: args._id })
+        },
+        // Successful create, update project, task
         addTask: async (parents, args, context) => {
-            const task = await Task.create(args.task)
+            // console.log(args.task)
+            const task = await Task.create({ ...args.task })
+            // console.log(task)
             await Project.findOneAndUpdate(
-                {_id: context.project._id},
-                {$addToSet: {tasks: task._id}}
+                { _id: args.projectId },
+                { $addToSet: { tasks: task._id } }
+            )
+            await Task.findOneAndUpdate(
+                { _id: task._id },
+                { $addToSet: { belongsToProject: args.projectId } }
             )
             return task
         },
 
         removeTask: async (parent, args, context) => {
             const pullFromProjectModel = await Project.findOneAndUpdate(
-                {tasks: [args.task._id]},
-                {$pull: {
-                    tasks: args.task._id
-                }}
+                { tasks: [args.task._id] },
+                {
+                    $pull: {
+                        tasks: args.task._id
+                    }
+                }
             )
-            return Task.deleteOne({_id: args.task._id})
+            return Task.deleteOne({ _id: args.task._id })
         }
+        // Need to create an assignTask mutation
     },
 };
 
