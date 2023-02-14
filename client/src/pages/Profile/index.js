@@ -25,12 +25,13 @@ const Profile = () => {
       </h4>
     );
   }
-
+console.log("checked token")
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
+    console.error(JSON.parse(JSON.stringify(error)))
     return <div>Error retrieving data</div>;
   }
 
