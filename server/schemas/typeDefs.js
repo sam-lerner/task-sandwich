@@ -65,6 +65,7 @@ type Mutation {
     removeProject(_id: ID!):Project
     addTask(task: taskInput, projectId:ID!):Project
     removeTask(_id: ID!):Project
+    assignTask(_id: ID!, userId: ID!):Task
 }
 input teamInput {
     teamName: String

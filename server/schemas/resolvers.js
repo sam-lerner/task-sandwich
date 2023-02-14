@@ -257,8 +257,16 @@ const resolvers = {
             //     }
             // )
             return Task.findOneAndDelete({ _id: args._id })
+        },
+        // Tested successfully, but showing empty array 
+        assignTask: async (parent, { _id, userId }, context) => {
+            console.log(_id)
+            console.log(userId)
+            return Task.findByIdAndUpdate(
+                { _id },
+                { $addToSet: { assignedTo: userId } }
+            )
         }
-        // Need to create an assignTask mutation
     },
 };
 
