@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
+import Collapse from 'react-bootstrap/Collapse';
 
 const TaskList = () => {
 
+    const [open, setOpen] = useState(false);
     const dateOne = new Date(2023, 1, 13, 23, 59);
 
     const todo = [
@@ -30,28 +33,23 @@ const TaskList = () => {
     return (
         <>
             <ListGroup>
-                <div class="accordion" id="accordionExample">
-                    {todo.map((item, index) => (
-                        <ListGroup.Item key={index}>
-                            <div class="card">
-                                <div class="card-header" id="headingOne">
-                                    <h2 class="mb-0">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            {item.taskName}
-                                        </button>
-
-                                    </h2>
-                                </div>
-                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <p>Due: {item.dueDateText}</p>
-                                        <p>{item.taskDescription}</p>
-                                    </div>
-                                </div>
+                {todo.map((item, index) => (
+                    <ListGroup.Item key={index}>
+                        <Button
+                            onClick={() => setOpen(!open)}
+                            aria-controls="example-collapse-text"
+                            aria-expanded={open}
+                        >
+                            {item.taskName}
+                        </Button>
+                        <Collapse in={open}>
+                            <div id="example-collapse-text">
+                                {item.taskDescription}
                             </div>
-                        </ListGroup.Item>
-                    ))}
-                </div>
+                        </Collapse>
+
+                    </ListGroup.Item>
+                ))}
             </ListGroup>
 
         </>
