@@ -10,13 +10,12 @@ function OurCalendar({ userData }) {
 
   return (
     <div className='app'>
-      <h1 className='text-center'>React Calendar</h1>
       <div className='calendar-container'>
-      {/* setDate stores a date, which is what the user clicks */}
-      {/* the current date is the initial value */}
+        {/* setDate stores a date, which is what the user clicks */}
+        {/* the current date is the initial value */}
         <Calendar onChange={setDate} value={date} />
       </div>
-      <p className='text-center'>
+      <p>
         <span className='bold'>Selected Date:</span>{' '}
         {date.toDateString()}
       </p>

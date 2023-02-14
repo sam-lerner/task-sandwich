@@ -8,6 +8,7 @@ const CreateTeam = () => {
 
     const [projectFormData, setProjectFormData] = useState({ projectName: '', projectDescription: '', endDate: '' });
     const [createProject, { error }] = useMutation(ADD_PROJECT);
+    const [startDate, setStartDate] = useState(new Date());
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -37,6 +38,8 @@ const CreateTeam = () => {
         });
     };
 
+    
+
     return (
         <>
             <Form onSubmit={handleFormSubmit}>
@@ -64,8 +67,7 @@ const CreateTeam = () => {
                 <Form.Group>
                     <Form.Label>Project End Date</Form.Label>
                     <Form.Control
-                        type='text'
-                        placeholder='What is the final date for the project?'
+                        type='date'
                         name='endDate'
                         onChange={handleInputChange}
                         value={projectFormData.endDate}

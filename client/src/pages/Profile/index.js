@@ -27,7 +27,7 @@ const Profile = () => {
   console.log("checked token")
   if (meLoading) {
     return <div>Loading User...</div>;
-  } 
+  }
   // else if (taskLoading) {
   //   return <div>Loading Tasks...</div>;
   // }
@@ -35,7 +35,7 @@ const Profile = () => {
   if (meError) {
     console.error(JSON.parse(JSON.stringify(meError)))
     return <div>Error retrieving user data</div>;
-  } 
+  }
   // else if (taskError) {
   //   console.error(JSON.parse(JSON.stringify(taskError)))
   //   return <div>Error retrieving task data</div>;
@@ -44,12 +44,12 @@ const Profile = () => {
   return (
     <div className="profileMain">
       <Container>
-        <Row>
-          <Col>
+        <Row className="m-3">
+          <Col className="m-2">
             <Calendar />
           </Col>
           {/* isLoggedInUser={!userId && true} */}
-          <Col>
+          <Col className="m-2">
             <TaskList userData={userData} />
           </Col>
         </Row>
