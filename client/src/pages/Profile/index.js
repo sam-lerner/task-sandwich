@@ -9,9 +9,10 @@ import Auth from '../../utils/auth';
 
 const Profile = () => {
 
+  console.log("im in profile")
   const [showModal, setShowModal] = useState(false);
 
-  const { data, loading, error } = useQuery(QUERY_ME);
+  const { data: userData, loading, error } = useQuery(QUERY_ME);
 
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -69,7 +70,7 @@ const Profile = () => {
           </Modal.Body>
         </Tab.Container>
       </Modal>
-      <UserInfo userData={data}/>
+      <UserInfo userData={userData}/>
     </>
   )
 

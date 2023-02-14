@@ -68,7 +68,7 @@ type Mutation {
 input teamInput {
     teamName: String
     members: [userInput]
-    project: [projectInput]
+    projects: [projectInput]
 }
 input projectInput {
     projectName: String!
