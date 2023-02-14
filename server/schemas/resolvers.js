@@ -10,6 +10,17 @@ const resolvers = {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-_v -password')
+                    .populate({
+                        path: 'teams',
+                        select: "teamName",
+                    }).populate({
+                        path: 'projects',
+                        select: 'projectName'
+                    }).populate({
+                        path: 'tasks',
+                        select: 'taskName'
+                    })
+                console.log(`userdata from resolvers:`, userData)
                 return userData;
             }
             throw new AuthenticationError('Please log in')
@@ -250,7 +261,7 @@ const resolvers = {
         // Successful create, update project, task
         addTask: async (parents, args, context) => {
             // console.log(args.task)
-            const task = await Task.create({ ...args.task })
+            const task = await Task.create({ ...args.task,  assignedTo:[context.user._id]})
             // console.log(task)
             await Project.findOneAndUpdate(
                 { _id: args.projectId },
@@ -259,6 +270,10 @@ const resolvers = {
             await Task.findOneAndUpdate(
                 { _id: task._id },
                 { $addToSet: { belongsToProject: args.projectId } }
+            )
+            await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { tasks: task._id } }
             )
             return task
         },

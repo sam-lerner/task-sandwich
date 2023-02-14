@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 
+//working
 export const QUERY_ME = gql`
   query me {
     me {
@@ -7,9 +8,15 @@ export const QUERY_ME = gql`
       name
       teams {
         _id
+        teamName
       }
       projects {
         _id
+        projectName
+      }
+      tasks {
+        _id
+        taskName
       }
     }
   }
@@ -129,7 +136,7 @@ query TasksByTeam($id: ID) {
 }
 `;
 
-export const QUERY_TASKS_BY_USER= gql`
+export const QUERY_TASKS_BY_USER = gql`
 query TasksByUser($id: ID) {
   tasksByUser(_id: $id) {
     assignedTo {
@@ -147,7 +154,7 @@ query TasksByUser($id: ID) {
 }
 `;
 
-export const QUERY_TEAMS_BY_USER= gql`
+export const QUERY_TEAMS_BY_USER = gql`
 query TeamsByUser($id: ID!) {
   teamsByUser(_id: $id) {
     admin {

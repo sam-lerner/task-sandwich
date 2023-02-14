@@ -2,19 +2,16 @@ import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
 import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../../utils/mutations';
+import { LOGIN_USER } from '../../../utils/mutations';
 
-import Auth from '../../utils/auth';
+import Auth from '../../../utils/auth';
 
-const SignupForm = () => {
-  // set initial form state
-  const [userFormData, setUserFormData] = useState({ name: '', email: '', password: '' });
-  // set state for form validation
+const LoginForm = () => {
+  const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
-  // set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
-  const [createUser, { error }] = useMutation(ADD_USER);
+  const [loginUser, { error }] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -24,6 +21,8 @@ const SignupForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+    console.log(userFormData);
+
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -32,9 +31,8 @@ const SignupForm = () => {
     }
 
     try {
-      const { data } = await createUser({ variables: { ...userFormData } });
-
-      Auth.login(data.addUser.token);
+      const { data } = await loginUser({ variables: { ...userFormData } });
+      Auth.login(data.login.token);
     } catch (err) {
       console.error(JSON.parse(JSON.stringify(err)));
       setShowAlert(true);
@@ -49,31 +47,15 @@ const SignupForm = () => {
 
   return (
     <>
-      {/* This is needed for the validation functionality above */}
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        {/* show alert if server response is bad */}
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
+          Something went wrong with your login credentials!
         </Alert>
-
-        <Form.Group>
-          <Form.Label htmlFor='name'>Name</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your name'
-            name='name'
-            onChange={handleInputChange}
-            value={userFormData.name}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>name is required!</Form.Control.Feedback>
-        </Form.Group>
-
         <Form.Group>
           <Form.Label htmlFor='email'>Email</Form.Label>
           <Form.Control
-            type='email'
-            placeholder='Your email address'
+            type='text'
+            placeholder='Your email'
             name='email'
             onChange={handleInputChange}
             value={userFormData.email}
@@ -95,14 +77,14 @@ const SignupForm = () => {
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
         <Button
-          disabled={!(userFormData.name && userFormData.email && userFormData.password)}
+          disabled={!(userFormData.email && userFormData.password)}
           type='submit'
           variant='success'>
-          Submit
+          Login
         </Button>
       </Form>
     </>
   );
 };
 
-export default SignupForm;
+export default LoginForm;

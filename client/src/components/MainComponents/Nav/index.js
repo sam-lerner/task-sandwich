@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
-import SignUpForm from "../SignupForm";
-import LoginForm from "../LoginForm";
+import { SignupForm, LoginForm, CreateTeam, CreateProject, CreateTask } from "../../../components"
 
-import Auth from "../../utils/auth";
+import Auth from "../../../utils/auth";
 
 import "./style.css";
 
 const AppNavbar = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   return (
     <>
@@ -21,13 +21,10 @@ const AppNavbar = () => {
               {/* if user is logged in show all of these, including logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/profile'>
-                    Your Profile
-                  </Nav.Link>
-                  <Nav.Link as={Link} to='/projects'>
-                    Your Projects
-                  </Nav.Link>
+                  <Nav.Link as={Link} to='/profile'>Your Profile</Nav.Link>
+                  <Nav.Link as={Link} to='/projects'>Your Projects</Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  <Nav.Link onClick={() => setShowCreateModal(true)}>Create</Nav.Link>
                 </>
               ) : (
                 // if user is not logged in, only show this
@@ -62,7 +59,44 @@ const AppNavbar = () => {
                 <LoginForm handleModalClose={() => setShowModal(false)} />
               </Tab.Pane>
               <Tab.Pane eventKey='signup'>
-                <SignUpForm handleModalClose={() => setShowModal(false)} />
+                <SignupForm handleModalClose={() => setShowModal(false)} />
+              </Tab.Pane>
+            </Tab.Content>
+          </Modal.Body>
+        </Tab.Container>
+      </Modal>
+      <Modal
+        size='lg'
+        show={showCreateModal}
+        onHide={() => setShowCreateModal(false)}
+        aria-labelledby='create-modal'>
+        {/* tab container to do either signup or login component */}
+        <Tab.Container defaultActiveKey='team'>
+          <Modal.Header closeButton>
+            <Modal.Title id='team-modal'>
+              <Nav variant='pills'>
+                <Nav.Item>
+                  <Nav.Link eventKey='team'>Create a Team</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey='project'>Create a Project</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey='task'>Create a Task</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Tab.Content>
+              <Tab.Pane eventKey='team'>
+                <CreateTeam handleModalClose={() => setShowCreateModal(false)} />
+              </Tab.Pane>
+              <Tab.Pane eventKey='project'>
+                <CreateProject handleModalClose={() => setShowCreateModal(false)} />
+              </Tab.Pane>
+              <Tab.Pane eventKey='task'>
+                <CreateTask handleModalClose={() => setShowCreateModal(false)} />
               </Tab.Pane>
             </Tab.Content>
           </Modal.Body>
@@ -73,3 +107,5 @@ const AppNavbar = () => {
 };
 
 export default AppNavbar;
+
+// className="justify-content-end"
