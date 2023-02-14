@@ -7,6 +7,7 @@ type User {
     email: String
     teams: [Team]
     projects: [Project]
+    tasks: [Task]
     nextSandwichReset: String
     sandwichCount: Int
     sandwichReceived: Int

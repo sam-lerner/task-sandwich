@@ -33,6 +33,11 @@ const userSchema = new Schema({
     ref: 'project'
   }],
 
+  tasks: [{
+    type: Schema.Types.ObjectId,
+    ref: 'task'
+  }],
+
   nextSandwichReset: {
     type: Date,
     default: Date.now
