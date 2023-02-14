@@ -53,7 +53,7 @@ const TaskList = ({ taskData }) => {
     return (
         <>
             <ListGroup>
-                {taskData.map((item, index) => (
+                {todo.map((item, index) => (
                     <ListGroup.Item key={index}>
                         <Button
                             onClick={() => handleOpen(index)}
