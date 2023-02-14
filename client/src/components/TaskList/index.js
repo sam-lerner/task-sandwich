@@ -9,6 +9,8 @@ import Collapse from 'react-bootstrap/Collapse';
 
 const TaskList = ({ taskData }) => {
 
+    console.log(taskData);
+
     const [open, setOpen] = useState({});
     // const { data, loading, error } = useQuery(QUERY_TASKS_BY_USER);
     // console.log(data);
