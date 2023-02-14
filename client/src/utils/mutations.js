@@ -25,22 +25,24 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_TEAM = gql`
-  mutation addTeam($userId: ID!, $teamName: String!, $members: String, $projects: String) {
-    addTeam(userId: $userId, teamName: $teamName, members: $members, projects: $projects) {
-      _id
-      teamName
-      admin
-      members
-      project
-    }
+mutation addTeam($team: teamInput) {
+  addTeam(team: $team) {
+    _id
   }
+}
 `;
 
 export const ADD_PROJECT = gql`
-  mutation addProject($userId: ID!, $projectName: String!) {
-    addProject(userId: $userId, projectName: $projectName) {
+mutation addProject($teamId: ID!) {
+  addProject(teamId: $teamId) {
+    _id
+    endDate
+    projectName
+    projectDescription
+    startDate
+    team {
       _id
-      projectName
     }
   }
+}
 `;

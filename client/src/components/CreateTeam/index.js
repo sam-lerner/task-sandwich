@@ -13,6 +13,7 @@ const CreateTeam = () => {
         const { name, value } = event.target;
         setTeamFormData({ ...teamFormData, [name]: value });
     };
+    console.log(teamFormData)
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -25,14 +26,16 @@ const CreateTeam = () => {
         }
 
         try {
-            const { data } = await createTeam({ variables: { ...teamFormData } });
+            console.log({...teamFormData})
+            const { data } = await createTeam({ variables: { team: {...teamFormData} } });
+            console.log(teamFormData);
+            setTeamFormData({
+                teamName: '',
+            });
+            console.log(teamFormData);
         } catch (err) {
             console.error(JSON.parse(JSON.stringify(err)));
         }
-
-        setTeamFormData({
-            teamName: '',
-        });
     };
 
     return (
