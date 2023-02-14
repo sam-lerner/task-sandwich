@@ -25,9 +25,16 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_TEAM = gql`
-mutation addTeam($team: teamInput) {
+mutation AddTeam($team: teamInput) {
   addTeam(team: $team) {
     _id
+    teamName
+    admin {
+      name
+    }
+    members {
+      name
+    }
   }
 }
 `;

@@ -7,6 +7,8 @@ import { QUERY_ME } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
+import "./style.css";
+
 const Profile = () => {
 
   const [showModal, setShowModal] = useState(false);
@@ -33,8 +35,8 @@ const Profile = () => {
   }
 
   return (
-    <>
-      <Calendar />
+    <div className="profileMain">
+      <Calendar/>
       {/* isLoggedInUser={!userId && true} */}
       <TaskList />
       <Button onClick={() => setShowModal(true)}> Create a Team or Project </Button>
@@ -69,8 +71,8 @@ const Profile = () => {
           </Modal.Body>
         </Tab.Container>
       </Modal>
-      <UserInfo userData={userData} />
-    </>
+      <UserInfo userData={userData}/>
+    </div>
   )
 
 };
