@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, CreateTeam, CreateProject, UserInfo } from '../../components';
+import { Calendar, CreateTeam, CreateProject, TaskList, UserInfo } from '../../components';
 import { Button, Nav, Modal, Tab } from "react-bootstrap";
 
 import { useQuery } from '@apollo/client';
@@ -9,7 +9,6 @@ import Auth from '../../utils/auth';
 
 const Profile = () => {
 
-  console.log("im in profile")
   const [showModal, setShowModal] = useState(false);
 
   const { data: userData, loading, error } = useQuery(QUERY_ME);
@@ -35,9 +34,9 @@ const Profile = () => {
 
   return (
     <>
-      <Calendar/>
+      <Calendar />
       {/* isLoggedInUser={!userId && true} */}
-      {/* <TaskList /> */}
+      <TaskList />
       <Button onClick={() => setShowModal(true)}> Create a Team or Project </Button>
       <Modal
         size='lg'
@@ -70,7 +69,7 @@ const Profile = () => {
           </Modal.Body>
         </Tab.Container>
       </Modal>
-      <UserInfo userData={userData}/>
+      <UserInfo userData={userData} />
     </>
   )
 
