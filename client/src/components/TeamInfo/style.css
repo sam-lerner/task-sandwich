@@ -1,0 +1,30 @@
+.team-info {
+  border: 1px solid black;
+  border-radius: 5%;
+  /* box-shadow: 2% 2% 6% solid black; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #424242;
+  margin: 2%;
+  /* width: 50%; */
+  /* height: auto; */
+  color: #bdbdbd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.team-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-justify: center;
+}
+
+.team-name {
+  border-bottom: 1px solid #bdbdbd;
+  font-size: 5vh;
+  font-family: 'Amatic SC', cursive;
+  text-align: center;
+}

@@ -12,7 +12,7 @@ import { setContext } from "@apollo/client/link/context";
 
 import './App.css';
 
-import { Home, Profile, Projects, BadNav } from './pages';
+import { Home, Profile, Project, BadNav, Team } from './pages';
 import { Header, Nav, Footer } from './components';
 
 // Construct our main GraphQL API endpoint
@@ -39,41 +39,48 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-  const ProjectsWrapper = () => {
-    const { id } = useParams();
-    console.log('id in App.js: ', id);
-    return <Projects projectID={id} />;
-  }
+const ProjectWrapper = () => {
+  const { id } = useParams();
+  return <Project projectID={id} />;
+}
+const TeamWrapper = () => {
+  const { id } = useParams();
+  return <Team teamID={id} />;
+}
 
 function App() {
 
 
   return (
     <>
-    <ApolloProvider client={client}>
-      <Header />
-      <Router>
-      <Nav />
-        <Routes>
-          <Route
-            path="/"
-            element={<Home />}
-          />
-          <Route
-            path="/profile"
-            element={<Profile />}
-          />
-          <Route
-            path="/project/:id"
-            element={<ProjectsWrapper />}
-          />
-          <Route 
-            path='*'
-            element={<BadNav />}
-          />
-        </Routes>
-      </Router>
-      <Footer />
+      <ApolloProvider client={client}>
+        <Header />
+        <Router>
+          <Nav />
+          <Routes>
+            <Route
+              path="/"
+              element={<Home />}
+            />
+            <Route
+              path="/profile"
+              element={<Profile />}
+            />
+            <Route
+              path="/project/:id"
+              element={<ProjectWrapper />}
+            />
+            <Route
+              path="/team/:id"
+              element={<TeamWrapper />}
+            />
+            <Route
+              path='*'
+              element={<BadNav />}
+            />
+          </Routes>
+        </Router>
+        <Footer />
       </ApolloProvider>
     </>
   );
