@@ -26,8 +26,8 @@
   /* height: 36vh; */
   justify-content: center;
   align-items: center;
-  margin-bottom: -2.5vh;
   background: #F6E2B2;
+  margin-bottom: -2.5vh;
 }
 
 /* .image-wrapper:hover .top-image {
@@ -44,7 +44,7 @@
   width: 30vw;
   top: 0;
   transition: transform 0.3s ease-out;
-  margin-top: 1%;
+  margin-top: 1vh;
   z-index: 1;
 }
 
@@ -52,7 +52,7 @@
   position: absolute;
   height: 10vh;
   width: 30vw;
-  bottom: 3vh;
+  bottom: 2vh;
   transition: transform 0.3s ease-out;
   z-index: 1;
 }
@@ -66,6 +66,7 @@
   z-index: 0;
   font-family: 'Amatic SC', cursive;
   font-size: 400%;
+  margin-top: -1vh;
   color: #424242;
 }
 
@@ -74,5 +75,5 @@
   font-family: 'Amatic SC', cursive;
   font-size: 400%;
   color: #424242;
-  margin-top: -10%;
+  margin-top: -4vh;
 }

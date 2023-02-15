@@ -11,18 +11,18 @@ const TeamInfo = ({ teamData }) => {
     <>
       <div className="team-info">
         <div key={teamData._id} className="team-container">
-          <h2 className="team-name">{teamData.team.teamName}</h2>
-          <div>Admin:
+          <h2 className="team-name team-text">{teamData.team.teamName}</h2>
+          <div className="team-text">Admin:
             <ul>
               {teamData.team.admin.length && teamData.team.admin.map(admin => <li>{admin._id}</li>)}
             </ul>
           </div>
-          <div>Members:
+          <div className="team-text">Members:
             <ul>
               {teamData.team.members.length && teamData.team.members.map(member => <li>{member._id}</li>)}
             </ul>
           </div>
-          <div>Projects:
+          <div className="team-text">Projects:
             <ul>
               <li>projects</li>
             </ul>

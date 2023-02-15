@@ -7,13 +7,13 @@ const UserInfo = ({ userData }) => {
     <>
       <div className="user-info">
         <div key={userData.me._id} className="user-container">
-          <h2 className="user-name">{userData.me.name}</h2>
-          <div>Teams:
+          <h2 className="user-name user-text">{userData.me.name}</h2>
+          <div className="user-teams user-text">Teams:
             <ul>
               {userData.me.teams.length && userData.me.teams.map(team => <li>{team.teamName}</li>)}
             </ul>
           </div>
-          <div>Projects:
+          <div className="user-projects user-text">Projects:
             <ul>
               {userData.me.projects.length && userData.me.projects.map(project => <li>{project.projectName}</li>)}
             </ul>

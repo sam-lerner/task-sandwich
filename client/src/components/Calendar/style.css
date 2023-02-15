@@ -26,20 +26,20 @@ td {
 
 .calendar-card {
   border-radius: 5%;
-  box-shadow: 4px 4px 6px black; margin-bottom: 2vh;
+  box-shadow: 4px 4px 6px black;
+  margin-bottom: 2vh;
 }
 
 .react-calendar-outmost-div {
   border: 1px solid black;
   border-radius: 5%;
   box-shadow: 4px 4px 6px black; 
-  margin-bottom: 2vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   background: #424242;
-  margin: 2%;
-  padding: 4%;
+  margin: 4% 2% 2%;
+  padding: 5%;
 }
 
 .calendar-container {
