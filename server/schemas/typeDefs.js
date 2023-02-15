@@ -64,7 +64,7 @@ type Mutation {
     addProject(project: projectInput, teamId:ID):Project
     removeProject(_id: ID!):Project
     addTask(task: taskInput, projectId:ID):Task
-    removeTask(_id: ID!):Project
+    removeTask(taskId: ID!, projectId: ID, userId: ID):Task
     assignTask(_id: ID!, userId: ID!):Task
     checkForSandwichReset(_id:ID!): User
 }

@@ -18,7 +18,7 @@ const resolvers = {
                         select: 'projectName'
                     }).populate({
                         path: 'tasks',
-                        select: { taskName: 1, taskDescription: 1, dueDate:1 }
+                        select: { taskName: 1, taskDescription: 1, dueDate: 1 }
                         // select: { taskName: 1, taskDescription: 1, createdOn: 1, taskStatus: 1, assignedTo: 1, belongsToProject: 1 }
 
                     })
@@ -198,14 +198,14 @@ const resolvers = {
             // await Project.deleteMany(
             //     { _id: { $in: projectsToBeDeleted } }
             // )
-            // await User.findOneAndUpdate(
-            //     { teams: [args.team._id] },
-            //     {
-            //         $pull: {
-            //             teams: args.team._id
-            //         }
-            //     }
-            // )
+            await User.findOneAndUpdate(
+                { teams: [args.team._id] },
+                {
+                    $pull: {
+                        teams: args.team._id
+                    }
+                }
+            )
             return Team.findOneAndDelete({ _id: args._id })
         },
 
@@ -280,17 +280,18 @@ const resolvers = {
             return task
         },
         // Successful only at deleting the project, not updating
-        removeTask: async (parent, args, context) => {
-            // const pullFromProjectModel = await Project.findOneAndUpdate(
-            //     { tasks: [args.task._id] },
-            //     {
-            //         $pull: {
-            //             tasks: args.task._id
-            //         }
-            //     }
-            // )
-            return Task.findOneAndDelete({ _id: args._id })
-        },
+        removeTask: async (parent, {taskId, projectId, userId}, context) => {
+            const user = await User.findOne({ _id: userId });
+            user.tasks = user.tasks.filter((task) => task._id.toString() !== taskId.toString());
+            await user.save();
+          
+            const project = await Project.findOne({ _id: projectId });
+            project.tasks = project.tasks.filter((task) => task._id.toString() !== taskId.toString());
+            await project.save();
+          
+            return Task.findOneAndDelete({ _id: taskId });
+          },
+          
         // Tested successfully, but showing empty array 
         assignTask: async (parent, { _id, userId }, context) => {
             console.log(_id)
