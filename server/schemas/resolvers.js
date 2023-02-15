@@ -152,6 +152,7 @@ const resolvers = {
             )
         },
 
+
         //check to see if a daily reset has happened and resets both sandwich count and next daily reset time in databse if necessary
         // checkForSandwichReset: async (parent, { userId }, context) => {
         //     console.log(context.user._id)
@@ -177,6 +178,7 @@ const resolvers = {
         //         return User.findOne({ _id: userId })
         //     }
         // }
+
     },
     Mutation: {
         // Tested successfully
@@ -339,15 +341,18 @@ const resolvers = {
             }
             const nextResetDate = user.nextSandwichReset;
             const currentDate = new Date();
+            currentDate.setHours(0, 0, 0, 0);
             if (currentDate > nextResetDate) {
-                await User.findByIdAndUpdate(
+                const updatedUser = await User.findByIdAndUpdate(
                     args._id,
                     { sandwichCount: 5, nextSandwichReset: currentDate },
-                    { new: true }
+                    { new: true } // Return the updated user object
                 );
+                return updatedUser; // Return the updated user object
             }
-            return user;
+            return user; // Return the original user object
         }
+
     }
 };
 
