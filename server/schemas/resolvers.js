@@ -18,7 +18,7 @@ const resolvers = {
                         select: 'projectName'
                     }).populate({
                         path: 'tasks',
-                        select: { taskName: 1, taskDescription: 1, dueDate:1 }
+                        select: { taskName: 1, taskDescription: 1, dueDate: 1 }
                         // select: { taskName: 1, taskDescription: 1, createdOn: 1, taskStatus: 1, assignedTo: 1, belongsToProject: 1 }
 
                     })
@@ -42,13 +42,18 @@ const resolvers = {
         // Tested successfully
         project: async (parent, { _id }) => {
             console.log(_id)
-            return Project.findOne({ _id: _id });
+            return Project.findOne({ _id: _id })
+                .populate({
+                    path: 'team',
+                    select: "teamName",
+                });
         },
         // Tested successfully
         projectsByUser: async (parent, args) => {
             const params = await User.find(
                 { _id: args._id }
-            ).populate('projects')
+            )
+            .populate('projects')
             console.log(params[0].projects)
             return params[0].projects
         },
@@ -121,30 +126,30 @@ const resolvers = {
         },
 
         //check to see if a daily reset has happened and resets both sandwich count and next daily reset time in databse if necessary
-        checkForSandwichReset: async (parent, { userId }, context) => {
-            console.log(context.user._id)
-            const checkForReset = await User.findOne(
-                { _id: userId }
-            );
+        // checkForSandwichReset: async (parent, { userId }, context) => {
+        //     console.log(context.user._id)
+        //     const checkForReset = await User.findOne(
+        //         { _id: userId }
+        //     );
 
-            let currentTime = new Date()
-            if (currentTime > checkForReset.nextSandwichReset) {
-                let setToNextDay = new Date(currentTime.setHours(currentTime.getHours() + 24)).toISOString().split('T')[0];
-                return User.findOneAndUpdate(
-                    { _id: userId },
-                    {
-                        $set: {
-                            sandwichCount: 5,
-                            nextSandwichReset: {
-                                $toDate: setToNextDay + 'T09:00:00'
-                            }
-                        }
-                    }
-                )
-            } else {
-                return User.findOne({ _id: userId })
-            }
-        }
+        //     let currentTime = new Date()
+        //     if (currentTime > checkForReset.nextSandwichReset) {
+        //         let setToNextDay = new Date(currentTime.setHours(currentTime.getHours() + 24)).toISOString().split('T')[0];
+        //         return User.findOneAndUpdate(
+        //             { _id: userId },
+        //             {
+        //                 $set: {
+        //                     sandwichCount: 5,
+        //                     nextSandwichReset: {
+        //                         $toDate: setToNextDay + 'T09:00:00'
+        //                     }
+        //                 }
+        //             }
+        //         )
+        //     } else {
+        //         return User.findOne({ _id: userId })
+        //     }
+        // }
     },
     Mutation: {
         // Tested successfully
@@ -198,14 +203,14 @@ const resolvers = {
             // await Project.deleteMany(
             //     { _id: { $in: projectsToBeDeleted } }
             // )
-            // await User.findOneAndUpdate(
-            //     { teams: [args.team._id] },
-            //     {
-            //         $pull: {
-            //             teams: args.team._id
-            //         }
-            //     }
-            // )
+            await User.findOneAndUpdate(
+                { teams: [args.team._id] },
+                {
+                    $pull: {
+                        teams: args.team._id
+                    }
+                }
+            )
             return Team.findOneAndDelete({ _id: args._id })
         },
 
@@ -241,24 +246,13 @@ const resolvers = {
             return project;
         },
 
-        // Successful only at deleting the project, not updating
-        removeProject: async (parent, args) => {
-            // const tasksToBeDeleted = await Project.find(
-            //     { _id: args.project._id },
-            //     { tasks: 1 }
-            // )
-            // const noMoreTasks = await Task.deleteMany(
-            //     { _id: tasksToBeDeleted }
-            // )
-            // const pullFromTeamModel = await Team.findOneAndUpdate(
-            //     { projects: [args.project._id] },
-            //     {
-            //         $pull: {
-            //             projects: args.project._id
-            //         }
-            //     }
-            // )
-            return Project.findOneAndDelete({ _id: args._id })
+        // Success! Removes project and all associated tasks
+        removeProject: async (parent, { projectId, userId }, context) => {
+            const user = await User.findOne({ _id: userId });
+            user.projects = user.projects.filter((project) => project._id.toString() !== projectId.toString());
+            await user.save();
+            await Task.deleteMany({ belongsToProject: projectId })
+            return Project.findOneAndDelete({ _id: projectId });
         },
         // Successful create, update project, task
         addTask: async (parents, args, context) => {
@@ -279,18 +273,19 @@ const resolvers = {
             )
             return task
         },
-        // Successful only at deleting the project, not updating
-        removeTask: async (parent, args, context) => {
-            // const pullFromProjectModel = await Project.findOneAndUpdate(
-            //     { tasks: [args.task._id] },
-            //     {
-            //         $pull: {
-            //             tasks: args.task._id
-            //         }
-            //     }
-            // )
-            return Task.findOneAndDelete({ _id: args._id })
+        // Successful!
+        removeTask: async (parent, { taskId, projectId, userId }, context) => {
+            const user = await User.findOne({ _id: userId });
+            user.tasks = user.tasks.filter((task) => task._id.toString() !== taskId.toString());
+            await user.save();
+
+            const project = await Project.findOne({ _id: projectId });
+            project.tasks = project.tasks.filter((task) => task._id.toString() !== taskId.toString());
+            await project.save();
+
+            return Task.findOneAndDelete({ _id: taskId });
         },
+
         // Tested successfully, but showing empty array 
         assignTask: async (parent, { _id, userId }, context) => {
             console.log(_id)
@@ -299,26 +294,30 @@ const resolvers = {
                 { _id },
                 { $addToSet: { assignedTo: userId } }
             )
+        },
+
+        checkForSandwichReset: async (parent, args, context) => {
+            console.log(args)
+            await User.findById(
+                { _id: args._id }
+            ).populate('nextSandwichReset')
+            console.log(nextSandwichReset)
+            // let setDate = { nextSandwichReset: args.nextSandwichReset }
+            // console.log(setDate)
+            // const currentDate = Date.now
+            // console.log(currentDate)
+            // if (currentDate > setDate) {
+            //     await User.findByIdAndUpdate(
+            //         { _id: args._id },
+            //         { sandwichCount: 5 },
+            //         { nextSandwichReset: currentDate }
+            //     ); return args
+            // } else {
+            //     return
+            // }
         }
-    },
+    }
 };
 
+
 module.exports = resolvers;
-
-
-// Sam notes
-
-// sandiwchCount: async (parent, oldDate, context) => {
-//     let currentSandwiches = GET FROM USER context
-//     let setDate = GET OLD DATE FROM LAST CHECK
-//     const currentDate = Date.now
-
-//     if currentDate > setDate {
-//         THIS WILL ACTUALLY NEED TO BE FINDANDUPDATE
-//         currentSanwiches++5
-//         setDate FIND AND UPDATE TO currentDate
-//         return
-//     } else {
-//         return
-//     }
-// }

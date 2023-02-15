@@ -54,7 +54,6 @@ type Query {
     tasksByTeam(_id:ID): [Task]
     team(_id:ID!): Team
     teamsByUser(_id:ID!): [Team]
-    checkForSandwichReset(_id:ID!): User
 }
 type Mutation {
     login(email: String!, password: String!):Auth
@@ -63,10 +62,11 @@ type Mutation {
     addUserToTeam(_id:ID!, memberId:ID!):Team
     removeTeam(_id: ID!):Team
     addProject(project: projectInput, teamId:ID):Project
-    removeProject(_id: ID!):Project
+    removeProject(projectId: ID!, userId: ID):Project
     addTask(task: taskInput, projectId:ID):Task
-    removeTask(_id: ID!):Project
+    removeTask(taskId: ID!, projectId: ID, userId: ID):Task
     assignTask(_id: ID!, userId: ID!):Task
+    checkForSandwichReset(_id:ID!): User
 }
 input teamInput {
     teamName: String

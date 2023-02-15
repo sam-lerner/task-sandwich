@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { Button, ListGroup, Collapse, OverlayTrigger, Popover } from 'react-bootstrap'
+import { Button, ListGroup, OverlayTrigger, Popover } from 'react-bootstrap'
 
-const TaskList = ({ userData }) => {
+const UserTaskList = ({ userData }) => {
     const taskData = userData.me.tasks;
     const [open, setOpen] = useState({});
 
@@ -13,7 +13,8 @@ const TaskList = ({ userData }) => {
                     <ListGroup.Item>
                         <OverlayTrigger trigger="click" placement="right" overlay={
                             <Popover id="popover-basic">
-                                <Popover.Header as="h3">{Date(task.dueDate).split(" ")[1]} {Date(task.dueDate).split(" ")[2]} {Date(task.dueDate).split(" ")[3]}</Popover.Header>
+                                {/* <Popover.Header as="h3">{Date(task.dueDate).split(" ")[1]} {Date(task.dueDate).split(" ")[2]} {Date(task.dueDate).split(" ")[3]}</Popover.Header> */}
+                                <Popover.Header as="h3">{task.dueDate}</Popover.Header>
                                 <Popover.Body>
                                     {task.taskDescription}
                                 </Popover.Body>
@@ -28,4 +29,4 @@ const TaskList = ({ userData }) => {
     );
 }
 
-export default TaskList;
+export default UserTaskList;
