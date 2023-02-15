@@ -10,11 +10,10 @@ const ProjectInfo = ({ projectID }) => {
 
   console.log("projectID in ProjectInfo: ", projectID)
 
+
   const { data, loading, error } = useQuery(QUERY_SINGLE_PROJECT, {
     variables: { id: projectID },
   });
-
-  console.log(data)
 
   if (loading) {
     return <div>Loading Project...</div>;
@@ -25,18 +24,17 @@ const ProjectInfo = ({ projectID }) => {
     return <div>Error retrieving project</div>;
   }
 
-
+  console.log(data.project.startDate)
+  console.log(data.project.endDate)
+  
   return (
     <>
       <div className="projectInfo">
         <div key={data._id}>
-          <h2>{data.projectName}</h2>
-
-          <div>Projects:
-            <ul>
-              {data.length && data.map(project => <li>{project.projectName}</li>)}
-            </ul>
-          </div>
+          <h2>{data.project.projectName}</h2>
+          <p>Project Description: {data.project.projectDescription} </p>
+          <p>Start Date: {data.project.startDate}</p>
+        <p>End Date: {data.project.endDate}</p>
         </div>
       </div>
     </>
