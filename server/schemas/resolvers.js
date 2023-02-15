@@ -313,15 +313,19 @@ const resolvers = {
             }
             const nextResetDate = user.nextSandwichReset;
             const currentDate = new Date();
+            currentDate.setHours(0, 0, 0, 0);
             if (currentDate > nextResetDate) {
-                await User.findByIdAndUpdate(
+                const updatedUser = await User.findByIdAndUpdate(
                     args._id,
                     { sandwichCount: 5, nextSandwichReset: currentDate },
-                    { new: true }
+                    { new: true } // Return the updated user object
                 );
+                return updatedUser; // Return the updated user object
             }
-            return user;
+            return user; // Return the original user object
         }
+
+
     }
 };
 

@@ -42,7 +42,7 @@ const userSchema = new Schema({
   nextSandwichReset: {
     type: Date,
     default: Date.now,
-    get: (timestamp) => dateFormat(timestamp)
+    // get: (timestamp) => dateFormat(timestamp)
   },
   
   sandwichCount: {
