@@ -45,7 +45,9 @@ type Auth {
 type Query {
     me: User
     mePlus:User
+    getUsers:[User!]!
     project(_id:ID!): Project
+    getProjects:[Project!]!
     projectsByUser(_id:ID!): [Project]
     projectsByTeam(_id:ID!): [Project]
     task(_id:ID): Task
@@ -54,6 +56,7 @@ type Query {
     tasksByTeam(_id:ID): [Task]
     team(_id:ID!): Team
     teamsByUser(_id:ID!): [Team]
+    getTeams:[Team!]!
 }
 type Mutation {
     login(email: String!, password: String!):Auth
@@ -66,7 +69,7 @@ type Mutation {
     addTask(task: taskInput, projectId:ID):Task
     removeTask(taskId: ID!, projectId: ID, userId: ID):Task
     assignTask(_id: ID!, userId: ID!):Task
-    checkForSandwichReset(_id:ID!): User
+    checkForSandwichReset(_id: ID!): User
 }
 input teamInput {
     teamName: String
