@@ -51,7 +51,8 @@ const userSchema = new Schema({
   },
   
   sandwichReceived: {
-    type: Number
+    type: Number,
+    default:0
   }
 
 });
