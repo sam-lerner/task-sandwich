@@ -36,3 +36,8 @@
 .navHeader a:hover {
   color: #FFFDD0;
 }
+
+.navbar-collapse {
+  display: flex;
+  justify-content: space-between;
+}

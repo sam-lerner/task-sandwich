@@ -47,9 +47,9 @@ const AppNavbar = () => {
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
-          <Navbar.Toggle aria-controls="navbar" />
+          <Navbar.Toggle aria-controls="navbar"/>
           <Navbar.Collapse id="navbar">
-            <Nav className="mr-auto">
+            <Nav className="mr-auto left-nav">
               {/* show these links on the left side */}
               {Auth.loggedIn() ? (
                 <>
@@ -88,14 +88,14 @@ const AppNavbar = () => {
                 <></>
               )}
             </Nav>
-            <Nav className="ml-auto float-right">
+            <Nav className="ml-auto right-nav">
               {/* show these links on the right side */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                   <Nav.Link onClick={() => setShowCreateModal(true)}>
                     Create
                   </Nav.Link>
+                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (
                 <Nav.Link onClick={() => setShowModal(true)} className="ml-auto">
