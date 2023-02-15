@@ -1,17 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Nav, Container, Modal, Tab, Dropdown, DropdownButton, NavDropdown } from "react-bootstrap";
-import { SignupForm, LoginForm, CreateTeam, CreateProject, CreateTask } from "../../../components"
+import {
+  Navbar,
+  Nav,
+  Container,
+  Modal,
+  Tab,
+  Dropdown,
+  DropdownButton,
+  NavDropdown,
+} from "react-bootstrap";
+import {
+  SignupForm,
+  LoginForm,
+  CreateTeam,
+  CreateProject,
+  CreateTask,
+} from "../..";
 
-import { useQuery } from '@apollo/client';
-import { QUERY_ME } from '../../../utils/queries';
+import { useQuery } from "@apollo/client";
+import { QUERY_ME } from "../../../utils/queries";
 
 import Auth from "../../../utils/auth";
 
 import "./style.css";
 
 const AppNavbar = () => {
-
   const [showModal, setShowModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
@@ -31,70 +45,105 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar bg='dark' variant='dark' expand='lg'>
+      <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
-          <Navbar.Toggle aria-controls='navbar' />
-          <Navbar.Collapse id='navbar'>
-            <Nav className='mr-auto'>
-              {/* if user is logged in show all of these */}
+          <Navbar.Toggle aria-controls="navbar"/>
+          <Navbar.Collapse id="navbar">
+            <Nav className="mr-auto left-nav">
+              {/* show these links on the left side */}
               {Auth.loggedIn() ? (
                 <>
+<<<<<<< HEAD
+                  <Nav.Link as={Link} to="/profile">
+                    My Profile
+                  </Nav.Link>
+=======
                   <Nav.Link as={Link} to='/profile'>Your Profile</Nav.Link>
                   {/* <Nav.Link as={Link} to='/project'>Your Projects</Nav.Link> */}
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                   <Nav.Link onClick={() => setShowCreateModal(true)}>Create</Nav.Link>
+>>>>>>> 0f7da6e90b5faf31ac79ef9e339424ba27fe792c
                   {error && <div>Error retrieving teams and projects</div>}
                   <NavDropdown
                     id="nav-dropdown-dark-example"
                     title="My Teams"
                     menuVariant="dark"
                   >
+<<<<<<< HEAD
+                    {data &&
+                      teams.length &&
+                      teams.map((team) => (
+                        <NavDropdown.Item href="#action/3.1">
+                          {team.teamName}
+                        </NavDropdown.Item>
+                      ))}
+=======
                     {data && teams.length && teams.map(team =>
                       <NavDropdown.Item href={"/team/" + team._id}>{team.teamName}</NavDropdown.Item>)}
+>>>>>>> 0f7da6e90b5faf31ac79ef9e339424ba27fe792c
                   </NavDropdown>
                   <NavDropdown
                     id="nav-dropdown-dark-example"
                     title="My Projects"
                     menuVariant="dark"
                   >
-                    {data && projects.length && projects.map(project =>
-                      <NavDropdown.Item href={"/project/" + project._id}>{project.projectName}</NavDropdown.Item>)}
+                    {data &&
+                      projects.length &&
+                      projects.map((project) => (
+                        <NavDropdown.Item href="#action/3.1">
+                          {project.projectName}
+                        </NavDropdown.Item>
+                      ))}
                   </NavDropdown>
-
                 </>
               ) : (
-                // if user is not logged in, only show this
-                <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+                <></>
+              )}
+            </Nav>
+            <Nav className="ml-auto right-nav">
+              {/* show these links on the right side */}
+              {Auth.loggedIn() ? (
+                <>
+                  <Nav.Link onClick={() => setShowCreateModal(true)}>
+                    Create
+                  </Nav.Link>
+                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                </>
+              ) : (
+                <Nav.Link onClick={() => setShowModal(true)} className="ml-auto">
+                  Login/Sign Up
+                </Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
       <Modal
-        size='lg'
+        size="lg"
         show={showModal}
         onHide={() => setShowModal(false)}
-        aria-labelledby='signup-modal'>
+        aria-labelledby="signup-modal"
+      >
         {/* tab container to do either signup or login component */}
-        <Tab.Container defaultActiveKey='login'>
+        <Tab.Container defaultActiveKey="login">
           <Modal.Header closeButton>
-            <Modal.Title id='signup-modal'>
-              <Nav variant='pills'>
+            <Modal.Title id="signup-modal">
+              <Nav variant="pills">
                 <Nav.Item>
-                  <Nav.Link eventKey='login'>Login</Nav.Link>
+                  <Nav.Link eventKey="login">Login</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
+                  <Nav.Link eventKey="signup">Sign Up</Nav.Link>
                 </Nav.Item>
               </Nav>
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Tab.Content>
-              <Tab.Pane eventKey='login'>
+              <Tab.Pane eventKey="login">
                 <LoginForm handleModalClose={() => setShowModal(false)} />
               </Tab.Pane>
-              <Tab.Pane eventKey='signup'>
+              <Tab.Pane eventKey="signup">
                 <SignupForm handleModalClose={() => setShowModal(false)} />
               </Tab.Pane>
             </Tab.Content>
@@ -102,37 +151,44 @@ const AppNavbar = () => {
         </Tab.Container>
       </Modal>
       <Modal
-        size='lg'
+        size="lg"
         show={showCreateModal}
         onHide={() => setShowCreateModal(false)}
-        aria-labelledby='create-modal'>
+        aria-labelledby="create-modal"
+      >
         {/* tab container to do either signup or login component */}
-        <Tab.Container defaultActiveKey='team'>
+        <Tab.Container defaultActiveKey="team">
           <Modal.Header closeButton>
-            <Modal.Title id='team-modal'>
-              <Nav variant='pills'>
+            <Modal.Title id="team-modal">
+              <Nav variant="pills">
                 <Nav.Item>
-                  <Nav.Link eventKey='team'>Create a Team</Nav.Link>
+                  <Nav.Link eventKey="team">Create a Team</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey='project'>Create a Project</Nav.Link>
+                  <Nav.Link eventKey="project">Create a Project</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey='task'>Create a Task</Nav.Link>
+                  <Nav.Link eventKey="task">Create a Task</Nav.Link>
                 </Nav.Item>
               </Nav>
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Tab.Content>
-              <Tab.Pane eventKey='team'>
-                <CreateTeam handleModalClose={() => setShowCreateModal(false)} />
+              <Tab.Pane eventKey="team">
+                <CreateTeam
+                  handleModalClose={() => setShowCreateModal(false)}
+                />
               </Tab.Pane>
-              <Tab.Pane eventKey='project'>
-                <CreateProject handleModalClose={() => setShowCreateModal(false)} />
+              <Tab.Pane eventKey="project">
+                <CreateProject
+                  handleModalClose={() => setShowCreateModal(false)}
+                />
               </Tab.Pane>
-              <Tab.Pane eventKey='task'>
-                <CreateTask handleModalClose={() => setShowCreateModal(false)} />
+              <Tab.Pane eventKey="task">
+                <CreateTask
+                  handleModalClose={() => setShowCreateModal(false)}
+                />
               </Tab.Pane>
             </Tab.Content>
           </Modal.Body>
