@@ -55,7 +55,6 @@ const AppNavbar = () => {
                 <>
 
                   <Nav.Link as={Link} to="/profile">My Profile</Nav.Link>
-                  <Nav.Link onClick={() => setShowCreateModal(true)}>Create</Nav.Link>
                   {error && <div>Error retrieving teams and projects</div>}
                   <NavDropdown
                     id="nav-dropdown-dark-example"
@@ -87,9 +86,7 @@ const AppNavbar = () => {
               {/* show these links on the right side */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link onClick={() => setShowCreateModal(true)}>
-                    Create
-                  </Nav.Link>
+                  <Nav.Link onClick={() => setShowCreateModal(true)}>Create</Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (
