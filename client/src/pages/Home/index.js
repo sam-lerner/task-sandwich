@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Figure } from "../../components";
 import { Container } from "react-bootstrap";
+import { taskGif, teamGif, sandwichGif } from "./images";
 
 import "./style.css";
 // import { sandwichLogoTopEdited, sandwichLogoBottomEdited } from './images';
@@ -40,8 +41,9 @@ const Home = () => {
       <h6>-Michael Scott, owner, Michael Scott Paper Comany</h6>
       <br></br>
       <br></br>
-      <h3>Here will be a screenshot gif</h3>
-      <p>This area will talk about the todo list</p>
+      <h3>To-Do's!</h3>
+      <img src={taskGif} className="task-gif" alt="a gif showing how to create a task"/>
+      <p> Use To-Do's to manage small tasks within you project. To create a task, click on the "Create" button in the navbar and select the "Create a Task" tab. Then, set the task name, task description, and task due date for your new task. Finally, click "Create Task" and reload the page.</p>
       <ul>
         <li>Create an account</li>
         <li>Build your team</li>
@@ -50,8 +52,9 @@ const Home = () => {
       </ul>
       <br></br>
       <br></br>
-      <h3>Here will be a screenshot gif</h3>
-      <p>This area will talk about creating a team</p>
+      <h3>Teams!</h3>
+      <img src={teamGif} className="team-gif" alt="a gif showing how to create a team"/>
+      <p>Use "Teams" to stay organized with those you are working with and manage shared projects. To create a team, click on the "Create" button in the navbar and select "Create a Team" tab. Then, set the team name for your new team. Finally, click "Create Team" and reload the page.</p>
       <ul>
         <li>Once you have created your free account, you can create your team</li>
         <li>Any member of the website can be invited to join your team</li>
@@ -60,8 +63,9 @@ const Home = () => {
 
       <br></br>
       <br></br>
-      <h3>Here will be a screenshot gif</h3>
-      <p>This area will talk about the sandiwch mechanic</p>
+      <h3>Sandwiches!</h3>
+      <img src={sandwichGif} className="sandwich-gif" alt="a gif showing a user completing a task and recieving a sandwich"/>
+      <p>Our unique "Sandwich" reward system can be used to give real life rewards to project members based on task completion. Use our task tracking on the projects page to deliver sandwiches to team memebers based on how well they are doing, or just keep knocking out tasks to earn sandwiches passively.</p>
       <ul>
         <li>As team leader, set your sandwich prizes</li>
         <li>Every day, each team member gets five sandwiches they can give to other members</li>

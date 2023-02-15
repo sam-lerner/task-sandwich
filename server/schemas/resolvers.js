@@ -53,7 +53,7 @@ const resolvers = {
             const params = await User.find(
                 { _id: args._id }
             )
-            .populate('projects')
+                .populate('projects')
             console.log(params[0].projects)
             return params[0].projects
         },
@@ -111,8 +111,9 @@ const resolvers = {
             return Task.find(newParams)
         },
 
-        team: async (parent, { teamId }) => {
-            return Team.findOne({ _id: teamId });
+        // Tested successfully
+        team: async (parent, { _id }) => {
+            return Team.findOne({ _id: _id });
         },
 
         teamsByUser: async (parent, { userId }) => {
