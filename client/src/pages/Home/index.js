@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Figure } from "../../components";
 import { Container, Row, Col, Toast, Button } from "react-bootstrap";
 
+import "./style.css";
+import { sandwichLogoTop, sandwichLogoBottom } from './images';
+
 const Home = () => {
   const [showA, setShowA] = useState(true);
   const [showB, setShowB] = useState(true);
@@ -55,6 +58,13 @@ const Home = () => {
         </Toast>
       </Col>
     </Row>
+
+    <div className="image-wrapper">
+      <img className="top-image" src={sandwichLogoTop} alt="Tasty-looking sandwich top."></img>
+      <img className="bottom-image" src={sandwichLogoBottom} alt="Tasy-looking sandwich bottom."></img>
+      <a href="/"><h1 className="title-name">TASK SANDWICH</h1></a>
+    </div>
+
       <h1>Stay on task and become your team's hero!</h1>
       <p className="plagueis">
         Do you have a project you are hoping to accomplish?
