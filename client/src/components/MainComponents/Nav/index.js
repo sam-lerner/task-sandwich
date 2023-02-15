@@ -54,7 +54,7 @@ const AppNavbar = () => {
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to="/profile">
-                    Your Profile
+                    My Profile
                   </Nav.Link>
                   {error && <div>Error retrieving teams and projects</div>}
                   <NavDropdown
