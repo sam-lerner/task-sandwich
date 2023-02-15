@@ -5,7 +5,7 @@ export { default as LoginForm } from './MainComponents/LoginForm';
 export { default as SignupForm } from './MainComponents/SignupForm';
 export { default as Calendar } from './Calendar';
 export { default as Figure } from './Figure';
-export { default as TaskList } from './TaskList';
+export { default as UserTaskList } from './UserTaskList';
 export { default as CreateTeam } from './NavComponents/CreateTeam';
 export { default as CreateProject } from './NavComponents/CreateProject';
 export { default as UserInfo } from './UserInfo';

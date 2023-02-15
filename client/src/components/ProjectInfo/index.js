@@ -26,7 +26,7 @@ const ProjectInfo = ({ projectID }) => {
 
   console.log(data.project.startDate)
   console.log(data.project.endDate)
-  
+
   return (
     <>
       <div className="projectInfo">
@@ -34,7 +34,10 @@ const ProjectInfo = ({ projectID }) => {
           <h2>{data.project.projectName}</h2>
           <p>Project Description: {data.project.projectDescription} </p>
           <p>Start Date: {data.project.startDate}</p>
-        <p>End Date: {data.project.endDate}</p>
+          <p>End Date: {data.project.endDate}</p>
+          {/* <p>Team: {data.project.team ? data.project.team.teamName : "no team"}</p> */}
+          <p>Team: {data.project.team && data.project.team.teamName ? data.project.team.teamName : "no team"}</p>
+
         </div>
       </div>
     </>

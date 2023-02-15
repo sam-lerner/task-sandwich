@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, TaskList, ProjectInfo } from '../../components';
+import { Calendar, UserTaskList, ProjectInfo } from '../../components';
 import { Row, Col } from "react-bootstrap";
 
 import { useQuery } from '@apollo/client';
@@ -42,7 +42,7 @@ const Projects = ({ projectID }) => {
           <Calendar />
         </Col>
         <Col sm={9}>
-          {/* <TaskList /> */}
+          {/* <UserTaskList /> */}
         </Col>
       </Row>
       <Row>

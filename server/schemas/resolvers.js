@@ -42,13 +42,18 @@ const resolvers = {
         // Tested successfully
         project: async (parent, { _id }) => {
             console.log(_id)
-            return Project.findOne({ _id: _id });
+            return Project.findOne({ _id: _id })
+                .populate({
+                    path: 'team',
+                    select: "teamName",
+                });
         },
         // Tested successfully
         projectsByUser: async (parent, args) => {
             const params = await User.find(
                 { _id: args._id }
-            ).populate('projects')
+            )
+            .populate('projects')
             console.log(params[0].projects)
             return params[0].projects
         },

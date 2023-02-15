@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, TaskList, UserInfo } from '../../components';
+import { Calendar, UserTaskList, UserInfo } from '../../components';
 import { Row, Col } from "react-bootstrap";
 
 import { useQuery } from '@apollo/client';
@@ -41,7 +41,7 @@ const Profile = () => {
         </Col>
         {/* isLoggedInUser={!userId && true} */}
         <Col sm={9}>
-          <TaskList userData={userData} />
+          <UserTaskList userData={userData} />
         </Col>
       </Row>
       <Row>
