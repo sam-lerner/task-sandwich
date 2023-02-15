@@ -149,6 +149,34 @@ const resolvers = {
                 }
             )
         },
+
+
+        //check to see if a daily reset has happened and resets both sandwich count and next daily reset time in databse if necessary
+        // checkForSandwichReset: async (parent, { userId }, context) => {
+        //     console.log(context.user._id)
+        //     const checkForReset = await User.findOne(
+        //         { _id: userId }
+        //     );
+
+        //     let currentTime = new Date()
+        //     if (currentTime > checkForReset.nextSandwichReset) {
+        //         let setToNextDay = new Date(currentTime.setHours(currentTime.getHours() + 24)).toISOString().split('T')[0];
+        //         return User.findOneAndUpdate(
+        //             { _id: userId },
+        //             {
+        //                 $set: {
+        //                     sandwichCount: 5,
+        //                     nextSandwichReset: {
+        //                         $toDate: setToNextDay + 'T09:00:00'
+        //                     }
+        //                 }
+        //             }
+        //         )
+        //     } else {
+        //         return User.findOne({ _id: userId })
+        //     }
+        // }
+
     },
     Mutation: {
         // Tested successfully
@@ -339,7 +367,6 @@ const resolvers = {
             console.log(receiver.sandwichReceived)
             return receiver
         }
-
 
     }
 };

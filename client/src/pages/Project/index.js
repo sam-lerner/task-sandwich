@@ -32,7 +32,9 @@ const Project = ({ projectID }) => {
     console.error(JSON.parse(JSON.stringify(error)))
     return <div>Error retrieving data</div>;
   }
-console.log(projectData)
+
+
+
   return (
     <>
       <Row>

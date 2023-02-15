@@ -43,13 +43,17 @@ mutation AddTeam($team: teamInput) {
 `;
 
 export const ADD_PROJECT = gql`
-mutation addProject($project: projectInput, $teamId:ID) {
+mutation addProject($project: projectInput, $teamId: ID) {
   addProject(project: $project, teamId: $teamId) {
     _id
     endDate
     projectName
     projectDescription
     startDate
+    team {
+      _id
+      teamName
+    }
   }
 }
 `;
@@ -61,6 +65,15 @@ mutation addTask($task: taskInput, $projectId: ID) {
     dueDate
     taskDescription
     taskName
+  }
+}
+`;
+
+export const CHECK_SANDWICH_RESET = gql`
+mutation CheckForSandwichReset($id: ID!) {
+  checkForSandwichReset(_id: $id) {
+    nextSandwichReset
+    sandwichCount
   }
 }
 `;

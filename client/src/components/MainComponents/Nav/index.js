@@ -69,12 +69,8 @@ const AppNavbar = () => {
                     title="My Projects"
                     menuVariant="dark"
                   >
-                    {data &&
-                      projects.length &&
-                      projects.map((project) => (
-                        <NavDropdown.Item href="#action/3.1">
-                          {project.projectName}
-                        </NavDropdown.Item>
+                    {data && projects.length && projects.map(project => 
+                    (<NavDropdown.Item href={"/project/" + project._id}>{project.projectName}</NavDropdown.Item>
                       ))}
                   </NavDropdown>
                 </>
