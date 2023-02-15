@@ -23,14 +23,14 @@ const AppNavbar = () => {
   const teams = data?.me?.teams;
   const projects = data?.me?.projects;
 
-  // if (loading) {
-  //   return <div>Loading Teams and Projects...</div>;
-  // }
-
-  // if (error) {
-  //   console.error(JSON.parse(JSON.stringify(error)))
-  //   return <div>Error retrieving teams and projects</div>;
-  // }
+  if (loading) {
+    return <div>Loading Teams and Projects...</div>;
+  }
+  
+  if (error) {
+    console.error(JSON.parse(JSON.stringify(error)))
+    return <div>Error retrieving teams and projects</div>;
+  }
 
 
   return (
@@ -40,7 +40,7 @@ const AppNavbar = () => {
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto'>
-              {/* if user is logged in show all of these, including logout */}
+              {/* if user is logged in show all of these */}
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/profile'>Your Profile</Nav.Link>
