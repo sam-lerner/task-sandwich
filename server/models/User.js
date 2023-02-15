@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const dateFormat = require('../utils/dateHelper');
 
 const userSchema = new Schema({
 
@@ -40,7 +41,8 @@ const userSchema = new Schema({
 
   nextSandwichReset: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    // get: (timestamp) => dateFormat(timestamp)
   },
   
   sandwichCount: {

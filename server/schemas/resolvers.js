@@ -65,160 +65,134 @@ const resolvers = {
             }
         },
 
-    // Tested successfully
-    project: async (parent, { _id }) => {
-        console.log(_id)
-        return Project.findOne({ _id: _id })
-            .populate({
-                path: 'team',
-                select: "teamName",
-            });
-    },
-    // Tested successfully
-    projectsByUser: async (parent, args) => {
-        const params = await User.find(
-            { _id: args._id }
-        )
-            .populate('projects')
-        console.log(params[0].projects)
-        return params[0].projects
-    },
-    // Tested successfully
-    projectsByTeam: async (parent, args) => {
-        const params = await Team.find(
-            { _id: args._id },
-        ).populate('projects')
-        console.log(params[0].projects)
-        return params[0].projects
-    },
-    // Tested successfully
-    task: async (parent, args) => {
-        console.log(args)
-        return Task.findOne(
-            {
-                _id: args._id
-            },
-        )
-    },
-    // Tested successfully
-    tasksByProject: async (parent, args) => {
-        console.log(args)
-        const params = await Project.find(
-            { _id: args._id },
-        ).populate('tasks')
-        return params[0].tasks
-    },
+        // Tested successfully
+        project: async (parent, { _id }) => {
+            console.log(_id)
+            return Project.findOne({ _id: _id })
+                .populate({
+                    path: 'team',
+                    select: "teamName",
+                });
+        },
+        // Tested successfully
+        projectsByUser: async (parent, args) => {
+            const params = await User.find(
+                { _id: args._id }
+            )
+                .populate('projects')
+            console.log(params[0].projects)
+            return params[0].projects
+        },
+        // Tested successfully
+        projectsByTeam: async (parent, args) => {
+            const params = await Team.find(
+                { _id: args._id },
+            ).populate('projects')
+            console.log(params[0].projects)
+            return params[0].projects
+        },
+        // Tested successfully
+        task: async (parent, args) => {
+            console.log(args)
+            return Task.findOne(
+                {
+                    _id: args._id
+                },
+            )
+        },
+        // Tested successfully
+        tasksByProject: async (parent, args) => {
+            console.log(args)
+            const params = await Project.find(
+                { _id: args._id },
+            ).populate('tasks')
+            return params[0].tasks
+        },
 
-    tasksByUser: async (parent, args) => {
-        console.log(args._id)
-        const params = await User.find(
-            { _id: args._id },
-        ).populate('tasks')
-        // return Task.aggregate(
-        //     [{
-        //         $group: {
-        //             assignedTo: args
-        //         }
-        //     }])
-        return params[0].tasks
-    },
+        tasksByUser: async (parent, args) => {
+            console.log(args._id)
+            const params = await User.find(
+                { _id: args._id },
+            ).populate('tasks')
+            // return Task.aggregate(
+            //     [{
+            //         $group: {
+            //             assignedTo: args
+            //         }
+            //     }])
+            return params[0].tasks
+        },
 
-    tasksByTeam: async (parent, { teamId }) => {
-        const projectsForTeam = await Team.find(
-            { _id: teamId },
-            { projects: 1 }
-        )
-        const params = projectsForTeam ? { _id } : {}
-        const teamProjects = await Project.find(
-            { params },
-            { tasks: 1 }
-        )
-        const newParams = teamProjects ? { _id } : {}
-        return Task.find(newParams)
-    },
+        tasksByTeam: async (parent, { teamId }) => {
+            const projectsForTeam = await Team.find(
+                { _id: teamId },
+                { projects: 1 }
+            )
+            const params = projectsForTeam ? { _id } : {}
+            const teamProjects = await Project.find(
+                { params },
+                { tasks: 1 }
+            )
+            const newParams = teamProjects ? { _id } : {}
+            return Task.find(newParams)
+        },
 
-    // Tested successfully
-    team: async (parent, { _id }) => {
-        return Team.findOne({ _id: _id });
-    },
+        // Tested successfully
+        team: async (parent, { _id }) => {
+            return Team.findOne({ _id: _id });
+        },
 
-    teamsByUser: async (parent, { userId }) => {
-        return Team.aggregate(
-            {
-                $group: {
-                    members: [userId]
+        teamsByUser: async (parent, { userId }) => {
+            return Team.aggregate(
+                {
+                    $group: {
+                        members: [userId]
+                    }
                 }
-            }
-        )
+            )
+        },
     },
-
-    //check to see if a daily reset has happened and resets both sandwich count and next daily reset time in databse if necessary
-    // checkForSandwichReset: async (parent, { userId }, context) => {
-    //     console.log(context.user._id)
-    //     const checkForReset = await User.findOne(
-    //         { _id: userId }
-    //     );
-
-    //     let currentTime = new Date()
-    //     if (currentTime > checkForReset.nextSandwichReset) {
-    //         let setToNextDay = new Date(currentTime.setHours(currentTime.getHours() + 24)).toISOString().split('T')[0];
-    //         return User.findOneAndUpdate(
-    //             { _id: userId },
-    //             {
-    //                 $set: {
-    //                     sandwichCount: 5,
-    //                     nextSandwichReset: {
-    //                         $toDate: setToNextDay + 'T09:00:00'
-    //                     }
-    //                 }
-    //             }
-    //         )
-    //     } else {
-    //         return User.findOne({ _id: userId })
-    //     }
-    // }
-},
     Mutation: {
         // Tested successfully
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
-if (!user) {
-    throw new AuthenticationError('No user found with this email address');
-}
+            if (!user) {
+                throw new AuthenticationError('No user found with this email address');
+            }
 
-const correctPw = await user.isCorrectPassword(password);
+            const correctPw = await user.isCorrectPassword(password);
 
-if (!correctPw) {
-    throw new AuthenticationError('Incorrect credentials');
-}
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
 
-const token = signToken(user);
+            const token = signToken(user);
 
-return { token, user };
+            return { token, user };
         },
-// Tested successfully
-addUser: async (parent, args) => {
-    const user = await User.create(args);
-    const token = signToken(user);
-    return { token, user };
-},
-    // Tested successfully
-    addTeam: async (parent, args, context) => {
-        const newTeam = { teamName: args.team.teamName, admin: [context.user._id], members: [context.user._id], projects: [] }
-        const team = await Team.create(newTeam);
-        console.log(args)
-        console.log(context.user)
-        const me = context.user._id;
-        await User.findOneAndUpdate(
-            { _id: me },
-            { $addToSet: { teams: team._id } }
-        )
-        // console.log(team)
-        const verifyTeam = await Team.findById(team._id).populate('admin').populate('members');
-        console.log(verifyTeam)
-        return verifyTeam;
-    },
+        // Tested successfully
+        addUser: async (parent, args) => {
+            const user = await User.create(args);
+            const token = signToken(user);
+            return { token, user };
+        },
+        // Tested successfully
+        addTeam: async (parent, args, context) => {
+            const newTeam = { teamName: args.team.teamName, admin: [context.user._id], members: [context.user._id], projects: [] }
+            const team = await Team.create(newTeam);
+            console.log(args)
+            console.log(context.user)
+            const me = context.user._id;
+            await User.findOneAndUpdate(
+                { _id: me },
+                { $addToSet: { teams: team._id } }
+            )
+            // console.log(team)
+            const verifyTeam = await Team.findById(team._id).populate('admin').populate('members');
+            console.log(verifyTeam)
+            return verifyTeam;
+        },
 
         // Currently only deleting team, not updating anything.
         removeTeam: async (parent, args) => {
@@ -241,113 +215,117 @@ addUser: async (parent, args) => {
             return Team.findOneAndDelete({ _id: args._id })
         },
 
-            //   Successfully tested
-            addUserToTeam: async (parent, { teamId, memberName }, context) => {
-                console.log(teamId, memberName);
-                const user = await User.findOne({ name: memberName });
-                if (!user) {
-                    throw new Error(`User ${memberName} not found`);
-                }
-                await Team.findByIdAndUpdate(
-                    teamId,
-                    { $addToSet: { members: user._id } },
-                    { new: true }
+        //   Successfully tested
+        addUserToTeam: async (parent, { teamId, memberName }, context) => {
+            console.log(teamId, memberName);
+            const user = await User.findOne({ name: memberName });
+            if (!user) {
+                throw new Error(`User ${memberName} not found`);
+            }
+            await Team.findByIdAndUpdate(
+                teamId,
+                { $addToSet: { members: user._id } },
+                { new: true }
+            );
+            await User.findByIdAndUpdate(
+                user._id,
+                { $addToSet: { teams: teamId } }
+            );
+            return await Team.findById(teamId).populate('members');
+        },
+
+
+
+
+        // All working
+        addProject: async (parent, args, context) => {
+            const me = context.user._id;
+            const projectData = { ...args.project };
+            projectData.team = [];
+            projectData.team.push(args.teamId);
+            console.log(projectData);
+            const project = await Project.create(projectData);
+            await Team.findOneAndUpdate(
+                { _id: args.teamId },
+                { $addToSet: { projects: project._id } }
+            )
+            await User.findOneAndUpdate(
+                { _id: me },
+                { $addToSet: { projects: project._id } }
+            )
+            return project;
+        },
+
+        // Success! Removes project and all associated tasks
+        removeProject: async (parent, { projectId, userId }, context) => {
+            const user = await User.findOne({ _id: userId });
+            user.projects = user.projects.filter((project) => project._id.toString() !== projectId.toString());
+            await user.save();
+            await Task.deleteMany({ belongsToProject: projectId })
+            return Project.findOneAndDelete({ _id: projectId });
+        },
+        // Successful create, update project, task
+        addTask: async (parents, args, context) => {
+            // console.log(args.task)
+            const task = await Task.create({ ...args.task, assignedTo: [context.user._id] })
+            // console.log(task)
+            await Project.findOneAndUpdate(
+                { _id: args.projectId },
+                { $addToSet: { tasks: task._id } }
+            )
+            await Task.findOneAndUpdate(
+                { _id: task._id },
+                { $addToSet: { belongsToProject: args.projectId } }
+            )
+            await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { tasks: task._id } }
+            )
+            return task
+        },
+        // Successful!
+        removeTask: async (parent, { taskId, projectId, userId }, context) => {
+            const user = await User.findOne({ _id: userId });
+            user.tasks = user.tasks.filter((task) => task._id.toString() !== taskId.toString());
+            await user.save();
+
+            const project = await Project.findOne({ _id: projectId });
+            project.tasks = project.tasks.filter((task) => task._id.toString() !== taskId.toString());
+            await project.save();
+
+            return Task.findOneAndDelete({ _id: taskId });
+        },
+
+        // Tested successfully, but showing empty array 
+        assignTask: async (parent, { _id, userId }, context) => {
+            console.log(_id)
+            console.log(userId)
+            return Task.findByIdAndUpdate(
+                { _id },
+                { $addToSet: { assignedTo: userId } }
+            )
+        },
+
+        checkForSandwichReset: async (parent, args, context) => {
+            const user = await User.findById(args._id);
+            if (!user) {
+                throw new Error(`User ${args._id} not found`);
+            }
+            const nextResetDate = user.nextSandwichReset;
+            const currentDate = new Date();
+            currentDate.setHours(0, 0, 0, 0);
+            if (currentDate > nextResetDate) {
+                const updatedUser = await User.findByIdAndUpdate(
+                    args._id,
+                    { sandwichCount: 5, nextSandwichReset: currentDate },
+                    { new: true } // Return the updated user object
                 );
-                await User.findByIdAndUpdate(
-                    user._id,
-                    { $addToSet: { teams: teamId } }
-                );
-                return await Team.findById(teamId).populate('members');
-            },
+                return updatedUser; // Return the updated user object
+            }
+            return user; // Return the original user object
+        }
 
 
-
-
-                // All working
-                addProject: async (parent, args, context) => {
-                    const me = context.user._id;
-                    const projectData = { ...args.project };
-                    projectData.team = [];
-                    projectData.team.push(args.teamId);
-                    console.log(projectData);
-                    const project = await Project.create(projectData);
-                    await Team.findOneAndUpdate(
-                        { _id: args.teamId },
-                        { $addToSet: { projects: project._id } }
-                    )
-                    await User.findOneAndUpdate(
-                        { _id: me },
-                        { $addToSet: { projects: project._id } }
-                    )
-                    return project;
-                },
-
-                    // Success! Removes project and all associated tasks
-                    removeProject: async (parent, { projectId, userId }, context) => {
-                        const user = await User.findOne({ _id: userId });
-                        user.projects = user.projects.filter((project) => project._id.toString() !== projectId.toString());
-                        await user.save();
-                        await Task.deleteMany({ belongsToProject: projectId })
-                        return Project.findOneAndDelete({ _id: projectId });
-                    },
-                        // Successful create, update project, task
-                        addTask: async (parents, args, context) => {
-                            // console.log(args.task)
-                            const task = await Task.create({ ...args.task, assignedTo: [context.user._id] })
-                            // console.log(task)
-                            await Project.findOneAndUpdate(
-                                { _id: args.projectId },
-                                { $addToSet: { tasks: task._id } }
-                            )
-                            await Task.findOneAndUpdate(
-                                { _id: task._id },
-                                { $addToSet: { belongsToProject: args.projectId } }
-                            )
-                            await User.findOneAndUpdate(
-                                { _id: context.user._id },
-                                { $addToSet: { tasks: task._id } }
-                            )
-                            return task
-                        },
-                            // Successful!
-                            removeTask: async (parent, { taskId, projectId, userId }, context) => {
-                                const user = await User.findOne({ _id: userId });
-                                user.tasks = user.tasks.filter((task) => task._id.toString() !== taskId.toString());
-                                await user.save();
-
-                                const project = await Project.findOne({ _id: projectId });
-                                project.tasks = project.tasks.filter((task) => task._id.toString() !== taskId.toString());
-                                await project.save();
-
-                                return Task.findOneAndDelete({ _id: taskId });
-                            },
-
-                                // Tested successfully, but showing empty array 
-                                assignTask: async (parent, { _id, userId }, context) => {
-                                    console.log(_id)
-                                    console.log(userId)
-                                    return Task.findByIdAndUpdate(
-                                        { _id },
-                                        { $addToSet: { assignedTo: userId } }
-                                    )
-                                },
-
-                                    checkForSandwichReset: async (parent, args, context) => {
-                                        const user = await User.findById(args._id);
-                                        if (!user) {
-                                            throw new Error(`User ${args._id} not found`);
-                                        }
-                                        const nextResetDate = user.nextSandwichReset;
-                                        const currentDate = new Date();
-                                        if (currentDate > nextResetDate) {
-                                            await User.findByIdAndUpdate(
-                                                args._id,
-                                                { sandwichCount: 5, nextSandwichReset: currentDate },
-                                                { new: true }
-                                            );
-                                        }
-                                        return user;
-                                    }          
     }
 };
 
