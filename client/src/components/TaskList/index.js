@@ -6,6 +6,7 @@ const TaskList = ({ userData }) => {
     const taskData = userData.me.tasks;
     console.log(taskData[0].dueDate)
     console.log(new Date(taskData[0].dueDate).toLocaleDateString());
+    // console.log(new Date(taskData[0].dueDate).ISOString()());
     console.log(new Date(1738213200000).toLocaleDateString());
     console.log(new Date());
     console.log(new Date(Date.parse(taskData[0].dueDate)).toLocaleDateString());
