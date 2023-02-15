@@ -35,12 +35,12 @@ const AppNavbar = () => {
         <Container fluid>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
-            <Nav className='ml-auto'>
+            <Nav className='mr-auto'>
               {/* if user is logged in show all of these */}
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/profile'>Your Profile</Nav.Link>
-                  <Nav.Link as={Link} to='/projects'>Your Projects</Nav.Link>
+                  {/* <Nav.Link as={Link} to='/projects'>Your Projects</Nav.Link> */}
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                   <Nav.Link onClick={() => setShowCreateModal(true)}>Create</Nav.Link>
                   {error && <div>Error retrieving teams and projects</div>}
