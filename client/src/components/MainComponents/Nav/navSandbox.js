@@ -51,43 +51,42 @@ const AppNavbar = () => {
           <Navbar.Collapse id="navbar">
             <Nav className="mr-auto">
               {/* show these links on the left side */}
-            {Auth.loggedIn() ? (
-              <>
-              <Nav.Link as={Link} to="/profile">
-                Your Profile
-              </Nav.Link>
-              {error && <div>Error retrieving teams and projects</div>}
-              <NavDropdown
-                id="nav-dropdown-dark-example"
-                title="My Teams"
-                menuVariant="dark"
-              >
-                {data &&
-                  teams.length &&
-                  teams.map((team) => (
-                    <NavDropdown.Item href="#action/3.1">
-                      {team.teamName}
-                    </NavDropdown.Item>
-                  ))}
-              </NavDropdown>
-              <NavDropdown
-                id="nav-dropdown-dark-example"
-                title="My Projects"
-                menuVariant="dark"
-              >
-                {data &&
-                  projects.length &&
-                  projects.map((project) => (
-                    <NavDropdown.Item href="#action/3.1">
-                      {project.projectName}
-                    </NavDropdown.Item>
-                  ))}
-              </NavDropdown>
-              </>
-            ) : (
-              <></>
-            )}
-              
+              {Auth.loggedIn() ? (
+                <>
+                  <Nav.Link as={Link} to="/profile">
+                    Your Profile
+                  </Nav.Link>
+                  {error && <div>Error retrieving teams and projects</div>}
+                  <NavDropdown
+                    id="nav-dropdown-dark-example"
+                    title="My Teams"
+                    menuVariant="dark"
+                  >
+                    {data &&
+                      teams.length &&
+                      teams.map((team) => (
+                        <NavDropdown.Item href="#action/3.1">
+                          {team.teamName}
+                        </NavDropdown.Item>
+                      ))}
+                  </NavDropdown>
+                  <NavDropdown
+                    id="nav-dropdown-dark-example"
+                    title="My Projects"
+                    menuVariant="dark"
+                  >
+                    {data &&
+                      projects.length &&
+                      projects.map((project) => (
+                        <NavDropdown.Item href="#action/3.1">
+                          {project.projectName}
+                        </NavDropdown.Item>
+                      ))}
+                  </NavDropdown>
+                </>
+              ) : (
+                <></>
+              )}
             </Nav>
             <Nav className="ml-auto">
               {/* show these links on the right side */}
