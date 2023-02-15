@@ -59,11 +59,11 @@ const Home = () => {
       </Col>
     </Row>
 
-    <div className="image-wrapper">
+    {/* <div className="image-wrapper">
       <img className="top-image" src={sandwichLogoTop} alt="Tasty-looking sandwich top."></img>
       <img className="bottom-image" src={sandwichLogoBottom} alt="Tasy-looking sandwich bottom."></img>
       <a href="/" className="title-link"><h1 className="title-name">TASK SANDWICH</h1></a>
-    </div>
+    </div> */}
 
       <h1>Stay on task and become your team's hero!</h1>
       <p className="plagueis">

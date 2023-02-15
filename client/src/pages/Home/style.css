@@ -1,6 +1,6 @@
 /* || LOGO & ANIMATED SANDWICH STYLE || */
 
-.image-wrapper {
+/* .image-wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -42,8 +42,5 @@
 
 .title-name {
   z-index: -1;
-  /* margin-top: 0; */
-  /* width: 100%; */
   font-family: 'Amatic SC', cursive;
-  /* font-size: 100%; */
-}
+} */
