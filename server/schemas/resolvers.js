@@ -38,6 +38,32 @@ const resolvers = {
             }
             throw new AuthenticationError('Please log in')
         },
+        // Tested successfully
+        getUsers: async () => {
+            try {
+                const users = await User.find();
+                return users;
+            } catch (error) {
+                throw new Error(error);
+            }
+        },
+
+        getProjects: async () => {
+            try {
+                const projects = await Project.find();
+                return projects;
+            } catch (error) {
+                throw new Error(error);
+            }
+        },
+        getTeams: async () => {
+            try {
+                const teams = await Team.find();
+                return teams;
+            } catch (error) {
+                throw new Error(error);
+            }
+        },
 
         // Tested successfully
         project: async (parent, { _id }) => {
@@ -125,32 +151,6 @@ const resolvers = {
                 }
             )
         },
-
-        //check to see if a daily reset has happened and resets both sandwich count and next daily reset time in databse if necessary
-        // checkForSandwichReset: async (parent, { userId }, context) => {
-        //     console.log(context.user._id)
-        //     const checkForReset = await User.findOne(
-        //         { _id: userId }
-        //     );
-
-        //     let currentTime = new Date()
-        //     if (currentTime > checkForReset.nextSandwichReset) {
-        //         let setToNextDay = new Date(currentTime.setHours(currentTime.getHours() + 24)).toISOString().split('T')[0];
-        //         return User.findOneAndUpdate(
-        //             { _id: userId },
-        //             {
-        //                 $set: {
-        //                     sandwichCount: 5,
-        //                     nextSandwichReset: {
-        //                         $toDate: setToNextDay + 'T09:00:00'
-        //                     }
-        //                 }
-        //             }
-        //         )
-        //     } else {
-        //         return User.findOne({ _id: userId })
-        //     }
-        // }
     },
     Mutation: {
         // Tested successfully
@@ -215,18 +215,27 @@ const resolvers = {
             return Team.findOneAndDelete({ _id: args._id })
         },
 
-        // Returning null but working
-        addUserToTeam: async (parent, args, context) => {
-            console.log(args)
-            await Team.findByIdAndUpdate(args._id,
-                { $addToSet: { members: args.memberId } },
+        //   Successfully tested
+        addUserToTeam: async (parent, { teamId, memberName }, context) => {
+            console.log(teamId, memberName);
+            const user = await User.findOne({ name: memberName });
+            if (!user) {
+                throw new Error(`User ${memberName} not found`);
+            }
+            await Team.findByIdAndUpdate(
+                teamId,
+                { $addToSet: { members: user._id } },
                 { new: true }
             );
-            await User.findOneAndUpdate(
-                { _id: args.memberId },
-                { $addToSet: { teams: args._id } }
-            )
+            await User.findByIdAndUpdate(
+                user._id,
+                { $addToSet: { teams: teamId } }
+            );
+            return await Team.findById(teamId).populate('members');
         },
+
+
+
 
         // All working
         addProject: async (parent, args, context) => {
@@ -298,25 +307,25 @@ const resolvers = {
         },
 
         checkForSandwichReset: async (parent, args, context) => {
-            console.log(args)
-            await User.findById(
-                { _id: args._id }
-            ).populate('nextSandwichReset')
-            console.log(nextSandwichReset)
-            // let setDate = { nextSandwichReset: args.nextSandwichReset }
-            // console.log(setDate)
-            // const currentDate = Date.now
-            // console.log(currentDate)
-            // if (currentDate > setDate) {
-            //     await User.findByIdAndUpdate(
-            //         { _id: args._id },
-            //         { sandwichCount: 5 },
-            //         { nextSandwichReset: currentDate }
-            //     ); return args
-            // } else {
-            //     return
-            // }
+            const user = await User.findById(args._id);
+            if (!user) {
+                throw new Error(`User ${args._id} not found`);
+            }
+            const nextResetDate = user.nextSandwichReset;
+            const currentDate = new Date();
+            currentDate.setHours(0, 0, 0, 0);
+            if (currentDate > nextResetDate) {
+                const updatedUser = await User.findByIdAndUpdate(
+                    args._id,
+                    { sandwichCount: 5, nextSandwichReset: currentDate },
+                    { new: true } // Return the updated user object
+                );
+                return updatedUser; // Return the updated user object
+            }
+            return user; // Return the original user object
         }
+
+
     }
 };
 
