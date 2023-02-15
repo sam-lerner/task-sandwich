@@ -17,11 +17,6 @@ const UserInfo = ({ userData }) => {
               {userData.me.projects.length && userData.me.projects.map(project => <li>{project.projectName}</li>)}
             </ul>
           </div>
-          <div>Tasks:
-            <ul>
-              {userData.me.tasks.length && userData.me.tasks.map(task => <li>{task.taskName}</li>)}
-            </ul>
-          </div>
         </div>
       </div>
     </>

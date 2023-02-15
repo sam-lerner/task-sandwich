@@ -41,12 +41,6 @@ td {
   margin: 2%;
 }
 
-.calendar-title {
-  color: #bdbdbd;
-  font-family: 'Amatic SC', cursive;
-  font-size: 300%;
-}
-
 .calendar-container {
   display: flex;
   justify-content: center;
@@ -62,5 +56,5 @@ td {
 .calendar-selected-date-text {
   color: #bdbdbd;
   font-family: 'Amatic SC', cursive;
-  font-size: 200%;
+  font-size: 150%;
 }
