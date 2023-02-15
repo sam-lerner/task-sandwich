@@ -33,7 +33,7 @@ const Projects = () => {
 return (
     <>
       <Calendar />
-      <TaskList />
+      {/* <TaskList /> */}
       <ProjectInfo userData={userData} />
     </>
 )

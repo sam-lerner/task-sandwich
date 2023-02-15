@@ -1,52 +1,19 @@
 import React, { useState } from 'react';
 
-// import { useQuery } from '@apollo/client';
-// import { QUERY_TASKS_BY_USER } from '../../utils/queries';
+import { Button, ListGroup, Collapse, OverlayTrigger, Popover } from 'react-bootstrap'
 
-import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
-import Collapse from 'react-bootstrap/Collapse';
-
-const TaskList = ({ taskData }) => {
-
-    console.log(taskData);
+const TaskList = ({ userData }) => {
+    const taskData = userData.me.tasks;
+    // console.log(taskData[0].dueDate)
+    // console.log(new Date(taskData[0].dueDate).toLocaleDateString());
+    // console.log(new Date(taskData[0].dueDate).ISOString()());
+    // console.log(new Date(1738213200000).toLocaleDateString());
+    // console.log(new Date());
+    // console.log(new Date(Date.parse(taskData[0].dueDate)).toLocaleDateString());
+    // const date = new Date(2025, 0, 30);
+    // console.log(date.toLocaleDateString());
 
     const [open, setOpen] = useState({});
-    // const { data, loading, error } = useQuery(QUERY_TASKS_BY_USER);
-    // console.log(data);
-
-    // if (loading) {
-    //     return <div>Loading...</div>;
-    // }
-
-    // if (error) {
-    //     return <div>Error retrieving data</div>;
-    // }
-
-
-    // const dateOne = new Date(2023, 1, 13, 23, 59);
-
-    const todo = [
-        {
-            taskName: "reach mvp",
-            dueDateText: "February 13, 2023 23:59",
-            dueDateValue: "new Date(2023, 1, 13, 23, 59)",
-            taskDescription: "have at least these...."
-        },
-        {
-            taskName: "add more stuff",
-            dueDateText: "February 14, 2023 23:59",
-            dueDateValue: "new Date(2023, 1, 14, 23, 59)",
-            taskDescription: "fun stuff"
-        },
-        {
-            taskName: "presentation",
-            dueDateText: "February 17, 2023 15:00",
-            dueDateValue: "new Date(2023, 1, 17, 10)",
-            taskDescription: "you got this!"
-        },
-    ];
-    // form for finaldate - all numerical - new Date(year,month,day,hours,minutes,seconds,ms)
 
     function handleOpen(index) {
         setOpen({ ...open, [index]: !open[index] })
@@ -55,24 +22,21 @@ const TaskList = ({ taskData }) => {
     return (
         <>
             <ListGroup>
-                {todo.map((item, index) => (
-                    <ListGroup.Item key={index}>
-                        <Button
-                            onClick={() => handleOpen(index)}
-                            aria-controls="example-collapse-text"
-                            aria-expanded={open}
-                        >
-                            {item.taskName}
-                        </Button>
-                        <Collapse in={open[index]}>
-                            <div id="example-collapse-text">
-                                {item.taskDescription}
-                            </div>
-                        </Collapse>
+                {taskData.length && taskData.map((task, index) => (
+                    <ListGroup.Item>
+                        <OverlayTrigger trigger="click" placement="right" overlay={
+                            <Popover id="popover-basic">
+                                <Popover.Header as="h3">{new Date(task.dueDate).toLocaleDateString()}</Popover.Header>
+                                <Popover.Body>
+                                    {task.taskDescription}
+                                </Popover.Body>
+                            </Popover>
+                        }>
+                            <Button variant="light">{task.taskName}</Button>
+                        </OverlayTrigger>
                     </ListGroup.Item>
                 ))}
             </ListGroup>
-
         </>
     );
 }

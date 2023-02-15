@@ -4,19 +4,21 @@ import Calendar from 'react-calendar';
 // styling from the react calendar npm
 import 'react-calendar/dist/Calendar.css';
 
+import "./style.css";
+
 function OurCalendar({ userData }) {
   // Date is a built-in object
   const [date, setDate] = useState(new Date());
 
   return (
-    <div className='app'>
-      <h1 className='text-center'>React Calendar</h1>
+    <div className='app react-calendar-outmost-div'>
       <div className='calendar-container'>
       {/* setDate stores a date, which is what the user clicks */}
       {/* the current date is the initial value */}
-        <Calendar onChange={setDate} value={date} />
+        <Calendar onChange={setDate} value={date} className="calendar-card" />
       </div>
-      <p className='text-center'>
+      <p className='text-center calendar-selected-date-text'>
+
         <span className='bold'>Selected Date:</span>{' '}
         {date.toDateString()}
       </p>

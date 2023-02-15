@@ -17,6 +17,10 @@ const CreateTeam = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
+        // date input is a timstamp in milliseconds, we convert it here and pass it with the variables when creating the project
+        const date = new Date(projectFormData.endDate);
+        const formattedDate = date.toLocaleDateString();
+
         // check if form has everything (as per react-bootstrap docs)
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -25,7 +29,7 @@ const CreateTeam = () => {
         }
 
         try {
-            const { data } = await createProject({ variables: { project: { ...projectFormData } } });
+            const { data } = await createProject({ variables: { project: { ...projectFormData, endDate: formattedDate } } });
         } catch (err) {
             console.error(JSON.parse(JSON.stringify(err)));
         }
@@ -64,8 +68,7 @@ const CreateTeam = () => {
                 <Form.Group>
                     <Form.Label>Project End Date</Form.Label>
                     <Form.Control
-                        type='text'
-                        placeholder='What is the final date for the project?'
+                        type='date'
                         name='endDate'
                         onChange={handleInputChange}
                         value={projectFormData.endDate}

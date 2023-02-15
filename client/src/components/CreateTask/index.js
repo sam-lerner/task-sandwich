@@ -66,8 +66,7 @@ const CreateTeam = () => {
                 <Form.Group>
                     <Form.Label>Task Due Date</Form.Label>
                     <Form.Control
-                        type='text'
-                        placeholder='What is the final date for the task?'
+                        type='date'
                         name='dueDate'
                         onChange={handleInputChange}
                         value={taskFormData.dueDate}
