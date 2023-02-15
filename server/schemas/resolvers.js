@@ -28,15 +28,12 @@ const resolvers = {
             throw new AuthenticationError('Please log in')
         },
 
-        mePlus: async (parent, args, context) => {
-            if (context.user) {
-                const userData = await User.findOne({ _id: context.user._id })
-                    .populate('projects', 'teams')
-                console.log(userData.teams)
+        mePlus: async (parent, { _id }) => {
 
-                return userData.teams;
-            }
-            throw new AuthenticationError('Please log in')
+            const userData = await User.findById({ _id })
+
+            return userData;
+
         },
         // Tested successfully
         getUsers: async () => {
@@ -64,6 +61,7 @@ const resolvers = {
                 throw new Error(error);
             }
         },
+
 
         // Tested successfully
         project: async (parent, { _id }) => {
@@ -323,6 +321,23 @@ const resolvers = {
                 return updatedUser; // Return the updated user object
             }
             return user; // Return the original user object
+        },
+        giveSandwich: async (parent, { receiverId }, context) => {
+            let test = await User.findById(context.user._id)
+            console.log(context.user)
+            const me = await User.findByIdAndUpdate(context.user._id,
+                { $inc: { sandwichCount: -1 } })
+            console.log(me.sandwichCount)
+            if (!me) {
+                throw new Error(`User ${context._id} not found`);
+            }
+            const receiver = await User.findByIdAndUpdate(receiverId,
+                { $inc: { sandwichReceived: 1 } })
+            if (!receiver) {
+                throw new Error('No user found to receive your sandwich')
+            }
+            console.log(receiver.sandwichReceived)
+            return receiver
         }
 
 

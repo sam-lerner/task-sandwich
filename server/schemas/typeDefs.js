@@ -44,7 +44,7 @@ type Auth {
 }
 type Query {
     me: User
-    mePlus:User
+    mePlus(_id:ID!):User
     getUsers:[User!]!
     project(_id:ID!): Project
     getProjects:[Project!]!
@@ -70,6 +70,7 @@ type Mutation {
     removeTask(taskId: ID!, projectId: ID, userId: ID):Task
     assignTask(_id: ID!, userId: ID!):Task
     checkForSandwichReset(_id: ID!): User
+    giveSandwich(receiverId: ID!):User
 }
 input teamInput {
     teamName: String
