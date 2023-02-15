@@ -1,0 +1,78 @@
+.header {
+  background: #424242;
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.header a h1 {
+  margin: 0;
+  padding-top: 1vh;
+  text-align: center;
+  color: #bdbdbd;
+  font-size: 3rem;
+}
+
+/* || LOGO & ANIMATED SANDWICH STYLE || */
+
+.image-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-out;
+  margin-top: -1%;
+  height: 36vh;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -2.5%;
+  background: #F6E2B2;
+}
+
+/* .image-wrapper:hover .top-image {
+  transform: translateY(-5vh);
+} */
+
+.image-wrapper:hover .bottom-image {
+  transform: translateY(8vh);
+}
+
+.top-image {
+  /* position: absolute; */
+  height: 10vh;
+  width: 30vw;
+  top: 0;
+  transition: transform 0.3s ease-out;
+  margin-top: 1%;
+  z-index: 1;
+}
+
+.bottom-image {
+  position: absolute;
+  height: 10vh;
+  width: 30vw;
+  bottom: 3vh;
+  transition: transform 0.3s ease-out;
+  z-index: 1;
+}
+
+.title-link {
+  display: flex;
+  justify-content: center;
+}
+
+.title-name {
+  z-index: 0;
+  font-family: 'Amatic SC', cursive;
+  font-size: 400%;
+  color: #424242;
+}
+
+.title-slogan {
+  z-index: 0;
+  font-family: 'Amatic SC', cursive;
+  font-size: 400%;
+  color: #424242;
+  margin-top: -10%;
+}
