@@ -3,9 +3,6 @@ import React, { useState } from 'react';
 import { Button, ListGroup, OverlayTrigger, Popover } from 'react-bootstrap'
 
 const ProjectTaskList = ({ projectData }) => {
-    console.log(projectData)
-    console.log(projectData.project)
-    console.log(projectData.project.task)
 
     return (
         <>

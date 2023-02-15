@@ -4,9 +4,6 @@ import "./style.css";
 
 const TeamInfo = ({ teamData }) => {
 
-  console.log(teamData)
-  // console.log(teamData.team.endDate)
-
   return (
     <>
       <div className="team-info">
