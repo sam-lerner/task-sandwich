@@ -29,9 +29,9 @@ const ProjectInfo = ({ projectID }) => {
 
   return (
     <>
-      <div className="projectInfo">
-        <div key={data._id}>
-          <h2>{data.project.projectName}</h2>
+      <div className="project-info">
+        <div key={data._id} className="project-container">
+          <h2 className="project-name">{data.project.projectName}</h2>
           <p>Project Description: {data.project.projectDescription} </p>
           <p>Start Date: {data.project.startDate}</p>
           <p>End Date: {data.project.endDate}</p>
