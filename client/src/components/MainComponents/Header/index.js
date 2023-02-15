@@ -16,12 +16,12 @@ const Header = () => {
     //   <img className="bottom-image" src={sandwichLogoBottomEdited} alt="Tasy-looking sandwich bottom."></img>
     // </header>
     <header className="image-wrapper">
-      {/* <div childrenlassName="sandwich-wrapper"> */}
+      <div childrenlassName="sandwich-wrapper">
         <img className="top-image" src={sandwichLogoTopEdited} alt="Tasty-looking sandwich top."></img>
         <a href="/" className="title-link"><h1 className="title-name">TASK SANDWICH</h1></a>
         <a href="/" className="title-link"><p className="title-slogan">"Accept No Subs!!"</p></a>
         <img className="bottom-image" src={sandwichLogoBottomEdited} alt="Tasy-looking sandwich bottom."></img>
-      {/* </div> */}
+      </div>
     </header>
   )
 }
