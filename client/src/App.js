@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import {
   ApolloClient,
   InMemoryCache,
@@ -39,6 +40,11 @@ const client = new ApolloClient({
 });
 
 function App() {
+
+  // const ProjectsWrapper = () => {
+  //   const { id } = useParams();
+  //   <Projects projectID={id} />;
+
   return (
     <>
     <ApolloProvider client={client}>
@@ -55,7 +61,7 @@ function App() {
             element={<Profile />}
           />
           <Route
-            path="/projects"
+            path="/projects/"
             element={<Projects />}
           />
           <Route 
@@ -69,5 +75,4 @@ function App() {
     </>
   );
 }
-
 export default App;

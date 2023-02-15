@@ -2,13 +2,16 @@ import React from 'react';
 import { Calendar, TaskList, ProjectInfo } from '../../components';
 
 import { useQuery } from '@apollo/client';
-import { QUERY_ME } from '../../utils/queries';
+import { QUERY_SINGLE_PROJECT } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
-const Projects = () => {
+const Projects = (projectID) => {
 
-  const { data: userData, loading, error } = useQuery(QUERY_ME);
+  const { data, loading, error } = useQuery(QUERY_SINGLE_PROJECT, {
+    variables: { id: projectID},
+  });
+  console.log(data)
 
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -34,7 +37,7 @@ return (
     <>
       <Calendar />
       {/* <TaskList /> */}
-      <ProjectInfo userData={userData} />
+      {/* <ProjectInfo projectID={projectID} /> */}
     </>
 )
 };

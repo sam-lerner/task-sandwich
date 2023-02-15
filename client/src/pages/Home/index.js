@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Figure } from "../../components";
-import { Container, Row, Col, Toast, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 import "./style.css";
-import { sandwichLogoTop, sandwichLogoBottom } from './images';
+// import { sandwichLogoTopEdited, sandwichLogoBottomEdited } from './images';
 
 const Home = () => {
   const [showA, setShowA] = useState(true);
@@ -14,54 +14,9 @@ const Home = () => {
   return (
     <>
     <Container>
-    <Toast>
-      <Toast.Header>
-        <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-        <strong className="me-auto">Bootstrap</strong>
-        <small>11 mins ago</small>
-      </Toast.Header>
-      <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
-    </Toast>
-    <Row>
-      <Col md={6} className="mb-2">
-        <Button onClick={toggleShowA} className="mb-2">
-          Toggle Toast <strong>with</strong> Animation
-        </Button>
-        <Toast show={showA} onClose={toggleShowA}>
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2"
-              alt=""
-            />
-            <strong className="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-          </Toast.Header>
-          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
-        </Toast>
-      </Col>
-      <Col md={6} className="mb-2">
-        <Button onClick={toggleShowB} className="mb-2">
-          Toggle Toast <strong>without</strong> Animation
-        </Button>
-        <Toast onClose={toggleShowB} show={showB} animation={false}>
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2"
-              alt=""
-            />
-            <strong className="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-          </Toast.Header>
-          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
-        </Toast>
-      </Col>
-    </Row>
-
     {/* <div className="image-wrapper">
-      <img className="top-image" src={sandwichLogoTop} alt="Tasty-looking sandwich top."></img>
-      <img className="bottom-image" src={sandwichLogoBottom} alt="Tasy-looking sandwich bottom."></img>
+      <img className="top-image" src={sandwichLogoTopEdited} alt="Tasty-looking sandwich top."></img>
+      <img className="bottom-image" src={sandwichLogoBottomEdited} alt="Tasy-looking sandwich bottom."></img>
       <a href="/" className="title-link"><h1 className="title-name">TASK SANDWICH</h1></a>
     </div> */}
 

@@ -18,19 +18,19 @@ const AppNavbar = () => {
   //   const { data: teamData, loading: teamLoading, error:teamError } = useQuery(QUERY_TEAMS_BY_USER);
   // console.log(teamData)
 
-  const { data, loading, error } = useQuery(QUERY_ME);
+  // const { data, loading, error } = useQuery(QUERY_ME);
   // checking whether data is truthy because the results will be undefined until the query finishes loading
-  const teams = data?.me?.teams;
-  const projects = data?.me?.projects;
+  // const teams = data?.me?.teams;
+  // const projects = data?.me?.projects;
 
-  if (loading) {
-    return <div>Loading Teams and Projects...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading Teams and Projects...</div>;
+  // }
   
-  if (error) {
-    console.error(JSON.parse(JSON.stringify(error)))
-    return <div>Error retrieving teams and projects</div>;
-  }
+  // if (error) {
+  //   console.error(JSON.parse(JSON.stringify(error)))
+  //   return <div>Error retrieving teams and projects</div>;
+  // }
 
 
   return (
@@ -47,7 +47,7 @@ const AppNavbar = () => {
                   <Nav.Link as={Link} to='/projects'>Your Projects</Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                   <Nav.Link onClick={() => setShowCreateModal(true)}>Create</Nav.Link>
-                  <NavDropdown
+                  {/* <NavDropdown
                     id="nav-dropdown-dark-example"
                     title="My Teams"
                     menuVariant="dark"
@@ -62,7 +62,7 @@ const AppNavbar = () => {
                   >
                     {projects.length && projects.map(project =>
                       <NavDropdown.Item href="#action/3.1">{project.projectName}</NavDropdown.Item>)}
-                  </NavDropdown>
+                  </NavDropdown> */}
 
                 </>
               ) : (
