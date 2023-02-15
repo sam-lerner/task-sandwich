@@ -13,8 +13,8 @@ function OurCalendar({ userData }) {
   return (
     <div className='app react-calendar-outmost-div'>
       <div className='calendar-container'>
-      {/* setDate stores a date, which is what the user clicks */}
-      {/* the current date is the initial value */}
+        {/* setDate stores a date, which is what the user clicks */}
+        {/* the current date is the initial value */}
         <Calendar onChange={setDate} value={date} className="calendar-card" />
       </div>
       <p className='text-center calendar-selected-date-text'>
@@ -27,7 +27,6 @@ function OurCalendar({ userData }) {
 }
 
 export default OurCalendar;
-
 
 // onChange
 // When a user clicks on an item of the most detailed view, this function is called. We can receive user selection with the help of this in the following way with alert('Clicked date is: ', value)}/>
