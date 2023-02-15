@@ -88,7 +88,7 @@ const AppNavbar = () => {
                 <></>
               )}
             </Nav>
-            <Nav className="ml-auto">
+            <Nav className="ml-auto float-right">
               {/* show these links on the right side */}
               {Auth.loggedIn() ? (
                 <>
@@ -98,7 +98,7 @@ const AppNavbar = () => {
                   </Nav.Link>
                 </>
               ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>
+                <Nav.Link onClick={() => setShowModal(true)} className="ml-auto">
                   Login/Sign Up
                 </Nav.Link>
               )}
