@@ -39,11 +39,14 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+  const ProjectsWrapper = () => {
+    const { id } = useParams();
+    console.log('id in App.js: ', id);
+    return <Projects projectID={id} />;
+  }
+
 function App() {
 
-  // const ProjectsWrapper = () => {
-  //   const { id } = useParams();
-  //   <Projects projectID={id} />;
 
   return (
     <>
@@ -61,8 +64,8 @@ function App() {
             element={<Profile />}
           />
           <Route
-            path="/projects/"
-            element={<Projects />}
+            path="/project/:id"
+            element={<ProjectsWrapper />}
           />
           <Route 
             path='*'
