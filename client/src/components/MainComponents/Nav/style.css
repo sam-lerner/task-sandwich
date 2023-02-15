@@ -37,6 +37,10 @@
   color: #FFFDD0;
 }
 
+.navbar {
+  background-color: #DE7A18;
+}
+
 .navbar-collapse {
   display: flex;
   justify-content: space-between;

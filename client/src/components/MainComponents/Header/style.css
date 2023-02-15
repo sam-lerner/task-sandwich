@@ -28,6 +28,7 @@
   align-items: center;
   background: #F6E2B2;
   margin-bottom: -2.5vh;
+  /* width: 30vw; */
 }
 
 /* .image-wrapper:hover .top-image {
@@ -65,15 +66,17 @@
 .title-name {
   z-index: 0;
   font-family: 'Amatic SC', cursive;
-  font-size: 400%;
+  font-size: 80px;
+  /* font-size: 400%; */
   margin-top: -1vh;
   color: #424242;
+  /* padding: -30vw; */
 }
 
 .title-slogan {
   z-index: 0;
   font-family: 'Amatic SC', cursive;
-  font-size: 400%;
+  font-size: 60px;
   color: #424242;
   margin-top: -4vh;
 }
