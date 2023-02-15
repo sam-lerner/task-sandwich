@@ -18,7 +18,8 @@ const taskSchema = new Schema({
         get: (timestamp) => dateFormat(timestamp)
     },
     dueDate: {
-        type: Date
+        type: Date,
+        get: (timestamp) => dateFormat(timestamp)
     },
     taskStatus: {
         type: String,
