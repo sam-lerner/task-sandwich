@@ -59,7 +59,7 @@ type Mutation {
     login(email: String!, password: String!):Auth
     addUser(name: String!, email: String!, password: String!):Auth
     addTeam(team: teamInput):Team
-    addUserToTeam(_id:ID!, memberId:ID!):Team
+    addUserToTeam(teamId: ID!, memberName: String!): Team
     removeTeam(_id: ID!):Team
     addProject(project: projectInput, teamId:ID):Project
     removeProject(projectId: ID!, userId: ID):Project

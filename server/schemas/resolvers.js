@@ -215,18 +215,27 @@ const resolvers = {
             return Team.findOneAndDelete({ _id: args._id })
         },
 
-        // Returning null but working
-        addUserToTeam: async (parent, args, context) => {
-            console.log(args)
-            await Team.findByIdAndUpdate(args._id,
-                { $addToSet: { members: args.memberId } },
+        //   Successfully tested
+        addUserToTeam: async (parent, { teamId, memberName }, context) => {
+            console.log(teamId, memberName);
+            const user = await User.findOne({ name: memberName });
+            if (!user) {
+                throw new Error(`User ${memberName} not found`);
+            }
+            await Team.findByIdAndUpdate(
+                teamId,
+                { $addToSet: { members: user._id } },
                 { new: true }
             );
-            await User.findOneAndUpdate(
-                { _id: args.memberId },
-                { $addToSet: { teams: args._id } }
-            )
+            await User.findByIdAndUpdate(
+                user._id,
+                { $addToSet: { teams: teamId } }
+            );
+            return await Team.findById(teamId).populate('members');
         },
+
+
+
 
         // All working
         addProject: async (parent, args, context) => {
