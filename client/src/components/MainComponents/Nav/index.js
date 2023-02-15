@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { Navbar, Nav, Container, Modal, Tab, Dropdown, DropdownButton, NavDropdown } from "react-bootstrap";
 import { SignupForm, LoginForm, CreateTeam, CreateProject, CreateTask } from "../../../components"
 
 import { useQuery } from '@apollo/client';
-import { QUERY_TEAMS_BY_USER, QUERY_PROJECTS_BY_USER, QUERY_ME } from '../../../utils/queries';
+import { QUERY_ME } from '../../../utils/queries';
 
 import Auth from "../../../utils/auth";
 
@@ -15,23 +15,19 @@ const AppNavbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
-  //   const { data: teamData, loading: teamLoading, error:teamError } = useQuery(QUERY_TEAMS_BY_USER);
-  // console.log(teamData)
-
-  // const { data, loading, error } = useQuery(QUERY_ME);
+  const { data, loading, error } = useQuery(QUERY_ME);
   // checking whether data is truthy because the results will be undefined until the query finishes loading
-  // const teams = data?.me?.teams;
-  // const projects = data?.me?.projects;
+  const teams = data?.me?.teams;
+  const projects = data?.me?.projects;
 
   // if (loading) {
   //   return <div>Loading Teams and Projects...</div>;
   // }
-  
+
   // if (error) {
   //   console.error(JSON.parse(JSON.stringify(error)))
-  //   return <div>Error retrieving teams and projects</div>;
+  //   return ;
   // }
-
 
   return (
     <>
@@ -47,12 +43,13 @@ const AppNavbar = () => {
                   <Nav.Link as={Link} to='/projects'>Your Projects</Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                   <Nav.Link onClick={() => setShowCreateModal(true)}>Create</Nav.Link>
-                  {/* <NavDropdown
+                  {error && <div>Error retrieving teams and projects</div>}
+                  <NavDropdown
                     id="nav-dropdown-dark-example"
                     title="My Teams"
                     menuVariant="dark"
                   >
-                    {teams.length && teams.map(team =>
+                    {data && teams.length && teams.map(team =>
                       <NavDropdown.Item href="#action/3.1">{team.teamName}</NavDropdown.Item>)}
                   </NavDropdown>
                   <NavDropdown
@@ -60,9 +57,9 @@ const AppNavbar = () => {
                     title="My Projects"
                     menuVariant="dark"
                   >
-                    {projects.length && projects.map(project =>
+                    {data && projects.length && projects.map(project =>
                       <NavDropdown.Item href="#action/3.1">{project.projectName}</NavDropdown.Item>)}
-                  </NavDropdown> */}
+                  </NavDropdown>
 
                 </>
               ) : (
