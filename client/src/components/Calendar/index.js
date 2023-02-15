@@ -12,7 +12,6 @@ function OurCalendar({ userData }) {
 
   return (
     <div className='app react-calendar-outmost-div'>
-      <h1 className='text-center calendar-title'>React Calendar</h1>
       <div className='calendar-container'>
       {/* setDate stores a date, which is what the user clicks */}
       {/* the current date is the initial value */}

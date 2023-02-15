@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Calendar, CreateTeam, CreateProject, CreateTask, TaskList, UserInfo } from '../../components';
-import { Button, Nav, Modal, Tab, Container, Row, Col } from "react-bootstrap";
+import React from 'react';
+import { Calendar, TaskList, UserInfo } from '../../components';
+import { Container, Row, Col } from "react-bootstrap";
 
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../../utils/queries';
@@ -11,7 +11,7 @@ import "./style.css";
 
 const Profile = () => {
 
-  const { data: userData, loading: meLoading, error: meError } = useQuery(QUERY_ME);
+  const { data: userData, loading, error } = useQuery(QUERY_ME);
 
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -23,13 +23,13 @@ const Profile = () => {
       </h4>
     );
   }
-  console.log("checked token")
-  if (meLoading) {
+
+  if (loading) {
     return <div>Loading User...</div>;
   }
 
-  if (meError) {
-    console.error(JSON.parse(JSON.stringify(meError)))
+  if (error) {
+    console.error(JSON.parse(JSON.stringify(error)))
     return <div>Error retrieving user data</div>;
   }
 
