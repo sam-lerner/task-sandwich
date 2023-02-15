@@ -119,30 +119,30 @@ const resolvers = {
         },
 
         //check to see if a daily reset has happened and resets both sandwich count and next daily reset time in databse if necessary
-        checkForSandwichReset: async (parent, { userId }, context) => {
-            console.log(context.user._id)
-            const checkForReset = await User.findOne(
-                { _id: userId }
-            );
+        // checkForSandwichReset: async (parent, { userId }, context) => {
+        //     console.log(context.user._id)
+        //     const checkForReset = await User.findOne(
+        //         { _id: userId }
+        //     );
 
-            let currentTime = new Date()
-            if (currentTime > checkForReset.nextSandwichReset) {
-                let setToNextDay = new Date(currentTime.setHours(currentTime.getHours() + 24)).toISOString().split('T')[0];
-                return User.findOneAndUpdate(
-                    { _id: userId },
-                    {
-                        $set: {
-                            sandwichCount: 5,
-                            nextSandwichReset: {
-                                $toDate: setToNextDay + 'T09:00:00'
-                            }
-                        }
-                    }
-                )
-            } else {
-                return User.findOne({ _id: userId })
-            }
-        }
+        //     let currentTime = new Date()
+        //     if (currentTime > checkForReset.nextSandwichReset) {
+        //         let setToNextDay = new Date(currentTime.setHours(currentTime.getHours() + 24)).toISOString().split('T')[0];
+        //         return User.findOneAndUpdate(
+        //             { _id: userId },
+        //             {
+        //                 $set: {
+        //                     sandwichCount: 5,
+        //                     nextSandwichReset: {
+        //                         $toDate: setToNextDay + 'T09:00:00'
+        //                     }
+        //                 }
+        //             }
+        //         )
+        //     } else {
+        //         return User.findOne({ _id: userId })
+        //     }
+        // }
     },
     Mutation: {
         // Tested successfully
@@ -261,7 +261,7 @@ const resolvers = {
         // Successful create, update project, task
         addTask: async (parents, args, context) => {
             // console.log(args.task)
-            const task = await Task.create({ ...args.task,  assignedTo:[context.user._id]})
+            const task = await Task.create({ ...args.task, assignedTo: [context.user._id] })
             // console.log(task)
             await Project.findOneAndUpdate(
                 { _id: args.projectId },
@@ -297,26 +297,30 @@ const resolvers = {
                 { _id },
                 { $addToSet: { assignedTo: userId } }
             )
+        },
+
+        checkForSandwichReset: async (parent, args, context) => {
+            console.log(args)
+            await User.findById(
+                { _id: args._id }
+            ).populate('nextSandwichReset')
+            console.log(nextSandwichReset)
+            // let setDate = { nextSandwichReset: args.nextSandwichReset }
+            // console.log(setDate)
+            // const currentDate = Date.now
+            // console.log(currentDate)
+            // if (currentDate > setDate) {
+            //     await User.findByIdAndUpdate(
+            //         { _id: args._id },
+            //         { sandwichCount: 5 },
+            //         { nextSandwichReset: currentDate }
+            //     ); return args
+            // } else {
+            //     return
+            // }
         }
-    },
+    }
 };
 
+
 module.exports = resolvers;
-
-
-// Sam notes
-
-// sandiwchCount: async (parent, oldDate, context) => {
-//     let currentSandwiches = GET FROM USER context
-//     let setDate = GET OLD DATE FROM LAST CHECK
-//     const currentDate = Date.now
-
-//     if currentDate > setDate {
-//         THIS WILL ACTUALLY NEED TO BE FINDANDUPDATE
-//         currentSanwiches++5
-//         setDate FIND AND UPDATE TO currentDate
-//         return
-//     } else {
-//         return
-//     }
-// }
