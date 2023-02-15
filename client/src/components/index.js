@@ -10,7 +10,9 @@ export { default as CreateProject } from './NavComponents/CreateProject';
 export { default as CreateTask } from './NavComponents/CreateTask';
 export { default as UserInfo } from './UserInfo';
 export { default as ProjectInfo } from './ProjectInfo';
+export { default as TeamInfo } from './TeamInfo';
 export { default as UserTaskList } from './UserTaskList';
 export { default as ProjectTaskList } from './ProjectTaskList';
+export { default as TeamTaskList } from './TeamTaskList';
 
 // export { default as Planner } from './Planner';
