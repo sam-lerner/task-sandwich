@@ -40,7 +40,7 @@ const AppNavbar = () => {
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/profile'>Your Profile</Nav.Link>
-                  {/* <Nav.Link as={Link} to='/projects'>Your Projects</Nav.Link> */}
+                  {/* <Nav.Link as={Link} to='/project'>Your Projects</Nav.Link> */}
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                   <Nav.Link onClick={() => setShowCreateModal(true)}>Create</Nav.Link>
                   {error && <div>Error retrieving teams and projects</div>}
@@ -50,7 +50,7 @@ const AppNavbar = () => {
                     menuVariant="dark"
                   >
                     {data && teams.length && teams.map(team =>
-                      <NavDropdown.Item href="/team">{team.teamName}</NavDropdown.Item>)}
+                      <NavDropdown.Item href={"/team/" + team._id}>{team.teamName}</NavDropdown.Item>)}
                   </NavDropdown>
                   <NavDropdown
                     id="nav-dropdown-dark-example"
