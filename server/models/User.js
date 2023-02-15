@@ -44,7 +44,8 @@ const userSchema = new Schema({
   },
   
   sandwichCount: {
-    type: Number
+    type: Number,
+    default: 5
   },
   
   sandwichReceived: {
