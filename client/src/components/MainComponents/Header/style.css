@@ -9,7 +9,7 @@
   background: #F6E2B2;
   width: 100%;
   min-height: 170px;
-  max-height: 170px;
+  max-height: auto;
   margin-top: -10px;
 }
 
@@ -33,6 +33,7 @@
 .top-image {
   height: 60px;
   top: 0;
+  margin-top: 10px;
   /* z-index: 1; */
 }
 
@@ -41,7 +42,7 @@
   height: 60px;
   transition: transform 0.3s ease-out;
   z-index: 1;
-  margin-top: -40px;
+  margin-top: -64px;
 }
 
 .title-link {
@@ -56,13 +57,15 @@
 
 .title-name {
   /* z-index: 0; */
-  /* font-family: 'Amatic SC', cursive; */
+  font-family: 'Amatic SC', cursive;
+  font-size: 500%;
+  margin-top: -6px;
   color: #424242;
 }
 
 .title-slogan {
   /* z-index: 0; */
-  /* font-family: 'Amatic SC', cursive; */
+  font-family: 'Amatic SC', cursive;
+  font-size: 200%;
   color: #424242;
-
 }
