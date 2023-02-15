@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, UserTaskList, ProjectInfo } from '../../components';
+import { Calendar, ProjectTaskList, ProjectInfo } from '../../components';
 import { Row, Col } from "react-bootstrap";
 
 import { useQuery } from '@apollo/client';
@@ -8,12 +8,10 @@ import { QUERY_SINGLE_PROJECT } from '../../utils/queries';
 import Auth from '../../utils/auth';
 
 const Projects = ({ projectID }) => {
-  console.log("projectID in Projects: ", projectID);
 
-  const { data, loading, error } = useQuery(QUERY_SINGLE_PROJECT, {
+  const { data: projectData, loading, error } = useQuery(QUERY_SINGLE_PROJECT, {
     variables: { id: projectID },
   });
-  console.log(data);
 
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -25,7 +23,7 @@ const Projects = ({ projectID }) => {
       </h4>
     );
   }
-  console.log("checked token")
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -34,7 +32,7 @@ const Projects = ({ projectID }) => {
     console.error(JSON.parse(JSON.stringify(error)))
     return <div>Error retrieving data</div>;
   }
-
+console.log(projectData)
   return (
     <>
       <Row>
@@ -42,12 +40,12 @@ const Projects = ({ projectID }) => {
           <Calendar />
         </Col>
         <Col sm={9}>
-          {/* <UserTaskList /> */}
+          <ProjectTaskList projectData={projectData} />
         </Col>
       </Row>
       <Row>
         <Col sm={3}>
-          <ProjectInfo projectID={projectID} />
+          <ProjectInfo projectData={projectData} />
         </Col>
       </Row>
     </>
