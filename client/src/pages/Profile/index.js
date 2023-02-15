@@ -35,18 +35,25 @@ const Profile = () => {
 
   return (
     <div className="profile-main">
-      <Container>
-        <Row className="m-3">
-          <Col className="m-2">
-            <Calendar />
-          </Col>
+      {/* <Container> */}
+        {/* <Row className="m-3"> */}
+        <Row>
+        <Col sm={3}>
+        {/* <Col className="m-2"> */}
+          <Calendar />
+        </Col>
           {/* isLoggedInUser={!userId && true} */}
-          <Col className="m-2">
+          <Col sm={9}>
+          {/* <Col className="m-2"> */}
             <TaskList userData={userData} />
           </Col>
         </Row>
-        <UserInfo userData={userData} />
-      </Container>
+        <Row>
+          <Col sm={3}>
+            <UserInfo userData={userData} />
+          </Col>
+        </Row>
+      {/* </Container> */}
     </div>
   )
 
