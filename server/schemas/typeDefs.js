@@ -62,7 +62,7 @@ type Mutation {
     addUserToTeam(_id:ID!, memberId:ID!):Team
     removeTeam(_id: ID!):Team
     addProject(project: projectInput, teamId:ID):Project
-    removeProject(_id: ID!):Project
+    removeProject(projectId: ID!, userId: ID):Project
     addTask(task: taskInput, projectId:ID):Task
     removeTask(taskId: ID!, projectId: ID, userId: ID):Task
     assignTask(_id: ID!, userId: ID!):Task
