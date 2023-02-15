@@ -34,7 +34,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="profileMain">
+    <div className="profile-main">
       <Container>
         <Row className="m-3">
           <Col className="m-2">

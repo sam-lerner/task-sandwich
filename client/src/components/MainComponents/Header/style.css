@@ -14,3 +14,54 @@
   color: #bdbdbd;
   font-size: 3rem;
 }
+
+/* || LOGO & ANIMATED SANDWICH STYLE || */
+
+.image-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-out;
+  margin-top: 5vh;
+  height: 20vh;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2.5%;
+}
+
+.image-wrapper:hover .top-image {
+  transform: translateY(-5vh);
+}
+
+.image-wrapper:hover .bottom-image {
+  transform: translateY(5vh);
+}
+
+.top-image {
+  position: absolute;
+  height: 10vh;
+  width: 30vw;
+  top: 0;
+  transition: transform 0.3s ease-out;}
+
+.bottom-image {
+  position: absolute;
+  height: 10vh;
+  width: 30vw;
+  bottom: 0;
+  transition: transform 0.3s ease-out;
+  z-index: 1;
+}
+
+.title-link {
+  display: flex;
+  justify-content: center;
+}
+
+.title-name {
+  z-index: -1;
+  /* margin-top: 0; */
+  /* width: 100%; */
+  font-family: 'Amatic SC', cursive;
+  font-size: 300%;
+}

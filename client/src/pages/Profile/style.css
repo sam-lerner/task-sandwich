@@ -1,4 +1,4 @@
-/* .profileMain {
+/* .profile-main {
   display: grid;
   grid-template-columns: 25% 75%;
   grid-template-rows: 25% 10% 225% 25%;
@@ -6,3 +6,7 @@
   margin: 0;
 }
  */
+
+ .profile-main .container {
+  margin-left: 0;
+ }
