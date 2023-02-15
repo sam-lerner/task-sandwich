@@ -36,7 +36,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="profileMain">
+    <div className="profile-main">
       <Container>
         <Row>
           <Col>

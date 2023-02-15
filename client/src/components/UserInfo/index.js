@@ -9,9 +9,9 @@ const UserInfo = ({ userData }) => {
 
   return (
     <>
-      <div className="userInfo">
-        <div key={userData.me._id}>
-          <h2>{userData.me.name}</h2>
+      <div className="user-info">
+        <div key={userData.me._id} className="user-container">
+          <h2 className="user-name">{userData.me.name}</h2>
           <div>Teams:
             <ul>
               {userData.me.teams.length && userData.me.teams.map(team => <li>{team.teamName}</li>)}

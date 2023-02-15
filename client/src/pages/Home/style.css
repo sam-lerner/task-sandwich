@@ -35,9 +35,15 @@
   transition: transform 0.3s ease-out;
 }
 
+.title-link {
+  display: flex;
+  justify-content: center;
+}
+
 .title-name {
   z-index: -1;
-  /* height: 10vh; */
-  /* width: 25vw; */
+  /* margin-top: 0; */
+  /* width: 100%; */
   font-family: 'Amatic SC', cursive;
+  /* font-size: 100%; */
 }
