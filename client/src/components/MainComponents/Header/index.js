@@ -1,6 +1,6 @@
 import React from 'react';
 
-import "./styleSandbox.css";
+import "./style.css";
 import { sandwichLogoTopEdited, sandwichLogoBottomEdited } from './images';
 
 const Header = () => {
