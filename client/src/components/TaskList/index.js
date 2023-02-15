@@ -4,7 +4,6 @@ import { Button, ListGroup, Collapse, OverlayTrigger, Popover } from 'react-boot
 
 const TaskList = ({ userData }) => {
     const taskData = userData.me.tasks;
-
     const [open, setOpen] = useState({});
 
     return (

@@ -1,6 +1,6 @@
 table {
     border-collapse: collapse;
-    width: 30%;
+    /* width: 30%; */
   }
   
 th,
@@ -10,9 +10,9 @@ td {
   text-align: center;
 }
 
-#calendar {
+/* #calendar {
   width: 30%;
-}
+} */
 
 #calendarHeader {
   display: flex;
@@ -39,6 +39,7 @@ td {
   justify-content: center;
   background: #424242;
   margin: 2%;
+  padding: 4%;
 }
 
 .calendar-container {
