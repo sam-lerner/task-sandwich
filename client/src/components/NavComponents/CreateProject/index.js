@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap';
 
 import { useMutation } from '@apollo/client';
-import { ADD_PROJECT } from '../../utils/mutations';
+import { ADD_PROJECT } from '../../../utils/mutations';
 
 const CreateTeam = () => {
 

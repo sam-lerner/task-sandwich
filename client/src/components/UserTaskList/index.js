@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { Button, ListGroup, Collapse, OverlayTrigger, Popover } from 'react-bootstrap'
+import { Button, ListGroup, OverlayTrigger, Popover } from 'react-bootstrap'
 
-const TaskList = ({ userData }) => {
+const UserTaskList = ({ userData }) => {
     const taskData = userData.me.tasks;
     const [open, setOpen] = useState({});
 
@@ -29,4 +29,4 @@ const TaskList = ({ userData }) => {
     );
 }
 
-export default TaskList;
+export default UserTaskList;

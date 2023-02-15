@@ -33,6 +33,7 @@ query project($id: ID!) {
     endDate
     team {
       _id
+      teamName
     }
   }
 }
