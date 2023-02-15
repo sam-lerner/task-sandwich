@@ -6,12 +6,13 @@ import { QUERY_SINGLE_PROJECT } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
-const Projects = (projectID) => {
+const Projects = ({ projectID }) => {
+  console.log("projectID in Projects: ", projectID);
 
   const { data, loading, error } = useQuery(QUERY_SINGLE_PROJECT, {
-    variables: { id: projectID},
+    variables: { id: projectID },
   });
-  console.log(data)
+  console.log(data);
 
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -37,7 +38,7 @@ return (
     <>
       <Calendar />
       {/* <TaskList /> */}
-      {/* <ProjectInfo projectID={projectID} /> */}
+      <ProjectInfo projectID={projectID} />
     </>
 )
 };
