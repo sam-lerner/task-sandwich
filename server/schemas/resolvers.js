@@ -18,9 +18,11 @@ const resolvers = {
                         select: 'projectName'
                     }).populate({
                         path: 'tasks',
-                        select: 'taskName'
+                        select: { taskName: 1, taskDescription: 1, dueDate:1 }
+                        // select: { taskName: 1, taskDescription: 1, createdOn: 1, taskStatus: 1, assignedTo: 1, belongsToProject: 1 }
+
                     })
-                console.log(`userdata from resolvers:`, userData)
+                console.log(`---userdata from resolvers:`, userData)
                 return userData;
             }
             throw new AuthenticationError('Please log in')
@@ -261,7 +263,7 @@ const resolvers = {
         // Successful create, update project, task
         addTask: async (parents, args, context) => {
             // console.log(args.task)
-            const task = await Task.create({ ...args.task,  assignedTo:[context.user._id]})
+            const task = await Task.create({ ...args.task, assignedTo: [context.user._id] })
             // console.log(task)
             await Project.findOneAndUpdate(
                 { _id: args.projectId },

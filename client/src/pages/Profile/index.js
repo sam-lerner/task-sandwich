@@ -11,9 +11,7 @@ import "./style.css";
 
 const Profile = () => {
 
-  const [showModal, setShowModal] = useState(false);
-
-  const { data: userData, loading, error } = useQuery(QUERY_ME);
+  const { data: userData, loading: meLoading, error: meError } = useQuery(QUERY_ME);
 
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -26,25 +24,25 @@ const Profile = () => {
     );
   }
   console.log("checked token")
-  if (loading) {
-    return <div>Loading...</div>;
+  if (meLoading) {
+    return <div>Loading User...</div>;
   }
 
-  if (error) {
-    console.error(JSON.parse(JSON.stringify(error)))
-    return <div>Error retrieving data</div>;
+  if (meError) {
+    console.error(JSON.parse(JSON.stringify(meError)))
+    return <div>Error retrieving user data</div>;
   }
 
   return (
     <div className="profile-main">
       <Container>
-        <Row>
-          <Col>
+        <Row className="m-3">
+          <Col className="m-2">
             <Calendar />
           </Col>
           {/* isLoggedInUser={!userId && true} */}
-          <Col>
-          <TaskList />
+          <Col className="m-2">
+            <TaskList userData={userData} />
           </Col>
         </Row>
         <UserInfo userData={userData} />

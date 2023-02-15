@@ -19,6 +19,7 @@ function OurCalendar({ userData }) {
         <Calendar onChange={setDate} value={date} className="calendar-card" />
       </div>
       <p className='text-center calendar-selected-date-text'>
+
         <span className='bold'>Selected Date:</span>{' '}
         {date.toDateString()}
       </p>

@@ -17,6 +17,8 @@ export const QUERY_ME = gql`
       tasks {
         _id
         taskName
+        taskDescription
+        dueDate
       }
     }
   }
