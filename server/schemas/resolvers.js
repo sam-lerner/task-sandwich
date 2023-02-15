@@ -110,9 +110,9 @@ const resolvers = {
             const newParams = teamProjects ? { _id } : {}
             return Task.find(newParams)
         },
-
-        team: async (parent, { teamId }) => {
-            return Team.findOne({ _id: teamId });
+        // Tested
+        team: async (parent, args) => {
+            return Team.findOne({ _id: args._id });
         },
 
         teamsByUser: async (parent, { userId }) => {
