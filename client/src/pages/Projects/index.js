@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar, TaskList, ProjectInfo } from '../../components';
+import { Row, Col } from "react-bootstrap";
 
 import { useQuery } from '@apollo/client';
 import { QUERY_SINGLE_PROJECT } from '../../utils/queries';
@@ -34,13 +35,23 @@ const Projects = ({ projectID }) => {
     return <div>Error retrieving data</div>;
   }
 
-return (
+  return (
     <>
-      <Calendar />
-      {/* <TaskList /> */}
-      <ProjectInfo projectID={projectID} />
+      <Row>
+        <Col sm={3}>
+          <Calendar />
+        </Col>
+        <Col sm={9}>
+          {/* <TaskList /> */}
+        </Col>
+      </Row>
+      <Row>
+        <Col sm={3}>
+          <ProjectInfo projectID={projectID} />
+        </Col>
+      </Row>
     </>
-)
+  )
 };
 
 export default Projects;

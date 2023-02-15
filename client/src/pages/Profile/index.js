@@ -1,6 +1,6 @@
 import React from 'react';
 import { Calendar, TaskList, UserInfo } from '../../components';
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../../utils/queries';
@@ -35,25 +35,21 @@ const Profile = () => {
 
   return (
     <div className="profile-main">
-      {/* <Container> */}
-        {/* <Row className="m-3"> */}
-        <Row>
+      <Row>
         <Col sm={3}>
-        {/* <Col className="m-2"> */}
           <Calendar />
         </Col>
-          {/* isLoggedInUser={!userId && true} */}
-          <Col sm={9}>
-          {/* <Col className="m-2"> */}
-            <TaskList userData={userData} />
-          </Col>
-        </Row>
-        <Row>
-          <Col sm={3}>
-            <UserInfo userData={userData} />
-          </Col>
-        </Row>
-      {/* </Container> */}
+        {/* isLoggedInUser={!userId && true} */}
+        <Col sm={9}>
+          <TaskList userData={userData} />
+        </Col>
+      </Row>
+      <Row>
+        <Col sm={3}>
+          <UserInfo userData={userData} />
+        </Col>
+      </Row>
+
     </div>
   )
 
