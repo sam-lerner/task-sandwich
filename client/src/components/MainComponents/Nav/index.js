@@ -50,7 +50,7 @@ const AppNavbar = () => {
                     menuVariant="dark"
                   >
                     {data && teams.length && teams.map(team =>
-                      <NavDropdown.Item href="#action/3.1">{team.teamName}</NavDropdown.Item>)}
+                      <NavDropdown.Item href="/team">{team.teamName}</NavDropdown.Item>)}
                   </NavDropdown>
                   <NavDropdown
                     id="nav-dropdown-dark-example"
@@ -58,7 +58,7 @@ const AppNavbar = () => {
                     menuVariant="dark"
                   >
                     {data && projects.length && projects.map(project =>
-                      <NavDropdown.Item href="#action/3.1">{project.projectName}</NavDropdown.Item>)}
+                      <NavDropdown.Item href={"/project/" + project._id}>{project.projectName}</NavDropdown.Item>)}
                   </NavDropdown>
 
                 </>

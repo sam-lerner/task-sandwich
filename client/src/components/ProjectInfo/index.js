@@ -2,37 +2,39 @@ import React from 'react'
 
 import "./style.css";
 
+import { useQuery } from '@apollo/client';
+import { QUERY_SINGLE_PROJECT } from '../../utils/queries';
 
 
-const ProjectInfo = ({ userData }) => {
+const ProjectInfo = ({ projectID }) => {
 
-  const projectData = userData.me.projects;
+  console.log("projectID in ProjectInfo: ", projectID)
 
-  // const { data, loading, error } = useQuery(QUERY_SINGLE_PROJECT, {
-  //   variables: { id: "63ec16456117b20d5e622d9e"},
-  // });
+  const { data, loading, error } = useQuery(QUERY_SINGLE_PROJECT, {
+    variables: { id: projectID },
+  });
 
-// console.log(data)
+  console.log(data)
 
-//   if (loading) {
-//     return <div>Loading Project...</div>;
-//   }
-  
-//   if (error) {
-//     console.error(JSON.parse(JSON.stringify(error)))
-//     return <div>Error retrieving project</div>;
-//   }
+  if (loading) {
+    return <div>Loading Project...</div>;
+  }
+
+  if (error) {
+    console.error(JSON.parse(JSON.stringify(error)))
+    return <div>Error retrieving project</div>;
+  }
 
 
   return (
     <>
       <div className="projectInfo">
-        <div key={userData.me._id}>
-          <h2>{userData.me.name}</h2>
+        <div key={data._id}>
+          <h2>{data.projectName}</h2>
 
           <div>Projects:
             <ul>
-              {projectData.length && projectData.map(project => <li>{project.projectName}</li>)}
+              {data.length && data.map(project => <li>{project.projectName}</li>)}
             </ul>
           </div>
         </div>
