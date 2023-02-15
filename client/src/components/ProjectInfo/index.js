@@ -4,9 +4,6 @@ import "./style.css";
 
 const ProjectInfo = ({ projectData }) => {
 
-  console.log(projectData.project.startDate)
-  console.log(projectData.project.endDate)
-
   return (
     <>
       <div className="project-info">

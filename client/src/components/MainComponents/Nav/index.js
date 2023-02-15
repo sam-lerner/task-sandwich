@@ -53,9 +53,8 @@ const AppNavbar = () => {
               {/* show these links on the left side */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/profile'>Your Profile</Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
-                  <Nav.Link onClick={() => setShowCreateModal(true)}>Create</Nav.Link>
+
+                  <Nav.Link as={Link} to="/profile">My Profile</Nav.Link>
                   {error && <div>Error retrieving teams and projects</div>}
                   <NavDropdown
                     id="nav-dropdown-dark-example"
@@ -63,7 +62,8 @@ const AppNavbar = () => {
                     menuVariant="dark"
                   >
                     {data && teams.length && teams.map(team =>
-                      <NavDropdown.Item href={"/team/" + team._id}>{team.teamName}</NavDropdown.Item>)}</NavDropdown>
+                      <NavDropdown.Item href={"/team/" + team._id}>{team.teamName}</NavDropdown.Item>)}
+                  </NavDropdown>
                   <NavDropdown
                     id="nav-dropdown-dark-example"
                     title="My Projects"
@@ -82,9 +82,7 @@ const AppNavbar = () => {
               {/* show these links on the right side */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link onClick={() => setShowCreateModal(true)}>
-                    Create
-                  </Nav.Link>
+                  <Nav.Link onClick={() => setShowCreateModal(true)}>Create</Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (

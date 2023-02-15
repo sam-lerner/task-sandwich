@@ -7,13 +7,13 @@
   justify-content: space-around;
 }
 
-.header a h1 {
+/* .header a h1 {
   margin: 0;
-  padding-top: 1vh;
+  padding-top: 1%;
   text-align: center;
   color: #bdbdbd;
   font-size: 3rem;
-}
+} */
 
 /* || LOGO & ANIMATED SANDWICH STYLE || */
 
@@ -22,11 +22,11 @@
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease-out;
-  margin-top: -1%;
-  height: 36vh;
+  /* margin-top: -1%; */
+  /* height: 36vh; */
   justify-content: center;
   align-items: center;
-  margin-bottom: -2.5%;
+  margin-bottom: -2.5vh;
   background: #F6E2B2;
 }
 

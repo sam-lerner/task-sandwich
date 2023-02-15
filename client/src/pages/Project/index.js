@@ -1,6 +1,6 @@
 import React from 'react';
 import { Calendar, ProjectTaskList, ProjectInfo } from '../../components';
-import { Row, Col, Form, DropdownButton } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 import { useQuery } from '@apollo/client';
 import { QUERY_SINGLE_PROJECT } from '../../utils/queries';
@@ -50,12 +50,6 @@ const Project = ({ projectID }) => {
           <ProjectInfo projectData={projectData} />
         </Col>
       </Row>
-      {/* 
-      <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-        {data && teams.length && teams.map(team =>
-          <Dropdown.Item href={"/team/" + team._id}>{team.teamName}</Dropdown.Item>)}
-      </DropdownButton> */}
-
     </>
   )
 };

@@ -75,6 +75,33 @@ query task($id: ID!) {
 }
 `;
 
+export const QUERY_USERS = gql`
+query GetUsers {
+  getUsers {
+    name
+    _id
+  }
+}
+`;
+
+export const QUERY_PROJECTS = gql`
+query GetProjects {
+  getProjects {
+    projectName
+    _id
+  }
+}
+`;
+
+export const QUERY_TEAMS = gql`
+query GetTeams {
+  getTeams {
+    teamName
+    _id
+  }
+}
+`;
+
 export const QUERY_PROJECTS_BY_TEAM = gql`
 query ProjectsByTeam($id: ID!) {
   projectsByTeam(_id: $id) {
