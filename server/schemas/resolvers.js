@@ -137,10 +137,21 @@ const resolvers = {
 
         // Tested successfully
         team: async (parent, { _id }) => {
-            return Team.findOne({ _id: _id })
-            .populate("admin")
-            .populate("members")
-            .populate("projects");
+            const teamData = await Team.findOne({ _id: _id })
+                // .populate("admin")
+                // .populate("members")
+                // .populate("projects")
+                .populate({
+                    path: 'admin',
+                    select: { name: 1, email: 1, sandwichCount: 1, sandwichReceived: 1 },
+                }).populate({
+                    path: 'members',
+                    select: { name: 1, email: 1, sandwichCount: 1, sandwichReceived: 1 },
+                }).populate({
+                    path: 'projects',
+                    select: 'projectName'
+                });
+            return teamData
         },
 
         teamsByUser: async (parent, { userId }) => {

@@ -73,3 +73,10 @@ mutation CheckForSandwichReset($id: ID!) {
   }
 }
 `;
+
+export const GIVE_SANDWICH = gql`
+mutation giveSandwich($receiverId:ID!) {
+  giveSandwich(receiverId: $receiverId) {
+    sandwichReceived
+  }
+}`
