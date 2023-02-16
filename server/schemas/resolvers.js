@@ -27,7 +27,7 @@ const resolvers = {
             }
             throw new AuthenticationError('Please log in')
         },
-
+        // Tested
         mePlus: async (parent, { _id }) => {
 
             const userData = await User.findById({ _id })
