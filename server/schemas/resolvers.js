@@ -370,6 +370,17 @@ const resolvers = {
             }
             console.log(receiver.sandwichReceived)
             return receiver
+        },
+        createDonation: async(parent, context) => {
+            if(!context.user) {
+                throw new AuthenticationError('Please log in to give us money!');
+            }
+            const donation = new Donation ({
+                value: 5,
+                user: context.user._id
+            })
+            await donation.save()
+            return donation;
         }
 
     }

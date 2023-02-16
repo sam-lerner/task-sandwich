@@ -78,6 +78,11 @@ On the projects page, the users will get a more details description of the proje
 - Link: [Azime Nail](https://github.com/azimezn 'The github page for Azime Nail.')
 - Link: [Xavier Vergara](https://github.com/NyqEvo 'The github page for Xavier Vergara.')
 
+### Our Teaching Team
+- Professor Joe Han
+- TA Paul Cwik
+- TA Justyn Subrai
+
 If you followed tutorials, include links to those here as well.
 
 Link: [Web Dev Simplified](https://www.youtube.com/@WebDevSimplified 'The Youtube channel for Web Dev Simplified.')
