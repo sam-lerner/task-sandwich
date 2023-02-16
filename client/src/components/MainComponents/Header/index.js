@@ -6,7 +6,7 @@ import { sandwichLogoTopEdited, sandwichLogoBottomEdited } from './images';
 const Header = () => {
   return (
     <header className="image-wrapper">
-      <div childrenlassName="sandwich-wrapper">
+      <div className="sandwich-wrapper">
         <img className="top-image" src={sandwichLogoTopEdited} alt="Tasty-looking sandwich top."></img>
         <a href="/" className="title-link">
           <h1 className="title-name">TASK SANDWICH</h1>
