@@ -15,6 +15,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 5vh;
 }
 
 .home-login-signup-btn {
@@ -28,4 +29,45 @@
 .hero-word {
   text-decoration: underline;
   color: #F6BC01;
+}
+
+.home-quote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "lucida console", cursive;
+  /* font-family: 'Amatic SC', cursive; */
+  margin: 1%;
+  padding: 0 5%;
+}
+
+.gif-card {
+  border: 2px solid black;
+  border-radius: 5vh;
+  padding: 2%;
+  margin: 2%;
+  display: flex;
+  flex-direction: column;
+  background: #424242;
+  color: #bdbdbd;
+}
+
+.task-gif,
+.team-gif,
+.sandwich-gif {
+  width: 50%;
+  margin: 2%;
+}
+
+.team-gif {
+  margin-left: auto;
+}
+
+.gif-card h3 {
+  align-self: center;
+}
+
+.gif-title {
+  text-decoration: underline;
 }
