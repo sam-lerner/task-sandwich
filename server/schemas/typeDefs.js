@@ -67,7 +67,7 @@ type Query {
 type Mutation {
     login(email: String!, password: String!):Auth
     addUser(name: String!, email: String!, password: String!):Auth
-    addTeam(team: teamInput, userId: ID!):Team
+    addTeam(team: teamInput):Team
     addUserToTeam(teamId: ID!, memberName: String!): Team
     removeTeam(_id: ID!):Team
     addProject(project: projectInput, teamId:ID):Project
