@@ -1,5 +1,5 @@
 .navCard {
-  background: black;
+  background: #F6E2B2;
   border: 1px solid #FFFDD0;
 }
 
@@ -25,16 +25,16 @@
 }
 
 .navHeader active {
-  color: black;
+  color: #F6E2B2;
   background: #FFFDD0;
 }
 
 .navHeader a {
-  color: #808080;
+  color: #FFFDD0;
 }
 
 .navHeader a:hover {
-  color: #FFFDD0;
+  color: white;
 }
 
 .navbar {
@@ -45,4 +45,11 @@
 .navbar-collapse {
   display: flex;
   justify-content: space-between;
+}
+
+/* #nav-dropdown-teams:hover,
+#nav-dropdown-projects:hover, */
+#nav-dropdown-teams div,
+#nav-dropdown-projects div {
+  background: #F6E2B2;
 }

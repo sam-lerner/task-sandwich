@@ -1,12 +1,15 @@
 .home-outer-container {
   display: flex;
   flex-direction: column;
+  /* background-image: url(./images/sky.jpg);
+  background-repeat: no-repeat;
+  background-size: cover; */
 }
 
 .pitch-card {
   border: 2px solid #BD211C;
-  background: #424242;
-  color: #bdbdbd;
+  background: rgba(66,66,66, 0.50);
+  color: white;
   box-shadow: 2px 2px 6px solid black;
   margin: 2%;
   padding: 2%;
@@ -21,7 +24,7 @@
 .home-login-signup-btn {
   border: 2px solid #BD211C;
   padding: 2%;
-  border-radius: 10%;
+  border-radius: 10vh;
   background: #F6BC01;
   color: #424242;
   transition: transform 0.3s;
@@ -55,8 +58,8 @@
   margin: 2% 0;
   display: flex;
   flex-direction: column;
-  background: #424242;
-  color: #bdbdbd;
+  background: rgba(66,66,66, 0.50);
+  color: white;
 }
 
 .task-gif,
@@ -84,6 +87,12 @@
   .home-gif {
     width: 75%;
     margin-right: 2%;
+  }
+}
+
+@media (min-width: 992px) {
+  .container, .container-lg, .container-md, .container-sm {
+      max-width: 100%;
   }
 }
 

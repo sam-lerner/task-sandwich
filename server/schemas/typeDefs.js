@@ -38,6 +38,12 @@ type Task {
     assignedTo: [User]
     belongsToProject: [Project]
 }
+type Donation {
+    _id:ID!
+    user:User!
+    amount: Float!
+    date:String!
+}
 type Auth {
     token: ID!
     user: User
@@ -71,6 +77,7 @@ type Mutation {
     assignTask(_id: ID!, userId: ID!):Task
     checkForSandwichReset(_id: ID!): User
     giveSandwich(receiverId: ID!):User
+    createDonation: Donation!
 }
 input teamInput {
     teamName: String

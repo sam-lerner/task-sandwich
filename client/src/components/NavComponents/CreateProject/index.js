@@ -49,7 +49,8 @@ const CreateProject = () => {
             projectName: '',
             projectDescription: '',
             endDate: '',
-        });
+        })
+        window.location.reload();
     };
 
     // console.log(teamData.getTeams[0].teamName)

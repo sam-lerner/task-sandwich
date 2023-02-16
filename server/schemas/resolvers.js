@@ -2,6 +2,7 @@ const { User, Project, Team, Task } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const { getArgumentValues } = require('graphql');
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
     Query: {
@@ -27,7 +28,7 @@ const resolvers = {
             }
             throw new AuthenticationError('Please log in')
         },
-
+        // Tested
         mePlus: async (parent, { _id }) => {
 
             const userData = await User.findById({ _id })
@@ -137,10 +138,21 @@ const resolvers = {
 
         // Tested successfully
         team: async (parent, { _id }) => {
-            return Team.findOne({ _id: _id })
-            .populate("admin")
-            .populate("members")
-            .populate("projects");
+            const teamData = await Team.findOne({ _id: _id })
+                // .populate("admin")
+                // .populate("members")
+                // .populate("projects")
+                .populate({
+                    path: 'admin',
+                    select: { name: 1, email: 1, sandwichCount: 1, sandwichReceived: 1 },
+                }).populate({
+                    path: 'members',
+                    select: { name: 1, email: 1, sandwichCount: 1, sandwichReceived: 1 },
+                }).populate({
+                    path: 'projects',
+                    select: 'projectName'
+                });
+            return teamData
         },
 
         teamsByUser: async (parent, { userId }) => {
@@ -369,6 +381,17 @@ const resolvers = {
             }
             console.log(receiver.sandwichReceived)
             return receiver
+        },
+        createDonation: async(parent, context) => {
+            if(!context.user) {
+                throw new AuthenticationError('Please log in to give us money!');
+            }
+            const donation = new Donation ({
+                value: 5,
+                user: context.user._id
+            })
+            await donation.save()
+            return donation;
         }
 
     }

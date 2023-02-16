@@ -70,10 +70,16 @@ query team($id: ID!) {
     admin {
       _id
       name
+      email
+      sandwichCount
+      sandwichReceived
     }
     members {
       _id
       name
+      email
+      sandwichCount
+      sandwichReceived
     }
     projects {
       _id

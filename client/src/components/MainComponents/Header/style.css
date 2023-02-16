@@ -14,7 +14,7 @@
   margin-bottom: -12px;
 }
 
-.sandwich-wrapper {
+/* .sandwich-wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -23,8 +23,7 @@
   background: #F6E2B2;
   width: 100%;
   height: 240px;
-  /* z-index: 3; */
-}
+} */
 
 .image-wrapper:hover .bottom-image {
   transform: translateY(52px);
