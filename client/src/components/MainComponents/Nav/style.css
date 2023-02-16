@@ -39,6 +39,7 @@
 
 .navbar {
   background-color: #DE7A18;
+  z-index: 1;
 }
 
 .navbar-collapse {
