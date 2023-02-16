@@ -41,15 +41,7 @@ const CreateTeam = () => {
         try {
             console.log(memberId)
             const { data } = await createTeam(
-                {
-                    variables: {
-                        team: {
-                            teamName: teamFormData.teamName,
-                            members: [memberId],
-                        },
-                    },
-                    userId: memberId,
-                });
+                { variables: { team: { teamName: teamFormData.teamName } } });
             setTeamFormData({
                 teamName: '',
             });
