@@ -57,17 +57,17 @@ const AppNavbar = () => {
                   <Nav.Link as={Link} to="/profile">My Profile</Nav.Link>
                   {error && <div>Error retrieving teams and projects</div>}
                   <NavDropdown
-                    id="nav-dropdown-dark-example"
+                    id="nav-dropdown-teams"
                     title="My Teams"
-                    menuVariant="dark"
+                    // menuVariant="dark"
                   >
                     {data && teams.length && teams.map(team =>
                       <NavDropdown.Item href={"/team/" + team._id}>{team.teamName}</NavDropdown.Item>)}
                   </NavDropdown>
                   <NavDropdown
-                    id="nav-dropdown-dark-example"
+                    id="nav-dropdown-projects"
                     title="My Projects"
-                    menuVariant="dark"
+                    // menuVariant="dark"
                   >
                     {data && projects.length && projects.map(project => 
                     (<NavDropdown.Item href={"/project/" + project._id}>{project.projectName}</NavDropdown.Item>
