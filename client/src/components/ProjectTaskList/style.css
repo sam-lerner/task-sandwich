@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: rgb(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.75);
   margin: 2% 2% 4%;
   color: #bdbdbd;
   display: flex;
@@ -16,17 +16,17 @@
   font-family: "lucida console", "sans serif";
   font-size: 120%;
   border-radius: 5%;
-  background: rgb(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.75);
   color: #424242;
 }
 
 .projecttask-delete-btn {
   transition: transform 0.1s;
-  background: #658F2A;
+  background: rgba(101, 143, 42, 0.75);
   float: right;
 }
 
 .projecttask-delete-btn:hover {
   transform: scale(1.05);
-  background: #BD211C;
+  background: rgba(189, 33, 28, 0.75);
 }
