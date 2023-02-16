@@ -30,11 +30,11 @@
 }
 
 .navHeader a {
-  color: #F6E2B2;
+  color: #FFFDD0;
 }
 
 .navHeader a:hover {
-  color: #FFFDD0;
+  color: white;
 }
 
 .navbar {
