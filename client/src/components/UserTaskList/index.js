@@ -1,21 +1,38 @@
 import React, { useState } from 'react';
 
+import { useMutation } from '@apollo/client';
+import { REMOVE_TASK } from '../../utils/mutations';
+
 import { Button, ListGroup, OverlayTrigger, Popover } from 'react-bootstrap'
 
 import "./style.css";
 
 const UserTaskList = ({ userData }) => {
-    const taskData = userData.me.tasks;
-    const [open, setOpen] = useState({});
+    const [tasks, setTasks] = useState(userData?.me?.tasks || []);
+
+
+    const [removeTask, { error }] = useMutation(REMOVE_TASK);
+
+    const handleRemoveTask = async (taskId) => {
+        try {
+            console.log(taskId)
+            await removeTask({ variables: { taskId: taskId } });
+            console.log('Task removed successfully');
+            const updatedTasks = tasks.filter(task => task._id !== taskId);
+            setTasks(updatedTasks);
+        } catch (err) {
+            console.error(JSON.parse(JSON.stringify(err)));
+        }
+    };
+    
 
     return (
         <>
             <ListGroup className="user-task-info">
-                {taskData.length && taskData.map((task, index) => (
-                    <ListGroup.Item>
+                {tasks.length && tasks.map((task, index) => (
+                    <ListGroup.Item key={index}>
                         <OverlayTrigger trigger="click" placement="right" overlay={
                             <Popover id="popover-basic">
-                                {/* <Popover.Header as="h3">{Date(task.dueDate).split(" ")[1]} {Date(task.dueDate).split(" ")[2]} {Date(task.dueDate).split(" ")[3]}</Popover.Header> */}
                                 <Popover.Header as="h3">{task.dueDate}</Popover.Header>
                                 <Popover.Body>
                                     {task.taskDescription}
@@ -24,6 +41,7 @@ const UserTaskList = ({ userData }) => {
                         }>
                             <Button variant="light" className="user-task-text">{task.taskName}</Button>
                         </OverlayTrigger>
+                        <Button onClick={() => handleRemoveTask(task._id)}>Delete</Button>
                     </ListGroup.Item>
                 ))}
             </ListGroup>

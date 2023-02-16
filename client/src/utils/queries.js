@@ -24,6 +24,29 @@ export const QUERY_ME = gql`
   }
 `;
 
+//working
+export const QUERY_ME_PLUS = gql`
+query MePlus($id: ID!) {
+  mePlus(_id: $id) {
+    _id
+    email
+    name
+    nextSandwichReset
+    sandwichCount
+    sandwichReceived
+    projects {
+      projectName
+    }
+    tasks {
+      taskName
+    }
+    teams {
+      teamName
+    }
+  }
+}
+`;
+
 export const QUERY_SINGLE_PROJECT = gql`
 query project($id: ID!) {
   project(_id: $id) {
