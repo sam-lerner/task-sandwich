@@ -1,13 +1,49 @@
 .badnav-top-card {
-  display: flex;
+  /* display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw; */
+  border-radius: 5vw;
+  margin: 2%;
 }
 
-/* .badnav-card {
+.badnav-card {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5vw;
+  /* width: 90vw; */
+}
+
+/* .badnav {
+  width: 50vw;
 } */
 
 .badnav-text {
   color: #bdbdbd;
+}
+
+@media (max-width: 635px) {
+  .badnav-card {
+    padding: 2%;
+  }
+
+  .badnav {
+    width: 100vw;
+    height: auto;
+  }
+}
+
+@media (max-width: 400px) {
+  .badnav-card {
+    padding: 5%;
+    margin: 8% 0;
+  }
+
+  .badnav {
+    width: 90vw;
+    height: auto;
+  }
 }
