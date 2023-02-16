@@ -1,5 +1,7 @@
 # 🥪 Task Sandwich 🥪
 
+  [![License](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/licenses/MIT)
+
 ## Description
 ---
 
@@ -30,6 +32,9 @@ Link: [Task Sandwich Heroku Deployment](https://task-sandwich.herokuapp.com/ 'a 
 - [Usage](#usage)
 - [Credits](#credits)
 - [License](#license)
+- [Features](#features)
+- [How To Contribute](#how-to-contribute)
+- [Tests](#tests)
 
 ## Installation
 ---
@@ -73,7 +78,10 @@ On the projects page, the users will get a more details description of the proje
 - Link: [Azime Nail](https://github.com/azimezn 'The github page for Azime Nail.')
 - Link: [Xavier Vergara](https://github.com/NyqEvo 'The github page for Xavier Vergara.')
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
+### Our Teaching Team
+- Professor Joe Han
+- TA Paul Cwik
+- TA Justyn Subrai
 
 If you followed tutorials, include links to those here as well.
 
@@ -83,13 +91,6 @@ Link: [Web Dev Simplified](https://www.youtube.com/@WebDevSimplified 'The Youtub
 ---
 
 This project uses a MIT License. Please refer to the liscense in our github repository or follow [this link](https://opensource.org/license/mit-0/) to find more details on the MIT Licsense.
-
-## Badges
----
-
-![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
-
-Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
 
 ## Features
 ---
@@ -107,4 +108,4 @@ If anyone would like to contribute to this project, please see [The Contributor 
 ## Tests
 ---
 
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.
+All testing was performed through `Apollo Server`.
