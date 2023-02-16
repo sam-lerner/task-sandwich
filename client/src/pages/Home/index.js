@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import { Figure } from "../../components";
-import { Container } from "react-bootstrap";
+import {
+  Container,
+  Tab,
+  Modal,
+  Nav
+} from "react-bootstrap";
+import {
+  SignupForm,
+  LoginForm
+} from "../../components/MainComponents/..";
 import { taskGif, teamGif, sandwichGif } from "./images";
 
 import "./style.css";
 // import { sandwichLogoTopEdited, sandwichLogoBottomEdited } from './images';
 
 const Home = () => {
+  const [showModal, setShowModal] = useState(false);
+
   const [showA, setShowA] = useState(true);
   const [showB, setShowB] = useState(true);
 
@@ -14,9 +25,9 @@ const Home = () => {
   const toggleShowB = () => setShowB(!showB);
   return (
     <>
-    <Container>
+    <Container className="home-outer-container">
       <div className="pitch-card">
-        <h1>Stay on task and become your team's hero!</h1>
+        <h1>Stay on task and become your team's <span className="hero-word">hero!</span></h1>
         <p className="plagueis">
           Do you have a project you are hoping to accomplish?
           <br></br>
@@ -29,7 +40,41 @@ const Home = () => {
           Task Sandwich: Accept no Subs!
           <br></br>
         </p>
-        <button className="home-signup-btn">Sign up now!</button>
+        <Nav.Link onClick={() => setShowModal(true)} className="home-login-signup-btn">
+          Login/Sign Up
+        </Nav.Link>
+        <Modal
+        size="lg"
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        aria-labelledby="signup-modal"
+        >
+          {/* tab container to do either signup or login component */}
+          <Tab.Container defaultActiveKey="login">
+            <Modal.Header closeButton>
+              <Modal.Title id="signup-modal">
+                <Nav variant="pills">
+                  <Nav.Item>
+                    <Nav.Link eventKey="login">Login</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="signup">Sign Up</Nav.Link>
+                  </Nav.Item>
+                </Nav>
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Tab.Content>
+                <Tab.Pane eventKey="login">
+                  <LoginForm handleModalClose={() => setShowModal(false)} />
+                </Tab.Pane>
+                <Tab.Pane eventKey="signup">
+                  <SignupForm handleModalClose={() => setShowModal(false)} />
+                </Tab.Pane>
+              </Tab.Content>
+            </Modal.Body>
+          </Tab.Container>
+          </Modal>
       </div>
      
       <Figure />

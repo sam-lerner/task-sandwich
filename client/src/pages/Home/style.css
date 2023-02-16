@@ -1,13 +1,31 @@
+.home-outer-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .pitch-card {
   border: 2px solid #BD211C;
   background: #424242;
   color: #bdbdbd;
   box-shadow: 2px 2px 6px solid black;
-  margin-top: 2%;
+  margin: 2%;
   padding: 2%;
   font-family: cursive;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.home-login-signup-btn {
+  border: 2px solid #BD211C;
+  padding: 2%;
+  border-radius: 10%;
+  background: #F6BC01;
+  color: #424242;
+}
+
+.hero-word {
+  text-decoration: underline;
+  color: #F6BC01;
 }
