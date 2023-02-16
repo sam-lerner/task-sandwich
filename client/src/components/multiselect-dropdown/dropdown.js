@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Multiselect } from "multiselect-react-dropdown";
-import "./styles.css";
+import "./style.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 class App extends React.Component {

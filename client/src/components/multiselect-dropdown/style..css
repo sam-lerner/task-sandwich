@@ -1,0 +1,71 @@
+.App {
+  font-family: sans-serif;
+}
+.header {
+  padding: 20px;
+  position: relative;
+  color: #fff;
+  text-align: center;
+  background-color: #159957;
+  background-image: linear-gradient(120deg, #155799, #159957);
+}
+.sourceLink {
+  left: 20px;
+  bottom: 25px;
+  position: absolute;
+  color: #fff;
+}
+.header small {
+  text-align: right;
+  display: block;
+  margin-bottom: 5px;
+}
+.header a {
+  color: white;
+  text-decoration: underline;
+}
+#multiselectContainerReact {
+  margin-bottom: 20px;
+  float: none;
+}
+code {
+  padding: 10px;
+  background: #f1f1f1;
+}
+.mt10 {
+  margin-top: 10px;
+}
+.mt20 {
+  margin-top: 20px;
+}
+.mb20 {
+  margin-bottom: 20px;
+}
+.mt40 {
+  margin-top: 40px;
+}
+.displayBlock {
+  display: block;
+}
+.contents a {
+  display: block;
+  margin-bottom: 10px;
+  color: #45576b;
+  text-decoration: underline;
+}
+.otheroptions {
+  font-size: 14px;
+}
+
+/* Overriding element hover */
+.optionContainer li:hover,
+.optionContainer .highlight {
+  background: red;
+  color: #fff;
+}
+/* Ends overriding */
+
+/* Placehoolder Color Change */
+.searchBox#css_custom_input::placeholder {
+  color: red;
+}
