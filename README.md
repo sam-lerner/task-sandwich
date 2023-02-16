@@ -81,8 +81,6 @@ Sandwich
 ```
 ![Tutorial GIF.](./client/src/pages/Home/images/sandwich-gif.gif)
 
-[![Tutorial](./assets/images/sql-tutor-img.png)](https://dropTutorialVideoHereInGihub.com/0000000.mp4))
-
 ## Credits
 ---
 
