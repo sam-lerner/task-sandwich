@@ -47,15 +47,28 @@ td {
   justify-content: center;
 }
 
-.calendar-title {
+/* .calendar-title {
   color: #bdbdbd;
   font-family: 'Amatic SC', cursive;
   font-size: 300%;
   text-decoration: underline;
-}
+} */
 
 .calendar-selected-date-text {
   color: #bdbdbd;
-  font-family: 'Amatic SC', cursive;
-  font-size: 150%;
+  /* font-family: 'Amatic SC', cursive;
+  font-size: 150%; */
+  font-family: "lucida console", "sans serif";
+}
+
+@media (max-width: 750px) {
+  .calendar-selected-date-text {
+    font-size: 80%;
+  }
+}
+
+@media (max-width: 576px) {
+  .calendar-selected-date-text {
+    font-size: 100%;
+  }
 }
