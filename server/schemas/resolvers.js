@@ -314,13 +314,13 @@ const resolvers = {
         },
         // Successful!
         removeTask: async (parent, { taskId, projectId, userId }, context) => {
-            const user = await User.findOne({ _id: userId });
-            user.tasks = user.tasks.filter((task) => task._id.toString() !== taskId.toString());
-            await user.save();
+            // const user = await User.findOne({ _id: userId });
+            // user.tasks = user.tasks.filter((task) => task._id.toString() !== taskId.toString());
+            // await user.save();
 
-            const project = await Project.findOne({ _id: projectId });
-            project.tasks = project.tasks.filter((task) => task._id.toString() !== taskId.toString());
-            await project.save();
+            // const project = await Project.findOne({ _id: projectId });
+            // project.tasks = project.tasks.filter((task) => task._id.toString() !== taskId.toString());
+            // await project.save();
 
             return Task.findOneAndDelete({ _id: taskId });
         },

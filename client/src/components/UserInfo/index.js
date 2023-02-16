@@ -10,12 +10,12 @@ const UserInfo = ({ userData }) => {
           <h2 className="user-name user-text">{userData.me.name}</h2>
           <div className="user-teams user-text">Teams:
             <ul>
-              {userData.me.teams.length && userData.me.teams.map(team => <li>{team.teamName}</li>)}
+              {userData.me.teams.length && userData.me.teams.map((team, index) => <li key={index}>{team.teamName}</li>)}
             </ul>
           </div>
           <div className="user-projects user-text">Projects:
             <ul>
-              {userData.me.projects.length && userData.me.projects.map(project => <li>{project.projectName}</li>)}
+              {userData.me.projects.length && userData.me.projects.map((project, index) => <li key={index}>{project.projectName}</li>)}
             </ul>
           </div>
         </div>

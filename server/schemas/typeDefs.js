@@ -61,7 +61,7 @@ type Query {
 type Mutation {
     login(email: String!, password: String!):Auth
     addUser(name: String!, email: String!, password: String!):Auth
-    addTeam(team: teamInput):Team
+    addTeam(team: teamInput, userId: ID!):Team
     addUserToTeam(teamId: ID!, memberName: String!): Team
     removeTeam(_id: ID!):Team
     addProject(project: projectInput, teamId:ID):Project
@@ -95,9 +95,9 @@ input taskInput {
     belongsToProject: projectInput
 }
 input userInput {
-    userId: String!
-    name: String!
-    email: String!
+    userId: ID!
+    name: String
+    email: String
     teams: [teamInput]
     projects: [projectInput]
     sandwichCount: Int
