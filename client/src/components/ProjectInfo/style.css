@@ -1,14 +1,12 @@
 .project-info {
   border: 1px solid black;
+  box-shadow: 4px 4px 6px black;
   border-radius: 5%;
-  /* box-shadow: 2% 2% 6% solid black; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   background: #424242;
-  margin: 2%;
-  /* width: 50%; */
-  /* height: auto; */
+  margin: 2% 2% 4%;
   color: #bdbdbd;
   display: flex;
   flex-direction: column;
@@ -20,6 +18,7 @@
   flex-direction: column;
   justify-content: center;
   text-justify: center;
+    border-radius: 5%;
 }
 
 .project-name {
@@ -27,4 +26,8 @@
   font-size: 5vh;
   font-family: 'Amatic SC', cursive;
   text-align: center;
+}
+
+.project-text {
+    padding: 0 5%;
 }
