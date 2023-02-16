@@ -52,7 +52,6 @@ const CreateProject = () => {
         })
         window.location.reload();
     };
-
     // console.log(teamData.getTeams[0].teamName)
     return (
         <>

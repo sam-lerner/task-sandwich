@@ -3,6 +3,7 @@ import React from 'react'
 import "./style.css";
 
 const ProjectInfo = ({ projectData }) => {
+  console.log(projectData.project.team[0].teamName)
 
   return (
     <>
@@ -12,8 +13,7 @@ const ProjectInfo = ({ projectData }) => {
           <p className="project-text">Project Description: {projectData.project.projectDescription} </p>
           <p className="project-text">Start Date: {projectData.project.startDate}</p>
           <p className="project-text">End Date: {projectData.project.endDate}</p>
-          {/* <p>Team: {projectData.project.team ? projectData.project.team.teamName : "no team"}</p> */}
-          <p className="project-text">Team: {projectData.project.team && projectData.project.team.teamName ? projectData.project.team.teamName : "no team"}</p>
+          <p className="project-text">Team: {projectData.project.team && projectData.project.team[0].teamName ? projectData.project.team[0].teamName : "no team"}</p>
 
         </div>
       </div>
