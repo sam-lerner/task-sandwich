@@ -6,11 +6,9 @@
   flex-direction: column;
   justify-content: center;
   background: rgba(66,66,66, 0.66);
-  /* background: #49526b; */
   margin: 2% 2% 4%;
   color: #bdbdbd;
   display: flex;
-  flex-drecition: column;
   justify-content: center;
 }
 
