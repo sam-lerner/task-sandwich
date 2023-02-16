@@ -89,6 +89,11 @@
   font-size: 300%;
 }
 
+.modal-content {
+  background: #F6E2B2;
+  color: #BD211C;
+}
+
 @media (max-width: 1240px) {
   .home-gif {
     width: 75%;
