@@ -36,6 +36,7 @@ const CreateTeam = () => {
         } catch (err) {
             console.error(JSON.parse(JSON.stringify(err)));
         }
+        window.location.reload()
     };
 
     return (

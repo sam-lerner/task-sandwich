@@ -36,7 +36,8 @@ const CreateTeam = () => {
             taskName: '',
             taskDescription: '',
             dueDate: '',
-        });
+        })
+        window.location.reload();
     };
 
     return (
