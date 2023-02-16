@@ -84,7 +84,7 @@ const Home = () => {
       </Container>
       <Container className="gif-card">
         <h3 className="gif-title">To-Do's!</h3>
-        <img src={taskGif} className="task-gif" alt="a gif showing how to create a task"/>
+        <img src={taskGif} className="task-gif home-gif" alt="a gif showing how to create a task"/>
         <p> Use To-Do's to manage small tasks within you project. To create a task, click on the "Create" button in the navbar and select the "Create a Task" tab. Then, set the task name, task description, and task due date for your new task. Finally, click "Create Task" and reload the page.</p>
         <ul>
           <li>Create an account</li>
@@ -95,7 +95,7 @@ const Home = () => {
       </Container>
       <Container className="gif-card">
         <h3 className="gif-title">Teams!</h3>
-        <img src={teamGif} className="team-gif" alt="a gif showing how to create a team"/>
+        <img src={teamGif} className="team-gif home-gif" alt="a gif showing how to create a team"/>
         <p>Use "Teams" to stay organized with those you are working with and manage shared projects. To create a team, click on the "Create" button in the navbar and select "Create a Team" tab. Then, set the team name for your new team. Finally, click "Create Team" and reload the page.</p>
         <ul>
           <li>Once you have created your free account, you can create your team</li>
@@ -105,7 +105,7 @@ const Home = () => {
       </Container>
       <Container className="gif-card">
         <h3 className="gif-title">Sandwiches!</h3>
-        <img src={sandwichGif} className="sandwich-gif" alt="a gif showing a user completing a task and recieving a sandwich"/>
+        <img src={sandwichGif} className="sandwich-gif home-gif" alt="a gif showing a user completing a task and recieving a sandwich"/>
         <p>Our unique "Sandwich" reward system can be used to give real life rewards to project members based on task completion. Use our task tracking on the projects page to deliver sandwiches to team memebers based on how well they are doing, or just keep knocking out tasks to earn sandwiches passively.</p>
         <ul>
           <li>As team leader, set your sandwich prizes</li>
