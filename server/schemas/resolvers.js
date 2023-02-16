@@ -137,7 +137,10 @@ const resolvers = {
 
         // Tested successfully
         team: async (parent, { _id }) => {
-            return Team.findOne({ _id: _id });
+            return Team.findOne({ _id: _id })
+            .populate("admin")
+            .populate("members")
+            .populate("projects");
         },
 
         teamsByUser: async (parent, { userId }) => {
