@@ -64,7 +64,22 @@ On the profile page, the user will be presented their personal user information,
 
 On the projects page, the users will get a more details description of the projects and tasks assigned to each project. This information is displayed per team. So each team is shown in descending order and displays each project similarly, showing tasks that are incomplete, in progress, and completed.
 
-![Tutorial GIF.](./public/assets/images/tutor-gif.gif)
+Please refer to the following tutorial videos to see some of the functionality of our website!
+
+```
+Tasks
+```
+![Tutorial GIF.](./client/src/pages/Home/images/task-gif.gif)
+
+```
+Team
+```
+![Tutorial GIF.](./client/src/pages/Home/images/team-gif.gif)
+
+```
+Sandwich
+```
+![Tutorial GIF.](./client/src/pages/Home/images/sandwich-gif.gif)
 
 [![Tutorial](./assets/images/sql-tutor-img.png)](https://dropTutorialVideoHereInGihub.com/0000000.mp4))
 
@@ -82,10 +97,6 @@ On the projects page, the users will get a more details description of the proje
 - Professor Joe Han
 - TA Paul Cwik
 - TA Justyn Subrai
-
-If you followed tutorials, include links to those here as well.
-
-Link: [Web Dev Simplified](https://www.youtube.com/@WebDevSimplified 'The Youtube channel for Web Dev Simplified.')
 
 ## License
 ---
@@ -108,4 +119,4 @@ If anyone would like to contribute to this project, please see [The Contributor 
 ## Tests
 ---
 
-All testing was performed through `Apollo Server`.
+All testing was performed through `Apollo Server` using `GraphQL`.
