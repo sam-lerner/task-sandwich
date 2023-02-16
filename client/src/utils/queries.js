@@ -42,16 +42,20 @@ query project($id: ID!) {
 export const QUERY_SINGLE_TEAM = gql`
 query team($id: ID!) {
   team(_id: $id) {
+    _id
+    teamName
     admin {
       _id
+      name
     }
     members {
       _id
+      name
     }
     projects {
       _id
+      projectName
     }
-    teamName
   }
 }
 `;

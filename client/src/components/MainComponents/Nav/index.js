@@ -156,11 +156,11 @@ const AppNavbar = () => {
                   handleModalClose={() => setShowCreateModal(false)}
                 />
               </Tab.Pane>
-              {/* <Tab.Pane eventKey="project">
+              <Tab.Pane eventKey="project">
                 <CreateProject
                   handleModalClose={() => setShowCreateModal(false)}
                 />
-              </Tab.Pane> */}
+              </Tab.Pane>
               <Tab.Pane eventKey="task">
                 <CreateTask
                   handleModalClose={() => setShowCreateModal(false)}

@@ -18,7 +18,6 @@ const CreateTeam = () => {
         const { name, value } = event.target;
         setProjectFormData({ ...projectFormData, [name]: value });
     };
-    console.log(projectFormData)
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -37,8 +36,11 @@ const CreateTeam = () => {
             event.stopPropagation();
         }
 
+        console.log({ project: { ...projectFormData, endDate: formattedDate }, teamId })
+
+        // teamId is same as teamId: teamId
         try {
-            const { data } = await createProject({ variables: { project: { ...projectFormData, endDate: formattedDate, teamId: teamId } } });
+            const { data } = await createProject({ variables: { project: { ...projectFormData, endDate: formattedDate }, teamId } });
         } catch (err) {
             console.error(JSON.parse(JSON.stringify(err)));
         }
@@ -49,7 +51,7 @@ const CreateTeam = () => {
             endDate: '',
         });
     };
-    console.log(teams)
+
     // console.log(teamData.getTeams[0].teamName)
     return (
         <>

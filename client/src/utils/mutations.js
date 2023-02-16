@@ -50,10 +50,6 @@ mutation addProject($project: projectInput, $teamId: ID) {
     projectName
     projectDescription
     startDate
-    team {
-      _id
-      teamName
-    }
   }
 }
 `;
