@@ -21,7 +21,7 @@
 .home-login-signup-btn {
   border: 2px solid #BD211C;
   padding: 2%;
-  border-radius: 10%;
+  border-radius: 10vh;
   background: #F6BC01;
   color: #424242;
   transition: transform 0.3s;
