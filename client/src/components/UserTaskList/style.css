@@ -22,5 +22,15 @@
 
 .list-group-item {
   background: rgb(255, 255, 255, 0.75);
+}
 
+.usertask-delete-btn {
+  transition: transform 0.1s;
+  background: #658F2A;
+  float: right;
+}
+
+.usertask-delete-btn:hover {
+  transform: scale(1.05);
+  background: #BD211C;
 }

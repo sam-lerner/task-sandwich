@@ -41,7 +41,7 @@ const UserTaskList = ({ userData }) => {
                         }>
                             <Button variant="light" className="user-task-text">{task.taskName}</Button>
                         </OverlayTrigger>
-                        <Button onClick={() => handleRemoveTask(task._id)}>Delete</Button>
+                        <Button onClick={() => handleRemoveTask(task._id)} className="usertask-delete-btn">Delete</Button>
                     </ListGroup.Item>
                 ))}
             </ListGroup>
