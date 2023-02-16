@@ -28,7 +28,7 @@ const Home = () => {
     <Container className="home-outer-container">
       <div className="pitch-card">
         <h1>Stay on task and become your team's <span className="hero-word">hero!</span></h1>
-        <p className="plagueis">
+        <p className="pitch">
           Do you have a project you are hoping to accomplish?
           <br></br>
           Does your team need help staying on task?
