@@ -26,20 +26,20 @@ td {
 
 .calendar-card {
   border-radius: 5%;
-  box-shadow: 4px 4px 6px black; margin-bottom: 2vh;
+  box-shadow: 4px 4px 6px black;
+  margin-bottom: 2vh;
 }
 
 .react-calendar-outmost-div {
   border: 1px solid black;
   border-radius: 5%;
   box-shadow: 4px 4px 6px black; 
-  margin-bottom: 2vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   background: #424242;
-  margin: 2%;
-  padding: 4%;
+  margin: 4% 2% 2%;
+  padding: 5%;
 }
 
 .calendar-container {
@@ -47,15 +47,28 @@ td {
   justify-content: center;
 }
 
-.calendar-title {
+/* .calendar-title {
   color: #bdbdbd;
   font-family: 'Amatic SC', cursive;
   font-size: 300%;
   text-decoration: underline;
-}
+} */
 
 .calendar-selected-date-text {
   color: #bdbdbd;
-  font-family: 'Amatic SC', cursive;
-  font-size: 150%;
+  /* font-family: 'Amatic SC', cursive;
+  font-size: 150%; */
+  font-family: "lucida console", "sans serif";
+}
+
+@media (max-width: 750px) {
+  .calendar-selected-date-text {
+    font-size: 80%;
+  }
+}
+
+@media (max-width: 576px) {
+  .calendar-selected-date-text {
+    font-size: 100%;
+  }
 }

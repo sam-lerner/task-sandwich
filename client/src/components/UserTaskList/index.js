@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 
 import { Button, ListGroup, OverlayTrigger, Popover } from 'react-bootstrap'
 
+import "./style.css";
+
 const UserTaskList = ({ userData }) => {
     const taskData = userData.me.tasks;
     const [open, setOpen] = useState({});
 
     return (
         <>
-            <ListGroup>
+            <ListGroup className="user-task-info">
                 {taskData.length && taskData.map((task, index) => (
                     <ListGroup.Item>
                         <OverlayTrigger trigger="click" placement="right" overlay={
@@ -20,7 +22,7 @@ const UserTaskList = ({ userData }) => {
                                 </Popover.Body>
                             </Popover>
                         }>
-                            <Button variant="light">{task.taskName}</Button>
+                            <Button variant="light" className="user-task-text">{task.taskName}</Button>
                         </OverlayTrigger>
                     </ListGroup.Item>
                 ))}

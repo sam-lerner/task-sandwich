@@ -1,0 +1,36 @@
+.project-task-info {
+  border: 1px solid black;
+  box-shadow: 4px 4px 6px black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #424242;
+  margin: 2% 2% 4%;
+  color: #bdbdbd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* .user-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-justify: center;
+  border-radius: 5%;
+}
+
+.user-name {
+  border-bottom: 1px solid #bdbdbd;
+  font-size: 5vh;
+  font-family: 'Amatic SC', cursive;
+  text-align: center;
+} */
+
+.project-task-text {
+  font-family: "lucida console", "sans serif";
+  font-size: 120%;
+  border-radius: 5%;
+  background: white;
+  color: #424242;
+}

@@ -1,7 +1,4 @@
-import sandwichLogoTop from "./sandwich-logo-top.jpg";
-import sandwichLogoBottom from "./sandwich-logo-bottom.jpg";
-import taskGif from "./task-gif.gif"
-import teamGif from "./team-gif.gif"
-import sandwichGif from "./sandwich-gif.gif"
-
-export { sandwichLogoTop, sandwichLogoBottom, taskGif, teamGif, sandwichGif };
+export { default as chknSandwich } from './chkn-sandwich-btn.png';
+export { default as taskGif } from "./task-gif.gif";
+export { default as teamGif } from "./team-gif.gif";
+export { default as sandwichGif } from "./sandwich-gif.gif";

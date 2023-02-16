@@ -8,12 +8,12 @@ const ProjectInfo = ({ projectData }) => {
     <>
       <div className="project-info">
         <div key={projectData._id} className="project-container">
-          <h2 className="project-name">{projectData.project.projectName}</h2>
-          <p>Project Description: {projectData.project.projectDescription} </p>
-          <p>Start Date: {projectData.project.startDate}</p>
-          <p>End Date: {projectData.project.endDate}</p>
+          <h2 className="project-name project-text">{projectData.project.projectName}</h2>
+          <p className="project-text">Project Description: {projectData.project.projectDescription} </p>
+          <p className="project-text">Start Date: {projectData.project.startDate}</p>
+          <p className="project-text">End Date: {projectData.project.endDate}</p>
           {/* <p>Team: {projectData.project.team ? projectData.project.team.teamName : "no team"}</p> */}
-          <p>Team: {projectData.project.team && projectData.project.team.teamName ? projectData.project.team.teamName : "no team"}</p>
+          <p className="project-text">Team: {projectData.project.team && projectData.project.team.teamName ? projectData.project.team.teamName : "no team"}</p>
 
         </div>
       </div>

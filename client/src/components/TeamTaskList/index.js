@@ -6,7 +6,7 @@ const TeamTaskList = ({ teamData }) => {
 
     return (
         <>
-            <ListGroup>
+            <ListGroup className="team-task-info">
                 {teamData.team.tasks ? (teamData.team.tasks.map((task, index) => (
                     <ListGroup.Item>
                         <OverlayTrigger trigger="click" placement="right" overlay={
@@ -18,7 +18,7 @@ const TeamTaskList = ({ teamData }) => {
                                 </Popover.Body>
                             </Popover>
                         }>
-                            <Button variant="light">{teamData.team.teamName}</Button>
+                            <Button variant="light" className="team-task-text">{teamData.team.teamName}</Button>
                         </OverlayTrigger>
                     </ListGroup.Item>
                 ))) : (<p>NO TASKS!</p>)}
