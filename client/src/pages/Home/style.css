@@ -1,46 +1,13 @@
-/* || LOGO & ANIMATED SANDWICH STYLE || */
-
-/* .image-wrapper {
-  position: relative;
+.pitch-card {
+  border: 2px solid #BD211C;
+  background: #424242;
+  color: #bdbdbd;
+  box-shadow: 2px 2px 6px solid black;
+  margin-top: 2%;
+  padding: 2%;
+  font-family: cursive;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease-out;
-  margin-top: 20%;
-  height: 20vh;
   justify-content: center;
   align-items: center;
-  margin-bottom: 5%;
 }
-
-.image-wrapper:hover .top-image {
-  transform: translateY(-5vh);
-}
-
-.image-wrapper:hover .bottom-image {
-  transform: translateY(5vh);
-}
-
-.top-image {
-  position: absolute;
-  height: 10vh;
-  width: 30vw;
-  top: 0;
-  transition: transform 0.3s ease-out;}
-
-.bottom-image {
-  position: absolute;
-  height: 10vh;
-  width: 30vw;
-  bottom: 0;
-  transition: transform 0.3s ease-out;
-}
-
-.title-link {
-  display: flex;
-  justify-content: center;
-}
-
-.title-name {
-  z-index: -1;
-  font-family: 'Amatic SC', cursive;
-} */

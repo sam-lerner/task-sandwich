@@ -15,27 +15,23 @@ const Home = () => {
   return (
     <>
     <Container>
-    {/* <div className="image-wrapper">
-      <img className="top-image" src={sandwichLogoTopEdited} alt="Tasty-looking sandwich top."></img>
-      <img className="bottom-image" src={sandwichLogoBottomEdited} alt="Tasy-looking sandwich bottom."></img>
-      <a href="/" className="title-link"><h1 className="title-name">TASK SANDWICH</h1></a>
-    </div> */}
-
-      <h1>Stay on task and become your team's hero!</h1>
-      <p className="plagueis">
-        Do you have a project you are hoping to accomplish?
-        <br></br>
-        Does your team need help staying on task?
-        <br></br>
-        Task Sandwich is here to help accheiving your project's goals!
-        <br></br>
-        Simply create an account to get started!
-        <br></br>
-        Task Sandwich: Accept no Subs!
+      <div className="pitch-card">
+        <h1>Stay on task and become your team's hero!</h1>
+        <p className="plagueis">
+          Do you have a project you are hoping to accomplish?
           <br></br>
-        <button>Sign up now!
-        </button>
-      </p>
+          Does your team need help staying on task?
+          <br></br>
+          Task Sandwich is here to help accheiving your project's goals!
+          <br></br>
+          Simply create an account to get started!
+          <br></br>
+          Task Sandwich: Accept no Subs!
+          <br></br>
+        </p>
+        <button className="home-signup-btn">Sign up now!</button>
+      </div>
+     
       <Figure />
       <h3>"I had stewed on how to better ensure my team acheived its goals. Task Sandwich filled a roll we never even know we needed."</h3>
       <h6>-Michael Scott, owner, Michael Scott Paper Comany</h6>
