@@ -16,7 +16,6 @@ const CreateTeam = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log("taskFormData: ", taskFormData)
 
         // check if form has everything (as per react-bootstrap docs)
         const form = event.currentTarget;
@@ -27,7 +26,6 @@ const CreateTeam = () => {
 
         try {
             const { data } = await createTask({ variables: { task: { ...taskFormData } } });
-            console.log("taskFormData: ", taskFormData)
         } catch (err) {
             console.error(JSON.parse(JSON.stringify(err)));
         }

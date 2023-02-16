@@ -6,7 +6,7 @@ import { ADD_PROJECT } from '../../../utils/mutations';
 import { useQuery } from '@apollo/client';
 import { QUERY_TEAMS } from '../../../utils/queries';
 
-const CreateTeam = () => {
+const CreateProject = () => {
 
     const [projectFormData, setProjectFormData] = useState({ projectName: '', projectDescription: '', endDate: '' });
     const [createProject, { error }] = useMutation(ADD_PROJECT);
@@ -35,12 +35,12 @@ const CreateTeam = () => {
             event.preventDefault();
             event.stopPropagation();
         }
-
-        console.log({ project: { ...projectFormData, endDate: formattedDate }, teamId })
-
         // teamId is same as teamId: teamId
         try {
-            const { data } = await createProject({ variables: { project: { ...projectFormData, endDate: formattedDate }, teamId } });
+            const { data } = await createProject(
+                { variables: 
+                    { project: 
+                        { ...projectFormData, endDate: formattedDate }, teamId } });
         } catch (err) {
             console.error(JSON.parse(JSON.stringify(err)));
         }
@@ -82,9 +82,14 @@ const CreateTeam = () => {
                     <Form.Label>Which team will this project be assigned to?</Form.Label>
                     <FloatingLabel controlId="floatingSelect">
                         <Form.Select aria-label="Floating label select example">
-                            {teams && teams.map(team => <option value={team._id}>{team.teamName}</option>)}
+                            {teams && teams.map((team, index) => <option key={index} value={team._id}>{team.teamName}</option>)}
                         </Form.Select>
                     </FloatingLabel>
+                    {/* <Form.Label>Which team will this project be assigned to?</Form.Label>
+                    <Form.Select aria-label="Default select example">
+                        <option>Open this select menu</option>
+                        {teams && teams.map((team, index) => <option key={index} value={team._id}>{team.teamName}</option>)}
+                    </Form.Select> */}
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Project End Date</Form.Label>
@@ -106,4 +111,15 @@ const CreateTeam = () => {
     )
 }
 
-export default CreateTeam
+export default CreateProject
+
+// search by typing
+{/* <label for="exampleDataList" class="form-label">Datalist example</label>
+<input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+<datalist id="datalistOptions">
+  <option value="San Francisco">
+  <option value="New York">
+  <option value="Seattle">
+  <option value="Los Angeles">
+  <option value="Chicago">
+</datalist> */}

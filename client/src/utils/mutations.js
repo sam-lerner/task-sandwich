@@ -29,13 +29,14 @@ export const ADD_USER = gql`
 //working
 export const ADD_TEAM = gql`
 mutation AddTeam($team: teamInput) {
-  addTeam(team: $team) {
+  addTeam(team: $team, userId: ID) {
     _id
     teamName
     admin {
       name
     }
     members {
+      _id
       name
     }
   }
@@ -61,6 +62,14 @@ mutation addTask($task: taskInput, $projectId: ID) {
     dueDate
     taskDescription
     taskName
+  }
+}
+`;
+
+export const REMOVE_TASK = gql`
+mutation RemoveTask($taskId: ID!) {
+  removeTask(taskId: $taskId) {
+    _id
   }
 }
 `;

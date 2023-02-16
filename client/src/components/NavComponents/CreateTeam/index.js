@@ -1,19 +1,32 @@
 import React, { useState } from 'react'
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, FloatingLabel } from 'react-bootstrap';
 
 import { useMutation } from '@apollo/client';
 import { ADD_TEAM } from '../../../utils/mutations';
+import { useQuery } from "@apollo/client";
+import { QUERY_USERS } from "../../../utils/queries";
 
 const CreateTeam = () => {
-
     const [teamFormData, setTeamFormData] = useState({ teamName: '' });
+    const [memberId, setMemberId] = useState('');
+
     const [createTeam, { error }] = useMutation(ADD_TEAM);
+
+    const { data: usersData, loading: usersLoading, error: usersError } = useQuery(QUERY_USERS);
+    const allUsersData = usersData?.getUsers
+
+    if (usersLoading) {
+        return <div>Loading Users...</div>;
+    }
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setTeamFormData({ ...teamFormData, [name]: value });
+        if (name === "teamName") {
+            setTeamFormData({ ...teamFormData, [name]: value });
+        } else if (name === "memberId") {
+            setMemberId(value);
+        }
     };
-    console.log(teamFormData)
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -26,13 +39,21 @@ const CreateTeam = () => {
         }
 
         try {
-            console.log({...teamFormData})
-            const { data } = await createTeam({ variables: { team: {...teamFormData} } });
-            console.log(teamFormData);
+            console.log(memberId)
+            const { data } = await createTeam(
+                {
+                    variables: {
+                        team: {
+                            teamName: teamFormData.teamName,
+                            members: [memberId],
+                        },
+                    },
+                    userId: memberId,
+                });
             setTeamFormData({
                 teamName: '',
             });
-            console.log(teamFormData);
+            setMemberId('');
         } catch (err) {
             console.error(JSON.parse(JSON.stringify(err)));
         }
@@ -52,6 +73,14 @@ const CreateTeam = () => {
                         value={teamFormData.teamName}
                         required
                     />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Who will be assigned to this team?</Form.Label>
+                    <FloatingLabel controlId="floatingSelect">
+                        <Form.Select aria-label="Floating label select example" onChange={handleInputChange}>
+                            {allUsersData.length && allUsersData.map((user, index) => <option key={index} value={user._id}>{user.name}</option>)}
+                        </Form.Select>
+                    </FloatingLabel>
                 </Form.Group>
                 <Button
                     disabled={!(teamFormData.teamName)}
