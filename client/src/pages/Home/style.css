@@ -31,7 +31,7 @@
 }
 
 .home-login-signup-btn:hover {
-  transform: scale(1.15);
+  transform: scale(1.1);
   color: #BD211C;
   border: 2px solid rgba(76, 107, 32, 1);
 
