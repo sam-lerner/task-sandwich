@@ -58,6 +58,12 @@ query project($id: ID!) {
       _id
       teamName
     }
+    tasks {
+      _id
+      taskName
+      taskDescription
+      dueDate
+    }
   }
 }
 `;
