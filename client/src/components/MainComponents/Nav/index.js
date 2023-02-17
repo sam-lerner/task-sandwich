@@ -34,7 +34,7 @@ const AppNavbar = () => {
         <Container fluid>
           <Navbar.Toggle aria-controls="navbar" />
           <Navbar.Collapse id="navbar">
-            <Nav className="mr-auto left-nav">
+            <Nav className="mr-auto left-nav main-nav">
               {/* show these links on the left side */}
               {Auth.loggedIn() ? (
                 <>
@@ -45,6 +45,7 @@ const AppNavbar = () => {
                     id="nav-dropdown-teams"
                     title="My Teams"
                     // menuVariant="dark"
+                    className="teams-dropdown"
                   >
                     {data && teams.length && teams.map((team, index) =>
                       <NavDropdown.Item key={index} href={"/team/" + team._id}>{team.teamName}</NavDropdown.Item>)}
@@ -53,6 +54,7 @@ const AppNavbar = () => {
                     id="nav-dropdown-projects"
                     title="My Projects"
                     // menuVariant="dark"
+                    className="projects-dropdown"
                   >
                     {data && projects.length && projects.map((project, index) =>
                     (<NavDropdown.Item key={index} href={"/project/" + project._id}>{project.projectName}</NavDropdown.Item>

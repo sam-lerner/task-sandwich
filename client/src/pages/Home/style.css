@@ -25,19 +25,23 @@
   border: 2px solid #BD211C;
   padding: 2%;
   border-radius: 10vh;
-  background: #F6BC01;
+  background: rgba(246, 188, 1, 0.75);;
   color: #424242;
   transition: transform 0.3s;
 }
 
 .home-login-signup-btn:hover {
-  transform: scale(1.20);
+  transform: scale(1.15);
   color: #BD211C;
+  border: 2px solid rgba(76, 107, 32, 1);
+
 }
 
 .hero-word {
   text-decoration: underline;
   color: #F6BC01;
+  font-family: 'Amatic SC', cursive;
+  font-size: 150%;
 }
 
 .home-quote {
@@ -92,6 +96,32 @@
 .modal-content {
   background: #F6E2B2;
   color: #BD211C;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: white;
+  background-color: rgba(101, 143, 42, 0.75);;
+}
+
+.btn:disabled {
+  background: rgba(66, 66, 66, 0.75);
+}
+
+.btn-success {
+  background: rgba(101, 143, 42, 0.75);
+}
+
+.btn-success:hover {
+  background: rgba(76, 107, 32, 1);
+}
+
+.nav-link {
+  color: #686868;
+}
+
+.nav-link:hover {
+  color: rgba(101, 143, 42, 0.75);
 }
 
 @media (max-width: 1240px) {
