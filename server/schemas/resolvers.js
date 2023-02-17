@@ -73,6 +73,9 @@ const resolvers = {
                 .populate({
                     path: 'team',
                     select: "teamName",
+                }).populate({
+                    path: 'tasks',
+                    select: { taskName: 1, taskDescription: 1, dueDate: 1 },
                 });
         },
         // Tested successfully

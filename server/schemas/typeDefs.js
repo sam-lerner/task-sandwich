@@ -26,6 +26,7 @@ type Project {
     startDate: String
     endDate: String
     team: [Team]
+    tasks: [Task]
    
 }
 type Task {

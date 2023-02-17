@@ -3,21 +3,23 @@ import React, { useState } from 'react';
 import { Button, ListGroup, OverlayTrigger, Popover } from 'react-bootstrap'
 
 const ProjectTaskList = ({ projectData }) => {
+    console.log(projectData)
+    console.log(projectData.project.tasks)
 
     return (
         <>
             <ListGroup className="project-task-info">
                 {projectData.project.tasks ? (projectData.project.tasks.map((task, index) => (
-                    <ListGroup.Item>
+                    <ListGroup.Item key={index}>
                         <OverlayTrigger trigger="click" placement="right" overlay={
                             <Popover id="popover-basic">
-                                <Popover.Header as="h3">{projectData.project.endDate}</Popover.Header>
+                                <Popover.Header as="h3">{task.dueDate}</Popover.Header>
                                 <Popover.Body>
-                                    {projectData.project.projectDescription}
+                                    {task.taskDescription}
                                 </Popover.Body>
                             </Popover>
                         }>
-                            <Button variant="light" className="project-task-text">{projectData.project.projectName}</Button>
+                            <Button variant="light" className="project-task-text">{task.taskName}</Button>
                         </OverlayTrigger>
                     </ListGroup.Item>
                 ))) : (<p>NO TASKS!</p>)}
