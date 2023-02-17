@@ -19,6 +19,7 @@
   "dependencies": {
     "dayjs": "^1.11.7",
     "jquery": "^3.6.3",
-    "react-dayjs": "^0.3.2"
+    "react-dayjs": "^0.3.2",
+    "react-multiselect-dropdown-bootstrap": "^1.1.0"
   }
 }

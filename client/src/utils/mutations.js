@@ -29,10 +29,11 @@ export const ADD_USER = gql`
 //working
 export const ADD_TEAM = gql`
 mutation AddTeam($team: teamInput) {
-  addTeam(team: $team, userId: ID) {
+  addTeam(team: $team) {
     _id
     teamName
     admin {
+      _id
       name
     }
     members {
