@@ -47,9 +47,21 @@
   justify-content: space-between;
 }
 
-/* #nav-dropdown-teams:hover,
-#nav-dropdown-projects:hover, */
-#nav-dropdown-teams div,
-#nav-dropdown-projects div {
-  background: #F6E2B2;
+.left-nav a,
+.right-nav a {
+  color: #F6E2B2;
+}
+
+.left-nav a:hover,
+.right-nav a:hover {
+  color: white;
+}
+
+.show .dropdown-item {
+  color: #424242;
+}
+
+.show .dropdown-item:hover {
+  background: rgba(211, 211, 211, 0.75);
+  color: black;
 }

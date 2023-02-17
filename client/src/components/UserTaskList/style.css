@@ -20,17 +20,23 @@
   color: #424242;
 }
 
+.user-task-text:hover {
+  background: rgba(211, 211, 211, 0.75);
+  color: black;
+
+}
+
 .list-group-item {
   background: rgba(255, 255, 255, 0.75);
 }
 
 .usertask-delete-btn {
   transition: transform 0.1s;
-  background: rgba(101, 143, 42, 0.75);
+  background: rgba(66, 66, 66, 0.75);
   float: right;
 }
 
 .usertask-delete-btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
   background: rgba(189, 33, 28, 0.75);
 }
