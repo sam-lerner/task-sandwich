@@ -34,7 +34,7 @@ const TeamInfo = ({ teamData }) => {
           </div>
           <div className="team-text">Members:
             <ul>
-              {teamData.team.members.length && teamData.team.members.map(member => <li value={member._id} >{member.name}(🥪{member.sandwichReceived})</li>)}
+              {teamData.team.members.length && teamData.team.members.map(member => <li value={member._id} >{member.name} (🥪{member.sandwichReceived})</li>)}
             </ul>
           </div>
           <div className="team-text">Projects:
