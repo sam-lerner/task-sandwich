@@ -1,10 +1,28 @@
 import React, { useState } from 'react';
 
+import { useMutation } from '@apollo/client';
+import { REMOVE_TASK } from '../../utils/mutations';
+
 import { Button, ListGroup, OverlayTrigger, Popover } from 'react-bootstrap'
 
+import { BsTrash } from "react-icons/bs";
+import "./style.css";
+
 const ProjectTaskList = ({ projectData }) => {
-    console.log(projectData)
-    console.log(projectData.project.tasks)
+    const [tasks, setTasks] = useState(projectData?.project?.tasks || []);
+
+    const [removeTask, { error }] = useMutation(REMOVE_TASK);
+
+    const handleRemoveTask = async (taskId) => {
+        try {
+            await removeTask({ variables: { taskId: taskId } });
+            console.log('Task removed successfully');
+            const updatedTasks = tasks.filter(task => task._id !== taskId);
+            setTasks(updatedTasks);
+        } catch (err) {
+            console.error(JSON.parse(JSON.stringify(err)));
+        }
+    };
 
     return (
         <>
@@ -21,6 +39,7 @@ const ProjectTaskList = ({ projectData }) => {
                         }>
                             <Button variant="light" className="project-task-text">{task.taskName}</Button>
                         </OverlayTrigger>
+                        <Button onClick={() => handleRemoveTask(task._id)} className="usertask-delete-btn"><BsTrash /></Button>
                     </ListGroup.Item>
                 ))) : (<p>NO TASKS!</p>)}
             </ListGroup>
