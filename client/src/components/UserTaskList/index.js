@@ -11,12 +11,10 @@ import "./style.css";
 const UserTaskList = ({ userData }) => {
     const [tasks, setTasks] = useState(userData?.me?.tasks || []);
 
-
     const [removeTask, { error }] = useMutation(REMOVE_TASK);
 
     const handleRemoveTask = async (taskId) => {
         try {
-            console.log(taskId)
             await removeTask({ variables: { taskId: taskId } });
             console.log('Task removed successfully');
             const updatedTasks = tasks.filter(task => task._id !== taskId);
