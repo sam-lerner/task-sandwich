@@ -124,6 +124,13 @@
   color: rgba(101, 143, 42, 0.75);
 }
 
+#floatingSelect {
+  height: 5vh;
+  color: #686868;
+  padding: 0.375rem 0.75rem;
+  min-height: 40px;
+}
+
 @media (max-width: 1240px) {
   .home-gif {
     width: 75%;
