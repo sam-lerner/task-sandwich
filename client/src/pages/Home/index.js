@@ -33,15 +33,15 @@ const Home = () => {
           <br></br>
           Does your team need help staying on task?
           <br></br>
-          Task Sandwich is here to help accheiving your project's goals!
+          Task Sandwich is here to help acheiving your project's goals!
           <br></br>
           Simply create an account to get started!
           <br></br>
-          Task Sandwich: Accept no Subs!
+          Task Sandwich: Accept no Subs!!
           <br></br>
         </p>
         <Nav.Link onClick={() => setShowModal(true)} className="home-login-signup-btn">
-          Login/Sign Up
+          Login / Sign Up
         </Nav.Link>
         <Modal
         size="lg"
@@ -80,7 +80,7 @@ const Home = () => {
      
       <Figure />
       <Container className="home-quote">
-        <h3>"I had stewed on how to better ensure my team acheived its goals. <span>Task Sandwich</span> filled a roll we never even know we needed."</h3>
+        <h3>"I had stewed on how to better ensure my team acheived its goals. <span>Task Sandwich</span> filled a roll we never even knew we needed."</h3>
         <h6>-Michael Scott, owner, Michael Scott Paper Comany</h6>
       </Container>
       <div className="gif-outter-container">

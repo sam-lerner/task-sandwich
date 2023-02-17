@@ -74,7 +74,7 @@ const AppNavbar = () => {
                 </>
               ) : (
                 <Nav.Link onClick={() => setShowModal(true)} className="ml-auto">
-                  Login/Sign Up
+                  Login / Sign Up
                 </Nav.Link>
               )}
             </Nav>
