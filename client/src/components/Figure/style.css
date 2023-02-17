@@ -1,6 +1,7 @@
 .figure {
   border: 2px solid black;  
   border-radius: 5vh;
+  margin: 2% 5%;
 }
 
 .home-sandwich {

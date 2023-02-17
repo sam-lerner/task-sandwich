@@ -48,6 +48,7 @@ const Home = () => {
         show={showModal}
         onHide={() => setShowModal(false)}
         aria-labelledby="signup-modal"
+        className="login-signup-modal"
         >
           {/* tab container to do either signup or login component */}
           <Tab.Container defaultActiveKey="login">
@@ -82,6 +83,7 @@ const Home = () => {
         <h3>"I had stewed on how to better ensure my team acheived its goals. <span>Task Sandwich</span> filled a roll we never even know we needed."</h3>
         <h6>-Michael Scott, owner, Michael Scott Paper Comany</h6>
       </Container>
+      <div className="gif-outter-container">
       <Container className="gif-card">
         <h3 className="gif-title">To-Do's!</h3>
         <img src={taskGif} className="task-gif home-gif" alt="a gif showing how to create a task"/>
@@ -114,6 +116,7 @@ const Home = () => {
           <li>Once a threshold is reached, your members can cash in their sandwiches for real world rewards!</li>
         </ul>
       </Container>
+      </div>
       <Container className="home-quote">
         <h3>"Task Sandwich literally saved my life!"</h3>
         <h6>-Jimmy Hoffa, labor organizer</h6>

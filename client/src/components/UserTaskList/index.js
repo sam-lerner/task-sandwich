@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { REMOVE_TASK } from '../../utils/mutations';
 
-import { Button, ListGroup, OverlayTrigger, Popover } from 'react-bootstrap'
+import { Button, ListGroup, OverlayTrigger, Popover } from 'react-bootstrap';
 
+import { BsTrash } from "react-icons/bs";
 import "./style.css";
 
 const UserTaskList = ({ userData }) => {
@@ -41,7 +42,7 @@ const UserTaskList = ({ userData }) => {
                         }>
                             <Button variant="light" className="user-task-text">{task.taskName}</Button>
                         </OverlayTrigger>
-                        <Button onClick={() => handleRemoveTask(task._id)}>Delete</Button>
+                        <Button onClick={() => handleRemoveTask(task._id)} className="usertask-delete-btn">Delete <BsTrash /></Button>
                     </ListGroup.Item>
                 ))}
             </ListGroup>

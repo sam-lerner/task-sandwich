@@ -3,7 +3,6 @@ background: rgba(66,66,66, 0.75);
 height: 15vh;
 display: flex;
 width: 100%;
-/* justify-content: space-between; */
 align-items: center;
 }
 
@@ -41,7 +40,6 @@ transform: scale(1.25);
 }
 
 .footerLinks a {
-/* float: right; */
 padding: 1vh 4vh;
 }
 
@@ -70,6 +68,5 @@ padding: 1vh 4vh;
 }
 
 .footerDocs2 a {
-  /* float: right; */
   padding: 2vh 6vw;
 }
