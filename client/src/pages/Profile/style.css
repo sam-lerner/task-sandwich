@@ -10,3 +10,7 @@
  .profile-main .container {
   margin-left: 0;
  }
+
+ .row {
+  --bs-gutter-x: 0;
+ }
