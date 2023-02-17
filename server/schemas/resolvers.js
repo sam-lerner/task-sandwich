@@ -3,6 +3,8 @@ const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const { getArgumentValues } = require('graphql');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Types;
 
 const resolvers = {
     Query: {
@@ -220,10 +222,12 @@ const resolvers = {
         },
         // Tested successfully
         addTeam: async (parent, args, context) => {
-            const newTeam = { teamName: args.team.teamName, admin: [context.user._id], members: [context.user._id], projects: [] }
+            // const members = args.team.members.map(memberId => mongoose.Types.ObjectId(memberId));
+            // const newTeam = { teamName: args.team.teamName, admin: [context.user._id], members, projects: [] };
+            const newTeam = { teamName: args.team.teamName, admin: [context.user._id], members: [...args.team.members], projects: [] }
             const team = await Team.create(newTeam);
-            console.log(args)
-            console.log(context.user)
+            console.log("args: ", args)
+            console.log("context.user: ", context.user)
             const me = context.user._id;
             await User.findOneAndUpdate(
                 { _id: me },
@@ -382,11 +386,11 @@ const resolvers = {
             console.log(receiver.sandwichReceived)
             return receiver
         },
-        createDonation: async(parent, context) => {
-            if(!context.user) {
+        createDonation: async (parent, context) => {
+            if (!context.user) {
                 throw new AuthenticationError('Please log in to give us money!');
             }
-            const donation = new Donation ({
+            const donation = new Donation({
                 value: 5,
                 user: context.user._id
             })

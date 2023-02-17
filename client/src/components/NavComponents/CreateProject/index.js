@@ -38,9 +38,13 @@ const CreateProject = () => {
         // teamId is same as teamId: teamId
         try {
             const { data } = await createProject(
-                { variables: 
-                    { project: 
-                        { ...projectFormData, endDate: formattedDate }, teamId } });
+                {
+                    variables:
+                    {
+                        project:
+                            { ...projectFormData, endDate: formattedDate }, teamId
+                    }
+                });
         } catch (err) {
             console.error(JSON.parse(JSON.stringify(err)));
         }
@@ -84,11 +88,6 @@ const CreateProject = () => {
                             {teams && teams.map((team, index) => <option key={index} value={team._id}>{team.teamName}</option>)}
                         </Form.Select>
                     </FloatingLabel>
-                    {/* <Form.Label>Which team will this project be assigned to?</Form.Label>
-                    <Form.Select aria-label="Default select example">
-                        <option>Open this select menu</option>
-                        {teams && teams.map((team, index) => <option key={index} value={team._id}>{team.teamName}</option>)}
-                    </Form.Select> */}
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Project End Date</Form.Label>
