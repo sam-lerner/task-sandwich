@@ -33,6 +33,11 @@ mutation AddTeam($team: teamInput) {
     _id
     teamName
     admin {
+      _id
+      name
+    }
+    members {
+      _id
       name
     }
   }
